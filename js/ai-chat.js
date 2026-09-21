@@ -100,10 +100,10 @@
   const widgetHTML = `
     <div class="ai-widget" id="aiWidget">
       <!-- Floating Toggle Button -->
-      <button class="ai-toggle-btn" id="aiToggleBtn" aria-label="Open AI Engineering Assistant">
+      <button class="ai-toggle-btn" id="aiToggleBtn" aria-label="Open Ask Donald Assistant">
         <div class="ai-badge-pulse"></div>
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="ai-toggle-label">Donalds Bay AI</span>
+        <span class="ai-toggle-label">Ask Donald</span>
       </button>
 
       <!-- Chat Box Panel -->
@@ -115,8 +115,7 @@
               <span>DB</span>
             </div>
             <div>
-              <h4>Donalds Bay AI Assistant</h4>
-              <p>Technical &amp; Engineering Support &middot; Active</p>
+              <h4>Ask Donald</h4>
             </div>
           </div>
           <button class="ai-close-btn" id="aiCloseBtn" aria-label="Close Chat">&times;</button>
@@ -124,8 +123,7 @@
 
         <div class="ai-chat-body" id="aiChatMessages">
           <div class="ai-msg ai-msg-bot">
-            <p>Welcome to <strong>Donalds Bay Limited</strong>! I'm your AI Engineering Assistant.</p>
-            <p>Ask me anything about our <strong>Road Construction</strong>, <strong>Project Management (EPC)</strong>, <strong>Real Estate developments</strong>, pricing estimates, or equipment fleet.</p>
+            <p>Welcome to <strong>Donalds Bay Limited</strong>! Ask Donald anything about our civil projects, road engineering, EPC management, or real estate developments.</p>
           </div>
 
           <div class="ai-quick-prompts" id="aiQuickPrompts">
@@ -137,7 +135,7 @@
         </div>
 
         <form class="ai-chat-foot" id="aiChatForm">
-          <input type="text" id="aiUserInput" class="ai-input" placeholder="Ask anything about Donalds Bay Limited..." autocomplete="off" required>
+          <input type="text" id="aiUserInput" class="ai-input" placeholder="Ask Donald anything about Donalds Bay Limited..." autocomplete="off" required>
           <button type="submit" class="ai-send-btn" aria-label="Send message">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
