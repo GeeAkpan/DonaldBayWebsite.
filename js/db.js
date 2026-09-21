@@ -59,10 +59,10 @@ const SEED_PROJECTS = [
     categoryLabel: "Road Construction",
     client: "Chevron Infrastructure Logistics",
     budget: "₦11.5B Highway",
-    image: "media/work-05.jpg",
-    desc: "Interstate bypass corridor with automated toll plazas and heavy earthwork cuttings.",
+    image: "media/branded-excavator.jpg",
+    desc: "Interstate bypass corridor with automated toll plazas, heavy earthwork cuttings, and high-tonnage excavator operations.",
     date: "Completed 2024",
-    gallery: ["media/work-05.jpg", "media/case-still-2.jpg", "media/work-01.jpg"]
+    gallery: ["media/branded-excavator.jpg", "media/branded-trucks.jpg", "media/work-01.jpg"]
   },
   {
     id: "PROJ-06",
@@ -71,10 +71,10 @@ const SEED_PROJECTS = [
     categoryLabel: "Project Management",
     client: "Apex Infrastructure Ltd",
     budget: "₦6.2B Mixed-Use",
-    image: "media/work-06.jpg",
-    desc: "End-to-end EPC management, cost engineering, and multi-contractor site coordination.",
+    image: "media/branded-survey.jpg",
+    desc: "End-to-end EPC management, robotic geomatic survey, cost engineering, and multi-contractor site coordination.",
     date: "Completed 2023",
-    gallery: ["media/work-06.jpg", "media/pillar-management.jpg", "media/work-04.jpg"]
+    gallery: ["media/branded-survey.jpg", "media/branded-helmet.jpg", "media/work-04.jpg"]
   }
 ];
 
@@ -82,23 +82,23 @@ const SEED_PROJECTS = [
 const SEED_BLOGS = [
   {
     id: "BLOG-01",
-    title: "Deep Soil Stabilization in Coastal Highway Construction",
+    title: "Deep Soil Stabilization & Heavy Paving in Coastal Highway Construction",
     category: "Road Engineering",
-    author: "Engr. Babatunde Sanusi, FNSE",
+    author: "Donalds Bay Road Engineering Directorate",
     date: "September 15, 2026",
     readTime: "5 min read",
-    image: "media/pillar-roads.jpg",
-    excerpt: "Overcoming tidal water table pressures and soft subsoils using cement-stabilized bases and geotextile membranes in coastal expressways."
+    image: "media/branded-trucks.jpg",
+    excerpt: "Overcoming tidal water table pressures and soft subsoils using company-owned automated asphalt paving trains and geotextile membranes."
   },
   {
     id: "BLOG-02",
-    title: "Eliminating Cost Overruns: Modern EPC Project Governance",
+    title: "Zero-Overrun EPC Governance: Real-Time Telemetry & Quality Standards",
     category: "Project Management",
-    author: "Engr. Donald Akpan",
+    author: "Chief Civil Engineering Board",
     date: "September 08, 2026",
     readTime: "6 min read",
-    image: "media/pillar-management.jpg",
-    excerpt: "How real-time 3D BIM coordination, drone telemetry, and milestone-based BoQ controls preserve financial margins on commercial high-rises."
+    image: "media/branded-helmet.jpg",
+    excerpt: "How real-time 3D BIM coordination, precision geomatics, and milestone-based BoQ controls preserve structural integrity and financial budgets."
   },
   {
     id: "BLOG-03",
