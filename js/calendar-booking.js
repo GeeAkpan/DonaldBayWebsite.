@@ -34,10 +34,6 @@
         <div class="booking-container" id="bookingMainStage">
           <!-- Left Column: Interactive Calendar & Slot Picker -->
           <div class="booking-left">
-            <div class="booking-badge-header">
-              <span class="booking-live-dot"></span>
-              <span>DIRECT EXECUTIVE BOOKING &middot; WAT TIMEZONE</span>
-            </div>
             <h3 class="booking-title">Select Consultation Date &amp; Time</h3>
             <p class="booking-desc">Choose a date and meeting slot with our resident chief engineers and project estimation board.</p>
 
