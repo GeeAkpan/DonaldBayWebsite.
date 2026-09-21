@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Careers &amp; Opportunities | Donalds Bay Limited</title>
+  <meta name="description" content="Explore career opportunities at Donalds Bay Limited. Join West Africa's leading civil engineering, road construction, and real estate development enterprise.">
+  <meta name="theme-color" content="#042125">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- ============================ NAVIGATION ============================ -->
+<header class="nav is-stuck" id="nav">
+  <div class="shell nav__inner">
+    <a href="index.html" class="nav__mark" aria-label="Donalds Bay Limited Homepage">
+      <img src="media/logo-white.svg" alt="Donalds Bay Limited" width="280" height="52">
+    </a>
+    
+    <nav class="nav__links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <div class="nav-item--dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" style="color:var(--accent); font-weight:700;">
+          Company <span class="nav-dropdown-caret">&#9662;</span>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-title">About Us</span>
+            <span class="nav-dropdown-sub">Heritage, Leadership &amp; Plant Fleet</span>
+          </a>
+          <a href="news.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-title">News &amp; Insights</span>
+            <span class="nav-dropdown-sub">Press Releases &amp; Project Handover</span>
+          </a>
+          <a href="events.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-title">Events</span>
+            <span class="nav-dropdown-sub">Photo &amp; Video Media Gallery</span>
+          </a>
+          <a href="careers.html" class="nav-dropdown-item" style="border-left-color:var(--accent); background:rgba(0,229,153,0.08);">
+            <span class="nav-dropdown-title">Careers</span>
+            <span class="nav-dropdown-sub">Open Engineering &amp; Site Roles</span>
+          </a>
+        </div>
+      </div>
+      <a href="news.html">Insights</a>
+      <a href="index.html#book">Contact</a>
+    </nav>
+    
+    <span class="nav__clock" id="clock" aria-label="Site Operations Local Time">WAT 00:00</span>
+    <a class="btn btn--primary" href="index.html#book">Request Consultation</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  </div>
+</header>
+
+<main style="padding-top: clamp(6.5rem, 12vh, 8.5rem);">
+
+<!-- ============================ CAREERS HERO ============================ -->
+<section class="band band--petrol" style="padding-top:2.5rem;">
+  <div class="shell">
+    <div class="stack" style="max-width:850px;">
+      <span class="label" data-reveal>Talent Acquisition &middot; Engineering Excellence</span>
+      <h1 style="font-size:var(--step-4); color:var(--white); line-height:1.1;" data-reveal>
+        Build Generational Landmarks With Us.
+      </h1>
+      <p style="color:var(--on-petrol-mid); font-size:var(--step-1); max-width:56ch; margin-top:1rem;" data-reveal>
+        We are seeking ambitious structural engineers, project managers, geotechnical specialists, and heavy plant professionals ready to pioneer landmark infrastructure across Nigeria.
+      </p>
+    </div>
+
+    <!-- Culture Benefits Grid -->
+    <div class="case__meta" style="margin-top:3.5rem;" data-reveal>
+      <div class="case__cell">
+        <dt>Workplace Safety</dt>
+        <dd style="font-size:1.4rem; color:var(--accent); font-weight:700;">Zero-LTI Culture</dd>
+      </div>
+      <div class="case__cell">
+        <dt>Equipment Technology</dt>
+        <dd style="font-size:1.4rem; color:var(--white); font-weight:700;">60+ Heavy Fleet</dd>
+      </div>
+      <div class="case__cell">
+        <dt>Professional Growth</dt>
+        <dd style="font-size:1.4rem; color:var(--accent); font-weight:700;">COREN Supported</dd>
+      </div>
+      <div class="case__cell case__cell--result">
+        <dt>Contract Scale</dt>
+        <dd>₦10B+ Mega Works</dd>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ OPEN POSITIONS ============================ -->
+<section class="band band--white">
+  <div class="shell">
+    <div class="grid__head" style="border-top:none; margin-top:0;" data-reveal>
+      <div>
+        <span class="label">Current Openings</span>
+        <h2 style="font-size:var(--step-3); color:var(--ink); margin-top:0.35rem;">Explore Active Job Opportunities</h2>
+      </div>
+      <div class="portfolio-search-box">
+        <input type="text" id="jobsSearchInput" placeholder="Search roles or locations..." class="form-control" style="min-width:280px;">
+      </div>
+    </div>
+
+    <!-- Job Filter Tabs -->
+    <div class="portfolio-filters" data-reveal>
+      <button class="portfolio-tab active" data-department="all">All Disciplines</button>
+      <button class="portfolio-tab" data-department="Highways">Highways &amp; Asphalt</button>
+      <button class="portfolio-tab" data-department="EPC">Project Controls &amp; EPC</button>
+      <button class="portfolio-tab" data-department="Structures">Structures &amp; Towers</button>
+      <button class="portfolio-tab" data-department="Fleet">Plant &amp; Fleet Ops</button>
+    </div>
+
+    <!-- Jobs Grid -->
+    <div style="display:flex; flex-direction:column; gap:1.25rem; margin-top:2.5rem;" id="jobsContainer">
+      
+      <!-- Job 1 -->
+      <div class="job-card" data-department="Highways" data-reveal style="background:var(--sand-soft); border:1px solid rgba(7,25,26,0.1); border-radius:8px; padding:1.75rem clamp(1.5rem, 3vw, 2.25rem); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem; transition:transform 0.3s var(--ease), border-color 0.3s var(--ease);">
+        <div>
+          <div style="display:flex; gap:0.6rem; align-items:center; margin-bottom:0.5rem;">
+            <span class="card__tag" style="color:var(--petrol); font-weight:700;">Highways &amp; Asphalt</span>
+            <span style="font-size:0.75rem; color:var(--ink-soft);">Full-Time &middot; Lagos Corridor</span>
+          </div>
+          <h3 style="font-size:1.3rem; color:var(--ink); margin:0 0 0.4rem;">Senior Highway &amp; Asphalt Paving Resident Engineer</h3>
+          <p style="font-size:0.9rem; color:var(--ink-mid); max-width:55ch; margin:0;">
+            Lead multi-lane highway polymer asphalt paving operations, subgrade soil stabilization, and stormwater culvert installations for ongoing coastal expressway contracts.
+          </p>
+          <div style="font-size:0.78rem; color:var(--ink-soft); margin-top:0.65rem;">
+            Requirements: 8+ Years Civil Experience &middot; COREN / NSE Registered &middot; Paving Machinery Expertise
+          </div>
+        </div>
+        <div>
+          <button class="btn btn--primary" onclick="openApplyModal('Senior Highway & Asphalt Paving Engineer')">Apply Now &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="job-card" data-department="EPC" data-reveal style="background:var(--sand-soft); border:1px solid rgba(7,25,26,0.1); border-radius:8px; padding:1.75rem clamp(1.5rem, 3vw, 2.25rem); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem;">
+        <div>
+          <div style="display:flex; gap:0.6rem; align-items:center; margin-bottom:0.5rem;">
+            <span class="card__tag" style="color:var(--petrol); font-weight:700;">Project Controls &amp; EPC</span>
+            <span style="font-size:0.75rem; color:var(--ink-soft);">Full-Time &middot; Headquarters (Lagos)</span>
+          </div>
+          <h3 style="font-size:1.3rem; color:var(--ink); margin:0 0 0.4rem;">EPC Project Controls &amp; BoQ Estimation Lead</h3>
+          <p style="font-size:0.9rem; color:var(--ink-mid); max-width:55ch; margin:0;">
+            Oversee project cost engineering, milestone scheduling, subcontractor BoQ auditing, and real-time drone telemetry reporting for commercial skyscrapers and mega-infrastructure.
+          </p>
+          <div style="font-size:0.78rem; color:var(--ink-soft); margin-top:0.65rem;">
+            Requirements: 6+ Years Quantity Surveying &middot; Primavera P6 / MS Project &middot; Civil Tender Forecasting
+          </div>
+        </div>
+        <div>
+          <button class="btn btn--primary" onclick="openApplyModal('EPC Project Controls & BoQ Estimation Lead')">Apply Now &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="job-card" data-department="Structures" data-reveal style="background:var(--sand-soft); border:1px solid rgba(7,25,26,0.1); border-radius:8px; padding:1.75rem clamp(1.5rem, 3vw, 2.25rem); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem;">
+        <div>
+          <div style="display:flex; gap:0.6rem; align-items:center; margin-bottom:0.5rem;">
+            <span class="card__tag" style="color:var(--petrol); font-weight:700;">Structures &amp; Towers</span>
+            <span style="font-size:0.75rem; color:var(--ink-soft);">Full-Time &middot; Abuja Regional Office</span>
+          </div>
+          <h3 style="font-size:1.3rem; color:var(--ink); margin:0 0 0.4rem;">Senior Structural Foundation &amp; Superstructure Engineer</h3>
+          <p style="font-size:0.9rem; color:var(--ink-mid); max-width:55ch; margin:0;">
+            Direct high-rise deep pile foundation execution, reinforced concrete core walls, and composite steel framing on high-tonnage multi-storey commercial towers.
+          </p>
+          <div style="font-size:0.78rem; color:var(--ink-soft); margin-top:0.65rem;">
+            Requirements: 7+ Years Heavy Structural Experience &middot; Deep Piling QA/QC &middot; COREN Certification
+          </div>
+        </div>
+        <div>
+          <button class="btn btn--primary" onclick="openApplyModal('Senior Structural Foundation & Superstructure Engineer')">Apply Now &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Job 4 -->
+      <div class="job-card" data-department="Fleet" data-reveal style="background:var(--sand-soft); border:1px solid rgba(7,25,26,0.1); border-radius:8px; padding:1.75rem clamp(1.5rem, 3vw, 2.25rem); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem;">
+        <div>
+          <div style="display:flex; gap:0.6rem; align-items:center; margin-bottom:0.5rem;">
+            <span class="card__tag" style="color:var(--petrol); font-weight:700;">Plant &amp; Fleet Ops</span>
+            <span style="font-size:0.75rem; color:var(--ink-soft);">Full-Time &middot; Central Equipment Yard</span>
+          </div>
+          <h3 style="font-size:1.3rem; color:var(--ink); margin:0 0 0.4rem;">Heavy Machinery &amp; Plant Fleet Maintenance Superintendent</h3>
+          <p style="font-size:0.9rem; color:var(--ink-mid); max-width:55ch; margin:0;">
+            Manage maintenance schedules, hydraulic telemetry, diagnostic testing, and rapid on-site parts logistics for over 60 excavators, asphalt pavers, compactors, and batch plants.
+          </p>
+          <div style="font-size:0.78rem; color:var(--ink-soft); margin-top:0.65rem;">
+            Requirements: 5+ Years Heavy Equipment Mechanics (Caterpillar, Bomag, Komatsu) &middot; Preventative Fleet Telemetry
+          </div>
+        </div>
+        <div>
+          <button class="btn btn--primary" onclick="openApplyModal('Heavy Machinery & Plant Fleet Superintendent')">Apply Now &rarr;</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__grid">
+      <div class="foot__col">
+        <img class="foot__mark" src="media/logo-white.svg" alt="Donalds Bay Limited" width="260" height="48">
+        <span style="max-width:34ch">Project Management, Road Construction &amp; Real Estate Development.</span>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Capabilities &amp; Company</span>
+        <a href="about.html">About Us</a>
+        <a href="index.html#services">Road Construction</a>
+        <a href="index.html#services">Project Management</a>
+        <a href="index.html#services">Real Estate</a>
+        <a href="portfolio.html">All Executed Projects</a>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Explore Donalds Bay</span>
+        <a href="news.html">News &amp; Articles</a>
+        <a href="events.html">Events &amp; Media</a>
+        <a href="careers.html">Careers &amp; Openings</a>
+        <a href="admin.html">Executive Portal</a>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Headquarters</span>
+        <span>Donalds Bay Tower, Coastal Boulevard</span>
+        <a href="mailto:info@donaldsbay.com">info@donaldsbay.com</a>
+        <a href="index.html#book">Schedule Technical Meeting</a>
+      </div>
+    </div>
+    
+    <div class="foot__base">
+      <span>&copy; 2026 Donalds Bay Limited. All rights reserved. Registered Civil Engineering &amp; Construction Entity.</span>
+      <span id="clock-foot">WAT 00:00</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ JOB APPLICATION MODAL ============================ -->
+<dialog class="admin-modal" id="modalApplyJob">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>Submit Engineering Application</h3>
+        <span style="font-size:0.85rem; color:var(--accent);" id="applyJobTitle">Position Name</span>
+      </div>
+      <button class="modal-close" type="button" onclick="document.getElementById('modalApplyJob').close()">&times;</button>
+    </div>
+
+    <form id="formJobApplication" class="modal-form">
+      <input type="hidden" id="appTargetRole">
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Full Legal Name</label>
+          <input type="text" id="appName" class="form-control" placeholder="Engr. / Mr. / Ms..." required>
+        </div>
+        <div class="form-group">
+          <label>Corporate / Personal Email</label>
+          <input type="email" id="appEmail" class="form-control" placeholder="name@domain.com" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Direct Phone Number</label>
+          <input type="tel" id="appPhone" class="form-control" placeholder="+234..." required>
+        </div>
+        <div class="form-group">
+          <label>Years of Relevant Experience</label>
+          <select id="appExp" class="form-control">
+            <option value="3-5 Years">3 – 5 Years</option>
+            <option value="6-10 Years" selected>6 – 10 Years</option>
+            <option value="10+ Years">10+ Years (Senior Lead)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Professional Registrations &amp; Certifications</label>
+        <input type="text" id="appCerts" class="form-control" placeholder="e.g. COREN, FNSE, PMP, HSE Level 3">
+      </div>
+
+      <div class="form-group">
+        <label>LinkedIn / Portfolio / CV Link</label>
+        <input type="url" id="appCvUrl" class="form-control" placeholder="https://linkedin.com/in/... or Google Drive link" required>
+      </div>
+
+      <div class="form-group">
+        <label>Brief Cover Note / Engineering Scope Experience</label>
+        <textarea id="appNote" class="form-control" rows="3" placeholder="Highlight past highway paving, foundation piling, or EPC governance contracts you have executed..."></textarea>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" onclick="document.getElementById('modalApplyJob').close()">Cancel</button>
+        <button type="submit" class="btn btn--primary">Submit Application</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script src="js/db.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ai-chat.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('jobsSearchInput');
+  const tabs = document.querySelectorAll('.portfolio-tab');
+  const cards = document.querySelectorAll('#jobsContainer .job-card');
+
+  function filterJobs() {
+    const activeTab = document.querySelector('.portfolio-tab.active');
+    const selectedDept = activeTab ? activeTab.dataset.department : 'all';
+    const query = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const dept = card.dataset.department;
+      const text = card.textContent.toLowerCase();
+      const matchDept = selectedDept === 'all' || dept === selectedDept;
+      const matchSearch = text.includes(query);
+
+      card.style.display = (matchDept && matchSearch) ? 'flex' : 'none';
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      filterJobs();
+    });
+  });
+
+  searchInput.addEventListener('input', filterJobs);
+
+  // Handle Application Submit
+  document.getElementById('formJobApplication')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const role = document.getElementById('appTargetRole').value;
+    const name = document.getElementById('appName').value;
+    alert(`Thank you ${name}! Your application for "${role}" has been submitted to Donalds Bay Human Resources.`);
+    document.getElementById('modalApplyJob').close();
+    e.target.reset();
+  });
+});
+
+window.openApplyModal = function(role) {
+  const modal = document.getElementById('modalApplyJob');
+  document.getElementById('applyJobTitle').textContent = role;
+  document.getElementById('appTargetRole').value = role;
+  modal.showModal();
+};
+</script>
+</body>
+</html>

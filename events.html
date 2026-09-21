@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events &amp; Media Gallery | Donalds Bay Limited</title>
+  <meta name="description" content="Explore photographic and video archives of Donalds Bay Limited's site commissioning ceremonies, engineering summits, groundbreaking events, and CSR initiatives.">
+  <meta name="theme-color" content="#042125">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- ============================ NAVIGATION ============================ -->
+<header class="nav is-stuck" id="nav">
+  <div class="shell nav__inner">
+    <a href="index.html" class="nav__mark" aria-label="Donalds Bay Limited Homepage">
+      <img src="media/logo-white.svg" alt="Donalds Bay Limited" width="280" height="52">
+    </a>
+    
+    <nav class="nav__links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <div class="nav-item--dropdown">
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" style="color:var(--accent); font-weight:700;">
+          Company <span class="nav-dropdown-caret">&#9662;</span>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-title">About Us</span>
+            <span class="nav-dropdown-sub">Heritage, Leadership &amp; Plant Fleet</span>
+          </a>
+          <a href="news.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-title">News &amp; Insights</span>
+            <span class="nav-dropdown-sub">Press Releases &amp; Project Handover</span>
+          </a>
+          <a href="events.html" class="nav-dropdown-item" style="border-left-color:var(--accent); background:rgba(0,229,153,0.08);">
+            <span class="nav-dropdown-title">Events</span>
+            <span class="nav-dropdown-sub">Photo &amp; Video Media Gallery</span>
+          </a>
+          <a href="careers.html" class="nav-dropdown-item">
+            <span class="nav-dropdown-title">Careers</span>
+            <span class="nav-dropdown-sub">Open Engineering &amp; Site Roles</span>
+          </a>
+        </div>
+      </div>
+      <a href="news.html">Insights</a>
+      <a href="index.html#book">Contact</a>
+    </nav>
+    
+    <span class="nav__clock" id="clock" aria-label="Site Operations Local Time">WAT 00:00</span>
+    <a class="btn btn--primary" href="index.html#book">Request Consultation</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  </div>
+</header>
+
+<main style="padding-top: clamp(6.5rem, 12vh, 8.5rem);">
+
+<!-- ============================ EVENTS HERO ============================ -->
+<section class="band band--petrol" style="padding-top:2.5rem;">
+  <div class="shell">
+    <div class="stack" style="max-width:850px;">
+      <span class="label" data-reveal>Media Archive &middot; Summits &middot; Site Milestones</span>
+      <h1 style="font-size:var(--step-4); color:var(--white); line-height:1.1;" data-reveal>
+        Events, Summits &amp; Milestone Celebrations.
+      </h1>
+      <p style="color:var(--on-petrol-mid); font-size:var(--step-1); max-width:56ch; margin-top:1rem;" data-reveal>
+        Browse through photographic coverage and video highlights from our major road commissioning ceremonies, groundbreaking events, international civil summits, and community initiatives.
+      </p>
+    </div>
+
+    <!-- Highlight Video Player Button Banner -->
+    <div style="margin-top:2.5rem; display:flex; gap:1rem; flex-wrap:wrap;" data-reveal>
+      <button class="btn btn--primary" id="btnPlayCompanyReel">
+        <span class="btn__play" style="border-left-color:var(--petrol);"></span>
+        Watch 2026 Company Showcase Reel
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EVENTS MEDIA GALLERY ============================ -->
+<section class="band band--white">
+  <div class="shell">
+    <div class="grid__head" style="border-top:none; margin-top:0;" data-reveal>
+      <div>
+        <span class="label">Archive Index</span>
+        <h2 style="font-size:var(--step-3); color:var(--ink); margin-top:0.35rem;">Recent Events &amp; Ceremonies</h2>
+      </div>
+      <div class="portfolio-search-box">
+        <input type="text" id="eventsSearchInput" placeholder="Search events by title or location..." class="form-control" style="min-width:280px;">
+      </div>
+    </div>
+
+    <!-- Event Filter Tabs -->
+    <div class="portfolio-filters" data-reveal>
+      <button class="portfolio-tab active" data-category="all">All Events</button>
+      <button class="portfolio-tab" data-category="Commissioning">Site Commissioning</button>
+      <button class="portfolio-tab" data-category="Groundbreaking">Groundbreaking</button>
+      <button class="portfolio-tab" data-category="Summits">Civil Summits</button>
+      <button class="portfolio-tab" data-category="Safety & CSR">Safety &amp; CSR</button>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="grid" id="eventsGrid" style="margin-top:2.5rem;">
+      <!-- Event 1: Atlantic Coastal Expressway Commissioning -->
+      <div class="card" data-category="Commissioning" data-reveal onclick="openEventModal('event1')">
+        <div class="card__media">
+          <img src="media/case-flagship.jpg" alt="Atlantic Coastal Expressway Commissioning Ceremony" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">Site Commissioning</span>
+          <span class="card__budget">September 2026</span>
+        </div>
+        <h3 class="card__title">Atlantic Coastal Expressway Official Commissioning</h3>
+        <p class="card__desc">Federal dignitaries, resident chief engineers, and transport authorities inaugurate the completed 42km dual expressway corridor.</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Location: <strong>Lagos Coastal Interchange</strong> &middot; Photo &amp; Video</span>
+      </div>
+
+      <!-- Event 2: West Africa Civil Infrastructure Summit -->
+      <div class="card" data-category="Summits" data-reveal onclick="openEventModal('event2')">
+        <div class="card__media">
+          <img src="media/work-06.jpg" alt="West Africa Civil Infrastructure Summit" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">Civil Summits</span>
+          <span class="card__budget">August 2026</span>
+        </div>
+        <h3 class="card__title">West Africa Civil Infrastructure &amp; Paving Summit</h3>
+        <p class="card__desc">Engr. Donald Akpan delivers keynote address on high-capacity polymer asphalt laying and coastal drainage flood mitigation.</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Location: <strong>Eko Convention Centre, Lagos</strong></span>
+      </div>
+
+      <!-- Event 3: Sterling Heights Groundbreaking -->
+      <div class="card" data-category="Groundbreaking" data-reveal onclick="openEventModal('event3')">
+        <div class="card__media">
+          <img src="media/work-04.jpg" alt="Sterling Heights Tower Groundbreaking" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">Groundbreaking</span>
+          <span class="card__budget">July 2026</span>
+        </div>
+        <h3 class="card__title">Sterling Heights 32-Storey Skyscraper Groundbreaking</h3>
+        <p class="card__desc">Commencement of deep foundation piling and high-tonnage raft concrete pouring for the Grade-A corporate tower in Abuja CBD.</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Location: <strong>Abuja Central Business District</strong></span>
+      </div>
+
+      <!-- Event 4: Zero-Harm HSE Safety Week -->
+      <div class="card" data-category="Safety & CSR" data-reveal onclick="openEventModal('event4')">
+        <div class="card__media">
+          <img src="media/pillar-management.jpg" alt="Zero-Harm HSE Safety Week" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">Safety &amp; CSR</span>
+          <span class="card__budget">June 2026</span>
+        </div>
+        <h3 class="card__title">Annual Zero-Harm Safety Week &amp; Operator Drills</h3>
+        <p class="card__desc">Over 300 site engineers and heavy plant operators undergo advanced emergency response and zero-LTI safety certifications.</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Location: <strong>Donalds Bay Operations Yard</strong></span>
+      </div>
+
+      <!-- Event 5: Bayview Luxury Residences Handover -->
+      <div class="card" data-category="Commissioning" data-reveal onclick="openEventModal('event5')">
+        <div class="card__media">
+          <img src="media/work-03.jpg" alt="Bayview Waterfront Luxury Handover" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">Site Commissioning</span>
+          <span class="card__budget">May 2026</span>
+        </div>
+        <h3 class="card__title">The Bayview Luxury Waterfront Residences Handover</h3>
+        <p class="card__desc">VIP reception for homeowners and investors marking completion of the 24-unit travertine luxury residential enclave.</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Location: <strong>Victoria Island Waterfront</strong></span>
+      </div>
+
+      <!-- Event 6: Coastal Mangrove CSR -->
+      <div class="card" data-category="Safety & CSR" data-reveal onclick="openEventModal('event6')">
+        <div class="card__media">
+          <img src="media/case-still-3.jpg" alt="Coastal Mangrove CSR Planting" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">Safety &amp; CSR</span>
+          <span class="card__budget">April 2026</span>
+        </div>
+        <h3 class="card__title">Coastal Mangrove Restoration &amp; Community Outreach</h3>
+        <p class="card__desc">Planting 10,000 mangrove saplings along shoreline corridors to protect coastal biodiversity and prevent shoreline soil erosion.</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Location: <strong>Atlantic Coastal Basin</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__grid">
+      <div class="foot__col">
+        <img class="foot__mark" src="media/logo-white.svg" alt="Donalds Bay Limited" width="260" height="48">
+        <span style="max-width:34ch">Project Management, Road Construction &amp; Real Estate Development.</span>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Capabilities &amp; Company</span>
+        <a href="about.html">About Us</a>
+        <a href="index.html#services">Road Construction</a>
+        <a href="index.html#services">Project Management</a>
+        <a href="index.html#services">Real Estate</a>
+        <a href="portfolio.html">All Executed Projects</a>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Explore Donalds Bay</span>
+        <a href="news.html">News &amp; Articles</a>
+        <a href="events.html">Events &amp; Media</a>
+        <a href="careers.html">Careers &amp; Openings</a>
+        <a href="admin.html">Executive Portal</a>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Headquarters</span>
+        <span>Donalds Bay Tower, Coastal Boulevard</span>
+        <a href="mailto:info@donaldsbay.com">info@donaldsbay.com</a>
+        <a href="index.html#book">Schedule Technical Meeting</a>
+      </div>
+    </div>
+    
+    <div class="foot__base">
+      <span>&copy; 2026 Donalds Bay Limited. All rights reserved. Registered Civil Engineering &amp; Construction Entity.</span>
+      <span id="clock-foot">WAT 00:00</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ REEL MODAL ============================ -->
+<dialog class="reel" id="reelModal" aria-label="Donalds Bay Limited Company Reel">
+  <button class="reel__close" type="button" data-reel-close aria-label="Close reel">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <video class="reel__video" src="media/hero-loop.mp4" poster="media/hero-poster.jpg"
+         controls playsinline preload="none"></video>
+</dialog>
+
+<!-- ============================ EVENT DETAIL MODAL ============================ -->
+<dialog class="reel reel--project" id="eventDetailModal">
+  <button class="reel__close" type="button" onclick="document.getElementById('eventDetailModal').close()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="reel__frame" id="eventStage" style="padding:1.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+    <img id="eventModalImg" src="media/case-flagship.jpg" alt="" style="max-height:65vh; width:auto; border-radius:6px; object-fit:contain;">
+  </div>
+  <div class="proj__bar">
+    <span class="proj__title" id="eventModalTitle">Event Media Details</span>
+  </div>
+</dialog>
+
+<script src="js/db.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ai-chat.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('eventsSearchInput');
+  const tabs = document.querySelectorAll('.portfolio-tab');
+  const cards = document.querySelectorAll('#eventsGrid .card');
+
+  function filterCards() {
+    const activeTab = document.querySelector('.portfolio-tab.active');
+    const selectedCategory = activeTab ? activeTab.dataset.category : 'all';
+    const query = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const cardCategory = card.dataset.category;
+      const text = card.textContent.toLowerCase();
+      const matchCat = selectedCategory === 'all' || cardCategory === selectedCategory;
+      const matchSearch = text.includes(query);
+
+      card.style.display = (matchCat && matchSearch) ? 'flex' : 'none';
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      filterCards();
+    });
+  });
+
+  searchInput.addEventListener('input', filterCards);
+
+  // Play Company Reel
+  document.getElementById('btnPlayCompanyReel')?.addEventListener('click', () => {
+    const reel = document.getElementById('reelModal');
+    if (reel) {
+      reel.showModal();
+      const vid = reel.querySelector('video');
+      if (vid) vid.play();
+    }
+  });
+});
+
+window.openEventModal = function(eventId) {
+  const modal = document.getElementById('eventDetailModal');
+  const title = document.getElementById('eventModalTitle');
+  const img = document.getElementById('eventModalImg');
+
+  const EVENT_DATA = {
+    event1: { title: "Atlantic Coastal Expressway Official Commissioning", img: "media/case-flagship.jpg" },
+    event2: { title: "West Africa Civil Infrastructure & Paving Summit", img: "media/work-06.jpg" },
+    event3: { title: "Sterling Heights 32-Storey Skyscraper Groundbreaking", img: "media/work-04.jpg" },
+    event4: { title: "Annual Zero-Harm Safety Week & Operator Drills", img: "media/pillar-management.jpg" },
+    event5: { title: "The Bayview Luxury Waterfront Residences Handover", img: "media/work-03.jpg" },
+    event6: { title: "Coastal Mangrove Restoration & Community Outreach", img: "media/case-still-3.jpg" }
+  };
+
+  const data = EVENT_DATA[eventId];
+  if (data) {
+    title.textContent = data.title;
+    img.src = data.img;
+    modal.showModal();
+  }
+};
+</script>
+</body>
+</html>
