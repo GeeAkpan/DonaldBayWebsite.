@@ -150,11 +150,18 @@ const SEED_ADMINS = [
 
 // LocalStorage Helpers
 function getCalls() {
+  if (window.DB && typeof window.DB.getCalls === 'function') {
+    return window.DB.getCalls();
+  }
   const data = localStorage.getItem('donalds_bay_calls');
   return data ? JSON.parse(data) : SEED_CALLS;
 }
 function saveCalls(calls) {
-  localStorage.setItem('donalds_bay_calls', JSON.stringify(calls));
+  if (window.DB && typeof window.DB.saveCalls === 'function') {
+    window.DB.saveCalls(calls);
+  } else {
+    localStorage.setItem('donalds_bay_calls', JSON.stringify(calls));
+  }
 }
 
 function getInvoices() {
@@ -271,6 +278,8 @@ function updateKPIsAndChart() {
   const projects = window.DB ? window.DB.getProjects() : [];
   const blogs = window.DB ? window.DB.getBlogs() : [];
 
+  const pendingCalls = calls.filter(c => c.status === 'Pending Validation').length;
+
   const kpiTotalCalls = document.getElementById('kpiTotalCalls');
   const countCallsBadge = document.getElementById('countCallsBadge');
   const kpiActiveInvoices = document.getElementById('kpiActiveInvoices');
@@ -282,7 +291,18 @@ function updateKPIsAndChart() {
   const kpiTotalBlogs = document.getElementById('kpiTotalBlogs');
 
   if (kpiTotalCalls) kpiTotalCalls.textContent = calls.length;
-  if (countCallsBadge) countCallsBadge.textContent = calls.length;
+  if (countCallsBadge) {
+    countCallsBadge.textContent = pendingCalls > 0 ? `${calls.length} (${pendingCalls} new)` : calls.length;
+    if (pendingCalls > 0) {
+      countCallsBadge.style.background = 'rgba(255, 170, 0, 0.2)';
+      countCallsBadge.style.color = '#FFB800';
+      countCallsBadge.style.border = '1px solid rgba(255, 170, 0, 0.4)';
+    } else {
+      countCallsBadge.style.background = '';
+      countCallsBadge.style.color = '';
+      countCallsBadge.style.border = '';
+    }
+  }
   if (kpiActiveInvoices) kpiActiveInvoices.textContent = invoices.length;
   if (countInvoicesBadge) countInvoicesBadge.textContent = invoices.length;
   if (countAdminsBadge) countAdminsBadge.textContent = admins.length;
@@ -361,7 +381,7 @@ function renderCalls() {
   const serviceFilter = document.getElementById('filterCallService')?.value || 'ALL';
 
   const filtered = calls.filter(c => {
-    const matchSearch = (c.client + ' ' + c.location + ' ' + c.contact).toLowerCase().includes(search);
+    const matchSearch = (c.id + ' ' + c.client + ' ' + c.location + ' ' + c.contact + ' ' + (c.phone || '') + ' ' + (c.notes || '')).toLowerCase().includes(search);
     const matchStatus = statusFilter === 'ALL' || c.status === statusFilter;
     const matchService = serviceFilter === 'ALL' || c.service === serviceFilter;
     return matchSearch && matchStatus && matchService;
@@ -374,24 +394,40 @@ function renderCalls() {
 
   tbody.innerHTML = filtered.map(c => {
     const dt = new Date(c.dateTime);
-    const dtStr = isNaN(dt.getTime()) ? c.dateTime : dt.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) + ' at ' + dt.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+    const dtStr = isNaN(dt.getTime()) ? (c.date ? `${c.date} ${c.time || ''}` : c.dateTime) : dt.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) + ' at ' + dt.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+    const isPending = c.status === 'Pending Validation';
     const statusClass = c.status === 'Confirmed' ? 'status-confirmed' : c.status === 'Completed' ? 'status-paid' : 'status-pending';
 
     return `
-      <tr>
+      <tr style="${isPending ? 'background:rgba(255,170,0,0.03);' : ''}">
         <td>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <strong style="color:var(--accent); font-size:0.75rem; font-family:var(--label);">${c.id}</strong>
+          </div>
           <div class="td-main">${c.client}</div>
           <div class="td-sub">${c.contact}</div>
+          ${c.phone ? `<div class="td-sub" style="font-size:0.75rem; color:var(--on-petrol-soft);"><span style="color:var(--accent);">Tel:</span> ${c.phone}</div>` : ''}
+          ${c.notes ? `<div class="td-sub" style="font-size:0.73rem; color:var(--on-petrol-mid); font-style:italic; margin-top:3px; max-width:260px;">"${c.notes}"</div>` : ''}
         </td>
         <td><span class="card__tag">${c.service}</span></td>
         <td>${c.location}</td>
         <td><strong>${dtStr}</strong></td>
         <td>${c.format}</td>
         <td>${c.budget}</td>
-        <td><span class="status-pill ${statusClass}">${c.status}</span></td>
+        <td>
+          <span class="status-pill ${statusClass}">${c.status}</span>
+          ${c.validatedBy ? `<div style="font-size:0.65rem; color:var(--on-petrol-soft); margin-top:3px;">Validated by: ${c.validatedBy.split('@')[0]}</div>` : ''}
+        </td>
         <td>
           <div class="table-actions">
-            ${c.status !== 'Completed' ? `<button class="table-btn" onclick="toggleCallComplete('${c.id}')" title="Mark Consultation Completed">✓ Done</button>` : ''}
+            ${isPending ? `
+              <button class="table-btn btn-pay" onclick="validateCall('${c.id}')" title="Validate and confirm technical consultation" style="background:rgba(0,229,153,0.15); color:var(--accent); border-color:rgba(0,229,153,0.4); font-weight:700; font-size:0.75rem;">
+                ✓ Validate &amp; Confirm
+              </button>
+            ` : ''}
+            ${c.status === 'Confirmed' ? `
+              <button class="table-btn" onclick="toggleCallComplete('${c.id}')" title="Mark Consultation Completed">✓ Done</button>
+            ` : ''}
             <button class="table-btn" onclick="deleteCall('${c.id}')" title="Remove Record">✕</button>
           </div>
         </td>
@@ -586,6 +622,25 @@ window.deleteAdmin = function(id) {
 /* ==========================================================================
    ACTIONS FOR CALLS & INVOICES
    ========================================================================== */
+window.validateCall = function(id) {
+  const loggedInUser = sessionStorage.getItem('donalds_bay_auth_user') || 'd.akpan@donaldsbay.com';
+  if (window.DB && typeof window.DB.validateMeeting === 'function') {
+    window.DB.validateMeeting(id, loggedInUser);
+  } else {
+    const calls = getCalls();
+    const call = calls.find(c => c.id === id);
+    if (call) {
+      call.status = 'Confirmed';
+      call.validatedBy = loggedInUser;
+      call.validatedAt = new Date().toISOString();
+      saveCalls(calls);
+    }
+  }
+  renderCalls();
+  updateKPIsAndChart();
+  alert(`✓ Technical Consultation ${id} has been validated and confirmed by ${loggedInUser}! Invitations are dispatched to the client.`);
+};
+
 window.toggleCallComplete = function(id) {
   const calls = getCalls();
   const call = calls.find(c => c.id === id);

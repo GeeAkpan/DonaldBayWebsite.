@@ -14,7 +14,7 @@ const SEED_PROJECTS = [
     image: "media/work-01.jpg",
     desc: "42km high-tonnage multi-lane highway, dual bridges, and reinforced stormwater drainage.",
     date: "Completed 2026",
-    gallery: ["media/work-01.jpg", "media/pillar-roads.jpg", "media/case-flagship.jpg"]
+    gallery: ["media/work-01.jpg", "media/branded-trucks.jpg", "media/branded-survey.jpg"]
   },
   {
     id: "PROJ-02",
@@ -26,7 +26,7 @@ const SEED_PROJECTS = [
     image: "media/work-02.jpg",
     desc: "32-storey Grade-A corporate headquarters with parametric energy-efficient glass facade.",
     date: "Completed 2025",
-    gallery: ["media/work-02.jpg", "media/work-04.jpg", "media/pillar-management.jpg"]
+    gallery: ["media/work-02.jpg", "media/work-04.jpg", "media/branded-helmet.jpg"]
   },
   {
     id: "PROJ-03",
@@ -112,6 +112,70 @@ const SEED_BLOGS = [
   }
 ];
 
+// Initial Seed Consultations & Scheduled Meetings
+const SEED_CALLS = [
+  {
+    id: "MEET-401",
+    client: "Federal Ministry of Works",
+    contact: "eng.sanusi@works.gov.ng",
+    phone: "+234 803 123 4567",
+    service: "Road Construction",
+    location: "Atlantic Coastal Corridor, Lagos",
+    dateTime: "2026-09-22T10:30",
+    date: "2026-09-22",
+    time: "10:30 AM (WAT)",
+    format: "On-Site Inspection",
+    budget: "₦10B+ Mega Infrastructure",
+    status: "Confirmed",
+    notes: "Review bridge interchange piling specifications and polymer asphalt test samples."
+  },
+  {
+    id: "MEET-402",
+    client: "PrimeStone Real Estate Partners",
+    contact: "director@primestone.ng",
+    phone: "+234 802 987 6543",
+    service: "Real Estate",
+    location: "Eko Atlantic, Victoria Island",
+    dateTime: "2026-09-23T14:00",
+    date: "2026-09-23",
+    time: "02:00 PM (WAT)",
+    format: "Google Meet (Virtual)",
+    budget: "₦1B – ₦10B ($1M – $10M)",
+    status: "Confirmed",
+    notes: "Travertine luxury residential phase 2 structural conceptualization."
+  },
+  {
+    id: "MEET-403",
+    client: "Sterling Urban Developments",
+    contact: "mgt@sterlingurban.com",
+    phone: "+234 809 555 1212",
+    service: "Project Management",
+    location: "Sterling Heights Site, Abuja CBD",
+    dateTime: "2026-09-24T11:00",
+    date: "2026-09-24",
+    time: "11:00 AM (WAT)",
+    format: "Headquarters Boardroom",
+    budget: "₦1B – ₦10B ($1M – $10M)",
+    status: "Pending Validation",
+    notes: "EPC governance and BoQ reconciliation for 32-storey commercial tower foundation."
+  },
+  {
+    id: "MEET-404",
+    client: "Chevron Infrastructure Logistics",
+    contact: "procurement@chevroninfra.com",
+    phone: "+234 805 777 8899",
+    service: "Road Construction",
+    location: "Escravos Access Highway",
+    dateTime: "2026-09-25T15:30",
+    date: "2026-09-25",
+    time: "03:30 PM (WAT)",
+    format: "Google Meet (Virtual)",
+    budget: "₦10B+ Mega Infrastructure",
+    status: "Confirmed",
+    notes: "Heavy haulage bypass soil stabilization and culvert design."
+  }
+];
+
 // Data Store Accessors
 window.DB = {
   getProjects: function() {
@@ -127,8 +191,52 @@ window.DB = {
   },
   saveBlogs: function(blogs) {
     localStorage.setItem('donalds_bay_blogs', JSON.stringify(blogs));
+  },
+  getCalls: function() {
+    const data = localStorage.getItem('donalds_bay_calls');
+    return data ? JSON.parse(data) : SEED_CALLS;
+  },
+  saveCalls: function(calls) {
+    localStorage.setItem('donalds_bay_calls', JSON.stringify(calls));
+  },
+  scheduleMeeting: function(meetingData) {
+    const calls = this.getCalls();
+    const idNum = Math.floor(100 + Math.random() * 900);
+    const newMeeting = {
+      id: "MEET-" + idNum,
+      client: meetingData.client || "Prospective Client",
+      contact: meetingData.contact || "client@company.com",
+      phone: meetingData.phone || "+234",
+      service: meetingData.service || "Road Construction",
+      location: meetingData.location || "Victoria Island, Lagos",
+      dateTime: meetingData.dateTime || new Date().toISOString().slice(0, 16),
+      date: meetingData.date || new Date().toISOString().slice(0, 10),
+      time: meetingData.time || "10:00 AM (WAT)",
+      format: meetingData.format || "Google Meet (Virtual)",
+      budget: meetingData.budget || "₦1B – ₦10B ($1M – $10M)",
+      status: "Pending Validation",
+      notes: meetingData.notes || "Requested via online calendar consultation scheduler.",
+      createdAt: new Date().toISOString()
+    };
+    calls.unshift(newMeeting);
+    this.saveCalls(calls);
+    return newMeeting;
+  },
+  validateMeeting: function(meetingId, validator) {
+    const calls = this.getCalls();
+    const target = calls.find(c => c.id === meetingId);
+    if (target) {
+      target.status = "Confirmed";
+      target.validatedBy = validator || "Executive Admin";
+      target.validatedAt = new Date().toISOString();
+      this.saveCalls(calls);
+      return target;
+    }
+    return null;
   }
 };
 
+// Seed LocalStorage if not present
 if (!localStorage.getItem('donalds_bay_projects')) window.DB.saveProjects(SEED_PROJECTS);
 if (!localStorage.getItem('donalds_bay_blogs')) window.DB.saveBlogs(SEED_BLOGS);
+if (!localStorage.getItem('donalds_bay_calls')) window.DB.saveCalls(SEED_CALLS);

@@ -1852,3 +1852,396 @@ a { color: inherit; text-decoration: none; }
 }
 .ai-send-btn:hover { transform: scale(1.05); }
 
+/* ==========================================================================
+   Interactive Calendar Consultation & Booking Modal
+   ========================================================================== */
+
+.booking-dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  width: min(1080px, 94vw);
+  max-height: 92vh;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 229, 153, 0.12);
+  outline: none;
+  z-index: 99999;
+}
+
+.booking-dialog::backdrop {
+  background: rgba(2, 18, 20, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.booking-box {
+  background: #021417;
+  background: linear-gradient(145deg, rgba(4, 33, 37, 0.98), rgba(2, 18, 20, 0.99));
+  border: 1px solid rgba(0, 229, 153, 0.3);
+  border-radius: 12px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.booking-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  font-size: 1.4rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s var(--ease);
+}
+.booking-close:hover {
+  background: var(--accent);
+  color: var(--petrol);
+  border-color: var(--accent);
+}
+
+.booking-container {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 0;
+}
+@media (max-width: 860px) {
+  .booking-container { grid-template-columns: 1fr; }
+}
+
+.booking-left {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-right: 1px solid rgba(0, 229, 153, 0.15);
+  background: rgba(2, 18, 20, 0.45);
+}
+@media (max-width: 860px) {
+  .booking-left { border-right: none; border-bottom: 1px solid rgba(0, 229, 153, 0.15); }
+}
+
+.booking-right {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.booking-badge-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--label);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  background: rgba(0, 229, 153, 0.08);
+  border: 1px solid rgba(0, 229, 153, 0.22);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.booking-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.booking-title {
+  font-size: 1.45rem;
+  color: var(--white);
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+
+.booking-desc {
+  font-size: 0.88rem;
+  color: var(--on-petrol-mid);
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+}
+
+/* Calendar Widget Component */
+.cal-widget {
+  background: rgba(4, 33, 37, 0.7);
+  border: 1px solid rgba(0, 229, 153, 0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.cal-month-title {
+  font-size: 1.05rem;
+  color: var(--white);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cal-nav-btn {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.cal-nav-btn:hover {
+  background: var(--accent);
+  color: var(--petrol);
+  border-color: var(--accent);
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-family: var(--label);
+  font-size: 0.72rem;
+  color: var(--on-petrol-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.cal-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  appearance: none;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--on-petrol);
+  font-family: var(--body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.cal-day.cal-day--blank {
+  pointer-events: none;
+  background: transparent;
+}
+
+.cal-day.cal-day--disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.cal-day.cal-day--active:hover {
+  background: rgba(0, 229, 153, 0.12);
+  border-color: rgba(0, 229, 153, 0.35);
+  color: var(--white);
+}
+
+.cal-day.is-selected {
+  background: var(--accent) !important;
+  color: var(--petrol) !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 16px rgba(0, 229, 153, 0.4);
+}
+
+/* Time Slots Component */
+.slots-section {
+  margin-top: 1.25rem;
+}
+
+.slots-label {
+  font-size: 0.84rem;
+  color: var(--on-petrol-mid);
+  margin-bottom: 0.65rem;
+}
+.slots-label strong { color: var(--accent); }
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.5rem;
+}
+
+.slot-btn {
+  appearance: none;
+  background: rgba(4, 33, 37, 0.6);
+  border: 1px solid rgba(0, 229, 153, 0.2);
+  border-radius: 6px;
+  padding: 0.6rem 0.5rem;
+  color: var(--on-petrol);
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  transition: all 0.2s var(--ease);
+}
+.slot-btn:hover {
+  background: rgba(0, 229, 153, 0.1);
+  border-color: var(--accent);
+}
+.slot-btn.is-selected {
+  background: rgba(0, 229, 153, 0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(0, 229, 153, 0.2);
+}
+.slot-btn.is-selected .slot-time {
+  color: var(--accent);
+  font-weight: 700;
+}
+.slot-time {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.slot-desc {
+  font-size: 0.68rem;
+  color: var(--on-petrol-soft);
+}
+
+/* Booking Form Elements */
+.booking-form-header h4 {
+  font-size: 1.35rem;
+  color: var(--white);
+  margin: 0.25rem 0 1.25rem;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.bform-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+@media (max-width: 540px) {
+  .bform-row-2 { grid-template-columns: 1fr; }
+}
+
+.bform-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.bform-group label {
+  font-family: var(--label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-petrol-soft);
+}
+
+.bform-control {
+  background: rgba(2, 18, 20, 0.8);
+  border: 1px solid rgba(0, 229, 153, 0.22);
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--body);
+  font-size: 0.88rem;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.bform-control:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 229, 153, 0.15);
+}
+
+.booking-summary-bar {
+  background: rgba(0, 229, 153, 0.08);
+  border: 1px dashed rgba(0, 229, 153, 0.3);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+.bsum-icon { font-size: 1.3rem; }
+.bsum-date { font-weight: 700; color: var(--white); font-size: 0.88rem; }
+.bsum-sub { font-size: 0.72rem; color: var(--accent); }
+
+/* Booking Success Receipt Stage */
+.booking-success-view {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.bsuccess-card {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.bsuccess-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(0, 229, 153, 0.12);
+  border: 2px solid var(--accent);
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  box-shadow: 0 0 30px rgba(0, 229, 153, 0.25);
+}
+
+.bsuccess-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  background: rgba(4, 33, 37, 0.7);
+  border: 1px solid rgba(0, 229, 153, 0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: left;
+  margin-top: 1.5rem;
+}
+@media (max-width: 540px) {
+  .bsuccess-grid { grid-template-columns: 1fr; }
+}
+
+.bsuccess-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.bs-lbl {
+  font-family: var(--label);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--on-petrol-soft);
+}
+.bs-val {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
