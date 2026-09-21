@@ -1,56 +1,96 @@
 /* ==========================================================================
-   Donalds Bay Limited — AI Engineering & Customer Assistant
+   Donalds Bay Limited — Advanced AI Engineering & Support Assistant
    ========================================================================== */
 
 (function() {
-  // Knowledge Base for Donalds Bay Limited
-  const KNOWLEDGE = [
+  // Comprehensive Knowledge Engine for Donalds Bay Limited
+  const KNOWLEDGE_BASE = [
     {
-      keywords: ["service", "offer", "what do you do", "capabilities", "specialty"],
-      response: "Donalds Bay Limited provides three core enterprise capabilities:\n\n1. **Project Management & EPC**: End-to-end site supervision, cost engineering, BoQ audits, and timeline delivery.\n2. **Road Construction**: Heavy civil infrastructure, multi-lane expressways, asphalt paving, culverts, and bridge civil works.\n3. **Real Estate**: Turnkey luxury residential developments, commercial towers, and masterplanned communities.\n\nWhich of these services are you looking to commission?"
+      intent: "services_overview",
+      keywords: ["service", "offer", "what do you do", "capabilities", "specialty", "about", "overview", "what are your services"],
+      response: "Donalds Bay Limited is an integrated civil engineering, project management, and luxury real estate enterprise. We operate across three primary divisions:\n\n1. 🏗️ **Project Management & EPC**: End-to-end site oversight, Bill of Quantities (BoQ), cost engineering, and QA/QC compliance.\n2. 🛣️ **Road Construction**: Heavy civil expressways, high-tonnage asphalt paving, drainage networks, and bridge infrastructure.\n3. 🏙️ **Real Estate & Commercial Towers**: Turnkey luxury residential estates, waterfront villas, and Grade-A commercial office skyscrapers.\n\nWhich division would you like more technical details on?",
+      followUps: ["Tell me about Road Construction", "Project Management EPC details", "Explore Real Estate portfolio", "Request Cost Estimate"]
     },
     {
-      keywords: ["road", "highway", "asphalt", "paving", "bridge", "expressway", "culvert"],
-      response: "Our **Road Construction** division handles high-capacity asphalt paving, subgrade compaction, dual-carriageway corridors, and bridge infrastructure. We operate a fleet of 60+ heavy earthmovers and dedicated batch plants.\n\nOur flagship Atlantic Coastal Expressway (42km) was delivered 3 months ahead of schedule with 5.2M man-hours zero LTI!"
+      intent: "road_construction",
+      keywords: ["road", "highway", "asphalt", "paving", "bridge", "expressway", "culvert", "earthwork", "dual carriageway", "pave", "drainage"],
+      response: "Our **Road Construction & Civil Division** delivers major national corridors:\n\n• **Asphalt Paving**: High-capacity polymer asphalt laying and subgrade compaction.\n• **Bridge Engineering**: Precast and in-situ reinforced concrete bridge spans and flyovers.\n• **Drainage Networks**: Deep storm sewer culverts and hydraulic flood control.\n• **Heavy Fleet**: Over 60 heavy earthmovers (Caterpillar, Bomag, Komatsu excavators, graders, pavers, and mobile concrete batch plants).\n\n**Flagship**: The *Atlantic Coastal Expressway* (42km corridor) was delivered 3 months ahead of schedule with zero safety incidents.",
+      followUps: ["What equipment do you use?", "View Atlantic Expressway case study", "Book Road Feasibility Study"]
     },
     {
-      keywords: ["project management", "epc", "boq", "supervision", "cost", "feasibility"],
-      response: "Our **Project Management** team provides full EPC management, on-site quality assurance, drone telemetry, and ISO 9001 compliance. We eliminate budget overruns and guarantee milestone delivery on complex civil and architectural projects."
+      intent: "project_management",
+      keywords: ["project management", "epc", "boq", "supervision", "cost", "feasibility", "audit", "drone", "telemetry", "schedule", "contractor"],
+      response: "Our **Project Management & EPC Division** provides turnkey governance:\n\n• **Financial Controls**: Comprehensive Bill of Quantities (BoQ) and milestone forecasting to eliminate budget overruns.\n• **Engineering Oversight**: Resident COREN-certified chief engineers and QA/QC officers on-site.\n• **Site Telemetry**: Real-time drone aerial mapping, 3D BIM coordination, and automated milestone reporting.\n• **Safety Compliance**: ISO 9001 and HSE Level 3 certified (5.2M man-hours Zero LTI).",
+      followUps: ["How do I get a BoQ audit?", "Consult with Chief Engineer", "View Executive Portal"]
     },
     {
-      keywords: ["real estate", "property", "house", "villa", "waterfront", "tower", "residential", "commercial"],
-      response: "Our **Real Estate** division specializes in luxury waterfront residences (like The Bayview Residences) and Grade-A commercial headquarters (like Sterling Heights Tower). We manage everything from architectural concept to turnkey interior handover."
+      intent: "real_estate",
+      keywords: ["real estate", "property", "house", "villa", "waterfront", "tower", "residential", "commercial", "bayview", "sterling", "apartment", "estate"],
+      response: "Our **Real Estate & Commercial Towers Division** develops high-value landmarks:\n\n• **The Bayview Waterfront Residences**: 24-unit luxury gated estate featuring travertine facades, infinity pools, and oceanfront terraces.\n• **Sterling Heights Corporate Tower**: 32-storey Grade-A commercial skyscraper with parametric energy-efficient glass facade.\n• **Turnkey Handover**: From land reclamation and structural build to bespoke MEP and luxury interior finishes.",
+      followUps: ["Inquire about Bayview Residences", "Commercial Tower Specifications", "Schedule Private Viewing"]
     },
     {
-      keywords: ["price", "cost", "quote", "rate", "how much", "budget", "pricing"],
-      response: "Project costs depend on site topography, square meterage, and civil specifications. Typical scales range from ₦50M for specialized structural works to ₦10B+ for major highway and high-rise developments.\n\nWould you like to schedule an assessment or submit your BoQ for an itemized estimate?"
+      intent: "pricing_quotes",
+      keywords: ["price", "cost", "quote", "rate", "how much", "budget", "pricing", "fee", "estimate", "bill of quantities"],
+      response: "Project pricing is determined by site topography, square meterage, and civil specifications:\n\n• **Specialized Structural & Civil Works**: Starting from ₦50M – ₦250M ($50K – $250K)\n• **Commercial Developments & Estate Phase Builds**: ₦250M – ₦1B ($250K – $1M)\n• **Mega Infrastructure & Highways**: ₦1B – ₦10B+ ($1M – $10M+)\n\nYou can fill out our on-page RFP form or tell me your site location and scope to get a preliminary consultation scheduled!",
+      followUps: ["Submit RFP Specifications", "Book Site Inspection", "Contact Estimation Team"]
     },
     {
-      keywords: ["contact", "phone", "email", "location", "address", "office", "headquarters"],
-      response: "📍 **Headquarters**: Donalds Bay Tower, Coastal Boulevard, Lagos\n📞 **Direct Line**: +234 (0) 800 DONALDS\n✉️ **Corporate Email**: info@donaldsbay.com\n\nYou can also book a direct technical meeting via our RFP form on this page!"
+      intent: "safety_certification",
+      keywords: ["safety", "certification", "compliance", "hse", "coren", "iso", "lti", "loss time", "standards", "quality"],
+      response: "Safety and quality governance at Donalds Bay Limited are benchmarked to international standards:\n\n• **ISO 9001:2015**: Certified Quality Management System.\n• **HSE Level 3**: 100% Zero-Loss Time Incident (Zero-LTI) track record over 5,200,000 operational hours.\n• **COREN & NSE Compliant**: All structural and civil designs are stamped by registered professional engineers.",
+      followUps: ["What services do you offer?", "Request Company Credentials"]
     },
     {
-      keywords: ["safety", "certification", "compliance", "hse", "coren", "iso"],
-      response: "Donalds Bay Limited operates under strict **ISO 9001** and **HSE Level 3** safety governance. We maintain a verified 100% Zero-Loss Time Incident (Zero-LTI) track record across all active sites."
+      intent: "contact_location",
+      keywords: ["contact", "phone", "email", "location", "address", "office", "headquarters", "where", "reach", "call", "whatsapp"],
+      response: "📍 **Headquarters**: Donalds Bay Tower, Coastal Boulevard, Victoria Island / Lekki, Lagos, Nigeria\n📞 **Direct Line**: +234 (0) 800 DONALDS (+234 800 366 2537)\n✉️ **Corporate Inquiries**: info@donaldsbay.com\n⏰ **Operational Hours**: Mon – Sat: 07:00 – 18:00 (WAT)\n\nYou can also use the RFP form right on this page to request an immediate callback from our project director!",
+      followUps: ["Schedule Technical Consultation", "Talk to Chief Estimator"]
     },
     {
-      keywords: ["admin", "invoice", "portal", "schedule", "meeting", "call"],
-      response: "You can access our **Executive Portal** to inspect scheduled site consultations and construction milestone invoices. Click the 'Executive Portal' button in the top navigation or footer to view the dashboard."
+      intent: "leadership_team",
+      keywords: ["founder", "ceo", "director", "who owns", "leadership", "management team", "donald", "babatunde", "team"],
+      response: "Donalds Bay Limited is led by a distinguished executive board:\n\n• **Engr. Donald Akpan** — Chief Executive & Managing Director\n• **Engr. Babatunde Sanusi, FNSE** — Director of Highway Planning & Civil Infrastructure\n• **Ngozi Okonkwo** — Chief Financial & Commercial Officer\n\nSupported by over 250 resident civil engineers, architects, survey specialists, and heavy plant operators.",
+      followUps: ["Contact the Executive Board", "Schedule Technical Meeting"]
+    },
+    {
+      intent: "admin_portal",
+      keywords: ["admin", "invoice", "portal", "schedule", "meeting", "call logs", "billing", "revenue", "executive"],
+      response: "Authorized executives can access the **Executive Portal** to:\n\n• Inspect and manage **Call Schedules & Technical Site Consultations**.\n• Issue, edit, or track **Construction Milestone Invoices**.\n• Authorize or revoke **Admin Credentials by Email**.\n• View real-time **Service Revenue Breakdown & Market Share Analytics**.\n\nClick the 'Executive Portal' link in the top menu or visit `/admin.html`.",
+      followUps: ["Go to Executive Portal", "How do I add an Admin?"]
     }
   ];
 
-  // Helper: Find Best AI Match
-  function getAIResponse(userText) {
-    const lower = userText.toLowerCase();
-    for (const item of KNOWLEDGE) {
-      if (item.keywords.some(k => lower.includes(k))) {
-        return item.response;
+  // Smart Matching Algorithm
+  function matchIntent(userText) {
+    const text = userText.toLowerCase();
+    let bestMatch = null;
+    let highestScore = 0;
+
+    for (const item of KNOWLEDGE_BASE) {
+      let score = 0;
+      for (const kw of item.keywords) {
+        if (text.includes(kw)) {
+          score += kw.split(' ').length * 2; // Weight multi-word keywords higher
+        }
+      }
+      if (score > highestScore) {
+        highestScore = score;
+        bestMatch = item;
       }
     }
-    return "Thank you for reaching out to Donalds Bay Limited. We specialize in Project Management, Road Construction, and Real Estate developments.\n\nCould you share details regarding your site location, project category, or preferred start date? You can also submit the RFP form on this page for an official technical review.";
+
+    if (bestMatch && highestScore > 0) {
+      return bestMatch;
+    }
+
+    return {
+      response: "Thank you for asking! **Donalds Bay Limited** provides enterprise civil solutions across **Project Management**, **Road Construction**, and **Real Estate Development**.\n\nWould you like to speak directly with our chief estimation engineer or submit your project scope for a free technical assessment?",
+      followUps: ["What services do you offer?", "Request Cost Estimate", "Contact Headquarters", "Schedule Site Inspection"]
+    };
   }
 
-  // Inject Widget DOM
+  // Inject AI Assistant Widget UI
   const widgetHTML = `
     <div class="ai-widget" id="aiWidget">
       <!-- Floating Toggle Button -->
@@ -60,7 +100,7 @@
         <span class="ai-toggle-label">Donalds Bay AI</span>
       </button>
 
-      <!-- Chat Drawer / Modal Box -->
+      <!-- Chat Box Panel -->
       <div class="ai-chat-box" id="aiChatBox">
         <div class="ai-chat-head">
           <div class="ai-head-info">
@@ -70,7 +110,7 @@
             </div>
             <div>
               <h4>Donalds Bay AI Assistant</h4>
-              <p>Technical &amp; Engineering Support &middot; Online</p>
+              <p>Technical &amp; Engineering Support &middot; Active</p>
             </div>
           </div>
           <button class="ai-close-btn" id="aiCloseBtn" aria-label="Close Chat">&times;</button>
@@ -78,21 +118,20 @@
 
         <div class="ai-chat-body" id="aiChatMessages">
           <div class="ai-msg ai-msg-bot">
-            <p>Welcome to <strong>Donalds Bay Limited</strong>. I'm your AI Engineering Assistant.</p>
-            <p>How can I assist you with your Project Management, Road Construction, or Real Estate requirements today?</p>
+            <p>Welcome to <strong>Donalds Bay Limited</strong>! I'm your AI Engineering Assistant.</p>
+            <p>Ask me anything about our <strong>Road Construction</strong>, <strong>Project Management (EPC)</strong>, <strong>Real Estate developments</strong>, pricing estimates, or equipment fleet.</p>
           </div>
 
-          <!-- Quick Starter Prompts -->
           <div class="ai-quick-prompts" id="aiQuickPrompts">
             <button class="ai-prompt-btn" data-query="What services do you offer?">What services do you offer?</button>
             <button class="ai-prompt-btn" data-query="Tell me about Road Construction capabilities">Road Construction capabilities</button>
-            <button class="ai-prompt-btn" data-query="How does Project Management work?">Project Management &amp; EPC</button>
+            <button class="ai-prompt-btn" data-query="How does Project Management EPC work?">Project Management &amp; EPC</button>
             <button class="ai-prompt-btn" data-query="How do I get a cost estimate or schedule a call?">Get Cost Estimate / Schedule Call</button>
           </div>
         </div>
 
         <form class="ai-chat-foot" id="aiChatForm">
-          <input type="text" id="aiUserInput" class="ai-input" placeholder="Ask about services, roadworks, pricing, BoQ..." autocomplete="off" required>
+          <input type="text" id="aiUserInput" class="ai-input" placeholder="Ask anything about Donalds Bay Limited..." autocomplete="off" required>
           <button type="submit" class="ai-send-btn" aria-label="Send message">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>
@@ -101,7 +140,10 @@
     </div>
   `;
 
-  document.body.insertAdjacentHTML('beforeend', widgetHTML);
+  // Avoid duplicate injection
+  if (!document.getElementById('aiWidget')) {
+    document.body.insertAdjacentHTML('beforeend', widgetHTML);
+  }
 
   const toggleBtn = document.getElementById('aiToggleBtn');
   const chatBox = document.getElementById('aiChatBox');
@@ -125,18 +167,34 @@
   });
   closeBtn.addEventListener('click', closeChat);
 
-  function appendMessage(sender, text) {
+  function appendMessage(sender, text, followUps = []) {
     const msgDiv = document.createElement('div');
     msgDiv.className = sender === 'user' ? 'ai-msg ai-msg-user' : 'ai-msg ai-msg-bot';
-    
-    // Parse bold text and newlines
+
     let formatted = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/• (.*?)(?=(\n|$))/g, '<li style="margin-left:1rem; list-style-type:disc;">$1</li>')
       .replace(/\n\n/g, '</p><p>')
       .replace(/\n/g, '<br>');
-    
+
     msgDiv.innerHTML = `<p>${formatted}</p>`;
     messages.appendChild(msgDiv);
+
+    // Dynamic Follow-Up Buttons
+    if (followUps && followUps.length && sender === 'bot') {
+      const followUpWrap = document.createElement('div');
+      followUpWrap.className = 'ai-quick-prompts';
+      followUpWrap.style.marginTop = '0.4rem';
+      followUps.forEach(fText => {
+        const btn = document.createElement('button');
+        btn.className = 'ai-prompt-btn';
+        btn.textContent = fText;
+        btn.onclick = () => handleQuery(fText);
+        followUpWrap.appendChild(btn);
+      });
+      messages.appendChild(followUpWrap);
+    }
+
     messages.scrollTop = messages.scrollHeight;
   }
 
@@ -144,7 +202,7 @@
     appendMessage('user', query);
     if (quickPrompts) quickPrompts.style.display = 'none';
 
-    // Show typing indicator
+    // Typing indicator
     const typing = document.createElement('div');
     typing.className = 'ai-msg ai-msg-bot ai-typing';
     typing.innerHTML = `<span></span><span></span><span></span>`;
@@ -153,9 +211,9 @@
 
     setTimeout(() => {
       typing.remove();
-      const reply = getAIResponse(query);
-      appendMessage('bot', reply);
-    }, 600);
+      const matched = matchIntent(query);
+      appendMessage('bot', matched.response, matched.followUps);
+    }, 500);
   }
 
   form.addEventListener('submit', (e) => {
