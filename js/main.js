@@ -75,60 +75,56 @@ if (nav) {
 /* --------------------------------------------------------------------------
    Mobile Drawer Menu & Dropdown Interaction
    -------------------------------------------------------------------------- */
-const navToggle = document.querySelector('.nav__toggle');
-if (nav && navToggle) {
-  const setMenu = (open) => {
-    nav.classList.toggle('is-open', open);
-    navToggle.setAttribute('aria-expanded', String(open));
-    navToggle.textContent = open ? 'Close' : 'Menu';
-  };
-  navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
-  nav.querySelectorAll('.nav__links > a').forEach((a) =>
-    a.addEventListener('click', () => setMenu(false)));
-  nav.querySelectorAll('.nav-dropdown-item').forEach((a) =>
-    a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
-  window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => {
-    if (e.matches) setMenu(false);
+function initNavigation() {
+  const navToggle = document.querySelector('.nav__toggle');
+  const nav = document.getElementById('nav');
+  if (nav && navToggle && !navToggle._init) {
+    navToggle._init = true;
+    const setMenu = (open) => {
+      nav.classList.toggle('is-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.textContent = open ? 'Close' : 'Menu';
+    };
+    navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+    nav.querySelectorAll('.nav__links > a').forEach((a) =>
+      a.addEventListener('click', () => setMenu(false)));
+    nav.querySelectorAll('.nav-dropdown-item').forEach((a) =>
+      a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+    window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => {
+      if (e.matches) setMenu(false);
+    });
+  }
+
+  // Dropdown click/tap toggle for Company menu
+  document.querySelectorAll('.nav-item--dropdown').forEach((dropdown) => {
+    const toggleBtn = dropdown.querySelector('.nav-dropdown-toggle');
+    if (toggleBtn && !toggleBtn._init) {
+      toggleBtn._init = true;
+      toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = dropdown.classList.toggle('is-open');
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item--dropdown')) {
+      document.querySelectorAll('.nav-item--dropdown.is-open').forEach((d) => {
+        d.classList.remove('is-open');
+        const btn = d.querySelector('.nav-dropdown-toggle');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+    }
   });
 }
 
-// Dropdown click/tap toggle for mobile & keyboard focus
-document.querySelectorAll('.nav-item--dropdown').forEach((dropdown) => {
-  const toggleBtn = dropdown.querySelector('.nav-dropdown-toggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = dropdown.classList.toggle('is-open');
-      toggleBtn.setAttribute('aria-expanded', String(isOpen));
-    });
-  }
-});
-
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.nav-item--dropdown')) {
-    document.querySelectorAll('.nav-item--dropdown.is-open').forEach((d) => {
-      d.classList.remove('is-open');
-      const btn = d.querySelector('.nav-dropdown-toggle');
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-    });
-  }
-});
-
-/* --------------------------------------------------------------------------
-   Site Operations Clock (WAT — West Africa Time)
-   -------------------------------------------------------------------------- */
-const clocks = ['clock', 'clock-studio', 'clock-foot'].map((id) => document.getElementById(id)).filter(Boolean);
-if (clocks.length) {
-  const fmt = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Africa/Lagos', hour: '2-digit', minute: '2-digit', hour12: false
-  });
-  const tick = () => {
-    const t = `WAT ${fmt.format(new Date())}`;
-    clocks.forEach((c) => { c.textContent = t; });
-  };
-  tick();
-  setInterval(tick, 30000);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNavigation);
+} else {
+  initNavigation();
 }
 
 /* --------------------------------------------------------------------------
