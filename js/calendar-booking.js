@@ -113,14 +113,20 @@
                   <input type="text" id="bLocation" class="bform-control" placeholder="e.g. Lagos Coastal Corridor / Abuja CBD" required>
                 </div>
                 <div class="bform-group">
-                  <label for="bBudgetTier">Estimated Budget Scale</label>
+                  <label for="bBudgetTier">Estimated Project Scale</label>
                   <select id="bBudgetTier" class="bform-control">
                     <option value="₦1B – ₦10B ($1M – $10M)" selected>₦1B – ₦10B ($1M – $10M)</option>
                     <option value="₦250M – ₦1B ($250K – $1M)">₦250M – ₦1B ($250K – $1M)</option>
                     <option value="₦50M – ₦250M ($50K – $250K)">₦50M – ₦250M ($50K – $250K)</option>
                     <option value="₦10B+ Mega Infrastructure">₦10B+ Mega Infrastructure</option>
+                    <option value="CUSTOM">Customized Amount &rarr;</option>
                   </select>
                 </div>
+              </div>
+
+              <div class="bform-group" id="bCustomBudgetWrap" style="display:none;">
+                <label for="bCustomBudget">Customized Estimated Scale / Amount (NGN / USD) *</label>
+                <input type="text" id="bCustomBudget" class="bform-control" placeholder="e.g. ₦850,000,000 or $4.5 Million">
               </div>
 
               <div class="bform-group">
@@ -339,6 +345,29 @@
     });
   }
 
+  // Custom Budget Visibility Toggle
+  const budgetSelect = document.getElementById('bBudgetTier');
+  const customBudgetWrap = document.getElementById('bCustomBudgetWrap');
+  const customBudgetInput = document.getElementById('bCustomBudget');
+
+  if (budgetSelect && customBudgetWrap) {
+    budgetSelect.addEventListener('change', () => {
+      if (budgetSelect.value === 'CUSTOM') {
+        customBudgetWrap.style.display = 'flex';
+        if (customBudgetInput) {
+          customBudgetInput.required = true;
+          customBudgetInput.focus();
+        }
+      } else {
+        customBudgetWrap.style.display = 'none';
+        if (customBudgetInput) {
+          customBudgetInput.required = false;
+          customBudgetInput.value = '';
+        }
+      }
+    });
+  }
+
   // Global Trigger Interception
   document.addEventListener('click', (e) => {
     const target = e.target.closest('a[href="#book"], a[href="index.html#book"], [data-open-consultation]');
@@ -358,6 +387,10 @@
       const dayStr = String(selectedDate.getDate()).padStart(2, '0');
       const isoDate = `${yearStr}-${monthStr}-${dayStr}`;
 
+      const selectedBudget = document.getElementById('bBudgetTier').value;
+      const customAmountVal = document.getElementById('bCustomBudget')?.value.trim();
+      const finalBudgetScale = selectedBudget === 'CUSTOM' ? (customAmountVal ? `Custom: ${customAmountVal}` : 'Customized Scale') : selectedBudget;
+
       const meetingData = {
         client: document.getElementById('bClientName').value.trim(),
         contact: document.getElementById('bClientEmail').value.trim(),
@@ -365,7 +398,7 @@
         service: document.getElementById('bServiceType').value,
         format: document.getElementById('bMeetingFormat').value,
         location: document.getElementById('bLocation').value.trim(),
-        budget: document.getElementById('bBudgetTier').value,
+        budget: finalBudgetScale,
         notes: document.getElementById('bNotes').value.trim() || 'Consultation booked via interactive calendar scheduler.',
         date: isoDate,
         time: selectedTimeSlot,

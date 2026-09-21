@@ -336,6 +336,28 @@ if (portfolioTabs.length && portfolioCards.length) {
    -------------------------------------------------------------------------- */
 const rfpForm = document.getElementById('rfpForm');
 if (rfpForm) {
+  const rfpBudgetSelect = document.getElementById('budgetTier');
+  const rfpCustomWrap = document.getElementById('rfpCustomBudgetWrap');
+  const rfpCustomInput = document.getElementById('rfpCustomBudget');
+
+  if (rfpBudgetSelect && rfpCustomWrap) {
+    rfpBudgetSelect.addEventListener('change', () => {
+      if (rfpBudgetSelect.value === 'CUSTOM') {
+        rfpCustomWrap.style.display = 'block';
+        if (rfpCustomInput) {
+          rfpCustomInput.required = true;
+          rfpCustomInput.focus();
+        }
+      } else {
+        rfpCustomWrap.style.display = 'none';
+        if (rfpCustomInput) {
+          rfpCustomInput.required = false;
+          rfpCustomInput.value = '';
+        }
+      }
+    });
+  }
+
   rfpForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = rfpForm.querySelector('button[type="submit"]');
@@ -348,24 +370,38 @@ if (rfpForm) {
     const clientName = document.getElementById('clientName').value.trim();
     const clientEmail = document.getElementById('clientEmail').value.trim();
     const siteLocation = document.getElementById('siteLocation').value.trim();
-    const budgetTier = document.getElementById('budgetTier').value;
+    const rawBudget = document.getElementById('budgetTier').value;
+    const customBudgetVal = document.getElementById('rfpCustomBudget')?.value.trim();
+    const finalBudget = rawBudget === 'CUSTOM' ? (customBudgetVal ? `Custom: ${customBudgetVal}` : 'Customized Scale') : rawBudget;
 
-    // Save directly to Executive Portal LocalStorage
+    // Save directly to Executive Portal LocalStorage / DB
     try {
-      let existingCalls = JSON.parse(localStorage.getItem('donalds_bay_calls') || '[]');
-      const newEntry = {
-        id: 'CALL-' + Math.floor(100 + Math.random() * 900),
-        client: clientName,
-        contact: clientEmail,
-        service: selectedServices,
-        location: siteLocation,
-        dateTime: new Date(Date.now() + 86400000 * 2).toISOString().slice(0, 16),
-        format: 'Google Meet (Virtual)',
-        budget: budgetTier,
-        status: 'Pending'
-      };
-      existingCalls.unshift(newEntry);
-      localStorage.setItem('donalds_bay_calls', JSON.stringify(existingCalls));
+      if (window.DB && typeof window.DB.scheduleMeeting === 'function') {
+        window.DB.scheduleMeeting({
+          client: clientName,
+          contact: clientEmail,
+          service: selectedServices,
+          location: siteLocation,
+          format: 'Google Meet (Virtual)',
+          budget: finalBudget,
+          notes: document.getElementById('projectDetails')?.value.trim() || 'RFP Specifications submitted via landing page form.'
+        });
+      } else {
+        let existingCalls = JSON.parse(localStorage.getItem('donalds_bay_calls') || '[]');
+        const newEntry = {
+          id: 'CALL-' + Math.floor(100 + Math.random() * 900),
+          client: clientName,
+          contact: clientEmail,
+          service: selectedServices,
+          location: siteLocation,
+          dateTime: new Date(Date.now() + 86400000 * 2).toISOString().slice(0, 16),
+          format: 'Google Meet (Virtual)',
+          budget: finalBudget,
+          status: 'Pending Validation'
+        };
+        existingCalls.unshift(newEntry);
+        localStorage.setItem('donalds_bay_calls', JSON.stringify(existingCalls));
+      }
     } catch (err) {}
 
     setTimeout(() => {

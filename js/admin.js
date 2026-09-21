@@ -908,9 +908,36 @@ document.getElementById('formAddAdmin')?.addEventListener('submit', (e) => {
   alert(`Administrative access granted to ${email} (${role})!`);
 });
 
+// Admin Call Modal Custom Budget Toggle
+const adminCallBudget = document.getElementById('callBudget');
+const adminCustomWrap = document.getElementById('adminCustomBudgetWrap');
+const adminCustomInput = document.getElementById('adminCustomBudget');
+
+if (adminCallBudget && adminCustomWrap) {
+  adminCallBudget.addEventListener('change', () => {
+    if (adminCallBudget.value === 'CUSTOM') {
+      adminCustomWrap.style.display = 'block';
+      if (adminCustomInput) {
+        adminCustomInput.required = true;
+        adminCustomInput.focus();
+      }
+    } else {
+      adminCustomWrap.style.display = 'none';
+      if (adminCustomInput) {
+        adminCustomInput.required = false;
+        adminCustomInput.value = '';
+      }
+    }
+  });
+}
+
 // Submit: New Call
 document.getElementById('formNewCall')?.addEventListener('submit', (e) => {
   e.preventDefault();
+  const rawCallBudget = document.getElementById('callBudget').value;
+  const customCallBudgetVal = document.getElementById('adminCustomBudget')?.value.trim();
+  const finalCallBudget = rawCallBudget === 'CUSTOM' ? (customCallBudgetVal ? `Custom: ${customCallBudgetVal}` : 'Custom Scale') : rawCallBudget;
+
   const newCall = {
     id: 'CALL-' + Math.floor(100 + Math.random() * 900),
     client: document.getElementById('callClient').value.trim(),
@@ -919,7 +946,7 @@ document.getElementById('formNewCall')?.addEventListener('submit', (e) => {
     location: document.getElementById('callLocation').value.trim(),
     dateTime: document.getElementById('callDateTime').value,
     format: document.getElementById('callFormat').value,
-    budget: document.getElementById('callBudget').value,
+    budget: finalCallBudget,
     status: 'Confirmed'
   };
 
