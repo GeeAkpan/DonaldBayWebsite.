@@ -67,7 +67,7 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
    -------------------------------------------------------------------------- */
 const nav = document.getElementById('nav');
 if (nav) {
-  const onScroll = () => nav.classList.toggle('is-stuck', window.scrollY > window.innerHeight * 0.5);
+  const onScroll = () => nav.classList.toggle('is-stuck', window.scrollY > 20);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 }
