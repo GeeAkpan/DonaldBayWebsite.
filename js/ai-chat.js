@@ -54,9 +54,15 @@
       followUps: ["Contact the Executive Board", "Schedule Technical Meeting"]
     },
     {
+      intent: "mission_vision_values",
+      keywords: ["mission", "vision", "core values", "values", "philosophy", "principles", "culture", "motto", "purpose"],
+      response: "Here is what defines **Donalds Bay Limited**:\n\n🎯 **Our Mission**: To engineer, manage, and construct high-impact road corridors, civil infrastructure, and premier real estate landmarks through uncompromising structural precision, rigorous EPC governance, and sustainable technologies built to last generations.\n\n🌐 **Our Vision**: To be the foremost civil engineering and infrastructure development authority in West Africa—recognized for structural integrity, innovation, zero-loss time safety, and resilient urban environments.\n\n⭐ **Our Core Values**:\n1. **Structural Integrity & Quality**: Zero compromise on testing and civil standards.\n2. **Uncompromising Safety**: 5.2M+ hours Zero-Loss Time Incidents (HSE Level 3).\n3. **Precision Project Governance**: Transparent BoQ milestone control.\n4. **Generational Sustainability**: Biophilic design & durable eco-materials.",
+      followUps: ["Explore Road Construction", "View Executed Portfolio", "Request Consultation"]
+    },
+    {
       intent: "admin_portal",
       keywords: ["admin", "invoice", "portal", "schedule", "meeting", "call logs", "billing", "revenue", "executive"],
-      response: "Authorized executives can access the **Executive Portal** to:\n\n• Inspect and manage **Call Schedules & Technical Site Consultations**.\n• Issue, edit, or track **Construction Milestone Invoices**.\n• Authorize or revoke **Admin Credentials by Email**.\n• View real-time **Service Revenue Breakdown & Market Share Analytics**.\n\nClick the 'Executive Portal' link in the top menu or visit `/admin.html`.",
+      response: "Authorized executives can access the **Executive Portal** to:\n\n• Inspect and manage **Call Schedules & Technical Site Consultations**.\n• Issue, edit, or track **Construction Milestone Invoices**.\n• Publish new projects to the **Portfolio Page** and articles to **Blogs & Insights**.\n• Authorize or revoke **Admin Credentials by Email**.\n• View real-time **Service Revenue Breakdown & Market Share Analytics**.\n\nVisit the Executive Portal link in the footer or navigate to `/admin.html` (Authentication required: `d.akpan@donaldsbay.com` / PIN: `donald2026`).",
       followUps: ["Go to Executive Portal", "How do I add an Admin?"]
     }
   ];
