@@ -282,20 +282,20 @@ a { color: inherit; text-decoration: none; }
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.75rem);
-  left: -1.25rem;
-  width: 270px;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 210px;
   background: rgba(2, 18, 20, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 229, 153, 0.25);
+  border: 1px solid rgba(0, 229, 153, 0.22);
   border-radius: 8px;
-  padding: 0.6rem 0;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 153, 0.06);
+  padding: 0.45rem 0;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 229, 153, 0.06);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.25s var(--ease);
+  transition: all 0.22s var(--ease);
   pointer-events: none;
   z-index: 120;
 }
@@ -305,34 +305,27 @@ a { color: inherit; text-decoration: none; }
 .nav-item--dropdown.is-open .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
 .nav-dropdown-item {
-  display: flex;
-  flex-direction: column;
+  display: block;
   padding: 0.65rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--on-petrol);
   text-decoration: none;
   border-left: 2px solid transparent;
-  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), padding-left 0.2s var(--ease);
+  transition: all 0.2s var(--ease);
+  white-space: nowrap;
 }
-.nav-dropdown-item:hover {
+.nav-dropdown-item:hover,
+.nav-dropdown-item.is-active {
   background: rgba(0, 229, 153, 0.08);
   border-left-color: var(--accent);
+  color: var(--accent);
   padding-left: 1.45rem;
-}
-
-.nav-dropdown-title {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 0.15rem;
-}
-.nav-dropdown-sub {
-  font-size: 0.72rem;
-  color: var(--on-petrol-soft);
-  font-weight: 400;
 }
 
 .nav__clock {
