@@ -73,7 +73,7 @@ if (nav) {
 }
 
 /* --------------------------------------------------------------------------
-   Mobile Drawer Menu
+   Mobile Drawer Menu & Dropdown Interaction
    -------------------------------------------------------------------------- */
 const navToggle = document.querySelector('.nav__toggle');
 if (nav && navToggle) {
@@ -83,13 +83,37 @@ if (nav && navToggle) {
     navToggle.textContent = open ? 'Close' : 'Menu';
   };
   navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
-  nav.querySelectorAll('.nav__links a').forEach((a) =>
+  nav.querySelectorAll('.nav__links > a').forEach((a) =>
+    a.addEventListener('click', () => setMenu(false)));
+  nav.querySelectorAll('.nav-dropdown-item').forEach((a) =>
     a.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
   window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => {
     if (e.matches) setMenu(false);
   });
 }
+
+// Dropdown click/tap toggle for mobile & keyboard focus
+document.querySelectorAll('.nav-item--dropdown').forEach((dropdown) => {
+  const toggleBtn = dropdown.querySelector('.nav-dropdown-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav-item--dropdown')) {
+    document.querySelectorAll('.nav-item--dropdown.is-open').forEach((d) => {
+      d.classList.remove('is-open');
+      const btn = d.querySelector('.nav-dropdown-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
 
 /* --------------------------------------------------------------------------
    Site Operations Clock (WAT — West Africa Time)
