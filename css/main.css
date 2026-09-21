@@ -462,92 +462,194 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ==========================================================================
-   Pillars — The 3 Core Services Made Structural
+   Pillars — Capabilities & Sectors (ITB Nigeria Inspired Design)
    ========================================================================== */
 
-.pillars__lede {
-  font-size: var(--step-2);
-  max-width: 24ch;
+.pillars__banner-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pillars__title-banner {
   font-family: var(--display);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.75rem, 3.8vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--ink);
   line-height: 1.15;
+  margin-top: 0.35rem;
+}
+
+.pillars__title-banner span {
+  display: inline-block;
+  color: var(--petrol);
+  transition: color 0.3s var(--ease);
+}
+
+.pillars__title-banner .divider-pipe {
+  color: rgba(4, 33, 37, 0.25);
+  font-weight: 300;
+  margin-inline: 0.35em;
 }
 
 .pillars__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(1.5rem, 2.5vw, 2.25rem);
   margin-top: 3.5rem;
 }
 
-.pillar {
-  border-top: 1.5px solid var(--ink);
-  padding-top: 1.35rem;
-  display: grid;
-  grid-row: span 4;
-  grid-template-rows: subgrid;
-  row-gap: 0.85rem;
-  justify-items: start;
-}
-
-.pillar__media {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: var(--petrol-lift);
-  border-radius: 4px;
+.itb-card {
+  position: relative;
+  background: var(--sand-soft);
+  border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-.pillar__media video, .pillar__media img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease);
-}
-.pillar:hover .pillar__media video,
-.pillar:hover .pillar__media img {
-  transform: scale(1.04);
-}
-
-.pillar__word {
-  font-family: var(--display);
-  font-size: var(--step-2);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-}
-
-.pillar p { font-size: var(--step--1); color: var(--ink-mid); line-height: 1.55; }
-
-.pillar__terms {
-  padding-top: 0.6rem;
-  width: 100%;
+  border: 1px solid rgba(7, 25, 26, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
 }
 
-.pillar__price,
-.pillar__time {
+.itb-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(4, 33, 37, 0.12);
+  border-color: rgba(0, 229, 153, 0.4);
+}
+
+.itb-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--petrol);
+}
+
+.itb-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+.itb-card:hover .itb-card__media img {
+  transform: scale(1.06);
+}
+
+.itb-card__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 33, 37, 0.1) 0%, rgba(4, 33, 37, 0.75) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.itb-card__badge {
   font-family: var(--label);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
+  color: var(--white);
+  background: rgba(4, 33, 37, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.pillar__price { color: var(--ink); font-weight: 700; }
 
-.pillar__includes {
+.itb-card__action-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--petrol);
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 229, 153, 0.4);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.itb-card:hover .itb-card__action-btn {
+  transform: rotate(45deg) scale(1.08);
+}
+
+.itb-card__body {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.itb-card__title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6rem;
+}
+
+.itb-card__desc {
+  font-size: 0.92rem;
+  color: var(--ink-mid);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.itb-card__features {
   list-style: none;
   margin: 0;
-  padding: 0.65rem 0 0;
-  border-top: 1px solid rgba(7, 25, 26, 0.12);
-  display: grid;
-  gap: 0.35rem;
-  font-size: var(--step--1);
-  color: var(--ink-mid);
+  padding: 1rem 0 0;
+  border-top: 1px solid rgba(7, 25, 26, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
 }
+
+.itb-card__features li {
+  font-size: 0.85rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itb-card__features li::before {
+  content: "—";
+  color: var(--petrol);
+  font-weight: 700;
+}
+
+.itb-card__footer {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  font-family: var(--label);
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.itb-card__link {
+  color: var(--petrol);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.itb-card__link:hover {
+  color: #008855;
+}
+
 .pillar__includes li { padding-left: 1.2rem; position: relative; }
 .pillar__includes li::before {
   content: "+";
@@ -1142,6 +1244,81 @@ a { color: inherit; text-decoration: none; }
   }
   .js [data-reveal] { opacity: 1 !important; transform: none !important; }
   .js .hero h1 .word > span { transform: none; animation: none; }
+}
+
+/* ==========================================================================
+   Blog & Engineering Insights Cards
+   ========================================================================== */
+
+.blog-card {
+  background: var(--white);
+  border: 1px solid var(--sand-deep);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.blog-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--petrol-lift);
+}
+.blog-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.blog-card:hover .blog-media img {
+  transform: scale(1.04);
+}
+
+.blog-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.4rem 0.5rem;
+}
+
+.blog-title {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  padding: 0 1.4rem;
+  margin-top: 0.35rem;
+}
+
+.blog-excerpt {
+  font-size: 0.88rem;
+  color: var(--ink-mid);
+  line-height: 1.55;
+  padding: 0.6rem 1.4rem 1.25rem;
+  flex: 1;
+}
+
+.blog-foot {
+  border-top: 1px solid rgba(7, 25, 26, 0.08);
+  padding: 0.9rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FCFAF7;
+}
+
+/* Portfolio Search Box */
+.portfolio-search-box .form-control {
+  background: var(--white);
+  border-color: rgba(7, 25, 26, 0.2);
 }
 
 /* ==========================================================================

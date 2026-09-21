@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio &amp; Executed Projects | Donalds Bay Limited</title>
+  <meta name="description" content="Explore Donalds Bay Limited's portfolio of executed road construction corridors, project management EPC contracts, and luxury real estate developments.">
+  <meta name="theme-color" content="#042125">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- ============================ NAVIGATION ============================ -->
+<header class="nav is-stuck" id="nav">
+  <div class="shell nav__inner">
+    <a href="index.html" class="nav__mark" aria-label="Donalds Bay Limited Homepage">
+      <img src="media/logo-white.svg" alt="Donalds Bay Limited" width="280" height="52">
+    </a>
+    
+    <nav class="nav__links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="portfolio.html" style="color:var(--accent); font-weight:700;">Portfolio</a>
+      <a href="index.html#studio">Company</a>
+      <a href="index.html#insights">Insights</a>
+      <a href="index.html#book">Contact</a>
+    </nav>
+    
+    <span class="nav__clock" id="clock" aria-label="Site Operations Local Time">WAT 00:00</span>
+    <a class="btn btn--primary" href="index.html#book">Request Consultation</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  </div>
+</header>
+
+<main style="padding-top: clamp(6.5rem, 12vh, 8.5rem);">
+
+<!-- ============================ PORTFOLIO HERO ============================ -->
+<section class="band band--petrol" style="padding-top:2rem;">
+  <div class="shell">
+    <div class="stack" style="max-width:850px;">
+      <span class="label" data-reveal>Executed Works &middot; Civil &amp; Architectural Portfolio</span>
+      <h1 style="font-size:var(--step-4); color:var(--white);" data-reveal>
+        Monumental Corridors &amp; Enduring Landmarks.
+      </h1>
+      <p style="color:var(--on-petrol-mid); font-size:var(--step-1); max-width:56ch;" data-reveal>
+        Every completed contract reflects rigorous project governance, heavy equipment mobilization, 
+        and uncompromising structural precision across Road Infrastructure, EPC Management, and Luxury Real Estate.
+      </p>
+    </div>
+
+    <!-- Portfolio Statistics Grid -->
+    <div class="case__meta" style="margin-top:3.5rem;" data-reveal>
+      <div class="case__cell">
+        <dt>Total Landmarks Delivered</dt>
+        <dd style="font-size:1.4rem; color:var(--accent); font-weight:700;">35+ Projects</dd>
+      </div>
+      <div class="case__cell">
+        <dt>Highway Corridors Paved</dt>
+        <dd style="font-size:1.4rem; color:var(--white); font-weight:700;">280+ KM</dd>
+      </div>
+      <div class="case__cell">
+        <dt>Safety Track Record</dt>
+        <dd style="font-size:1.4rem; color:var(--accent); font-weight:700;">5.2M Hours Zero-LTI</dd>
+      </div>
+      <div class="case__cell case__cell--result">
+        <dt>Aggregate Asset Value</dt>
+        <dd>₦120B+ Executed</dd>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PORTFOLIO FILTER & GALLERY GRID ============================ -->
+<section class="band band--white">
+  <div class="shell">
+    <div class="grid__head" style="margin-top:0; border-top:none;" data-reveal>
+      <div>
+        <span class="label">Project Index</span>
+        <h2 style="font-size:var(--step-2); margin-top:0.35rem;">Filter by Engineering Specialization</h2>
+      </div>
+      <div class="portfolio-search-box">
+        <input type="text" id="portfolioSearchInput" placeholder="Search project by name or client..." class="form-control" style="min-width:280px;">
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="portfolio-filters" data-reveal>
+      <button class="portfolio-tab active" data-filter="all">All Projects</button>
+      <button class="portfolio-tab" data-filter="road">Road Construction</button>
+      <button class="portfolio-tab" data-filter="management">Project Management &amp; EPC</button>
+      <button class="portfolio-tab" data-filter="realestate">Real Estate &amp; Towers</button>
+    </div>
+
+    <!-- Project Cards Grid -->
+    <div class="grid" id="fullPortfolioGrid" style="margin-top:3rem;">
+      <!-- Populated dynamically via JS from DB.getProjects() -->
+    </div>
+
+    <!-- Project Inquiry Callout -->
+    <div style="margin-top:5rem; background:var(--sand); padding:clamp(2rem, 5vw, 3.5rem); border-radius:6px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:2rem;" data-reveal>
+      <div>
+        <span class="label" style="color:var(--ink-soft);">Ready to break ground?</span>
+        <h3 style="font-size:var(--step-2); margin-top:0.4rem; color:var(--ink);">Have a civil or architectural contract in tender?</h3>
+        <p style="color:var(--ink-mid); margin-top:0.5rem; max-width:50ch;">Submit your Bill of Quantities (BoQ) or request a preliminary site topography evaluation.</p>
+      </div>
+      <a class="btn btn--dark" href="index.html#book" style="padding:1.1rem 2rem;">Request Project Consultation</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__grid">
+      <div class="foot__col">
+        <img class="foot__mark" src="media/logo-white.svg" alt="Donalds Bay Limited" width="260" height="48">
+        <span style="max-width:34ch">Project Management, Road Construction &amp; Real Estate Development.</span>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Capabilities</span>
+        <a href="index.html#services">Project Management</a>
+        <a href="index.html#services">Road Construction</a>
+        <a href="index.html#services">Real Estate Development</a>
+        <a href="portfolio.html">All Executed Projects</a>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Executive Access</span>
+        <a href="admin.html">Executive Portal</a>
+        <a href="admin.html">Call Schedules</a>
+        <a href="admin.html">Milestone Invoicing</a>
+        <a href="index.html#book">Tender &amp; RFP</a>
+      </div>
+      <div class="foot__col">
+        <span class="label" style="color:var(--on-petrol-soft)">Headquarters</span>
+        <span>Donalds Bay Tower, Coastal Boulevard</span>
+        <a href="mailto:info@donaldsbay.com">info@donaldsbay.com</a>
+        <a href="index.html#book">Schedule Technical Meeting</a>
+      </div>
+    </div>
+    
+    <div class="foot__base">
+      <span>&copy; 2026 Donalds Bay Limited. All rights reserved. Registered Civil Engineering &amp; Construction Entity.</span>
+      <span id="clock-foot">WAT 00:00</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ PROJECT SHOWCASE MODAL ============================ -->
+<dialog class="reel reel--project" id="projectModal" aria-labelledby="projectTitle">
+  <button class="reel__close" type="button" data-project-close aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="reel__frame proj__stage"></div>
+  <div class="proj__bar">
+    <span class="proj__title" id="projectTitle"></span>
+    <div class="proj__nav" hidden>
+      <button class="proj__arrow" type="button" data-project-prev aria-label="Previous image"><span aria-hidden="true">&larr;</span></button>
+      <span class="proj__count" aria-live="polite"></span>
+      <button class="proj__arrow" type="button" data-project-next aria-label="Next image"><span aria-hidden="true">&rarr;</span></button>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/db.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ai-chat.js" defer></script>
+<script>
+// Standalone Portfolio Renderer
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('fullPortfolioGrid');
+  const searchInput = document.getElementById('portfolioSearchInput');
+  const tabs = document.querySelectorAll('.portfolio-tab');
+
+  function renderProjects(filter = 'all', query = '') {
+    const projects = window.DB ? window.DB.getProjects() : [];
+    const q = query.toLowerCase();
+
+    const filtered = projects.filter(p => {
+      const matchCat = filter === 'all' || p.category === filter;
+      const matchSearch = (p.title + ' ' + p.client + ' ' + p.desc).toLowerCase().includes(q);
+      return matchCat && matchSearch;
+    });
+
+    if (!filtered.length) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:4rem 0; color:var(--ink-soft);">No projects found matching "${query}".</div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(p => `
+      <div class="card" data-category="${p.category}" onclick="openProjectLightbox('${p.id}')">
+        <div class="card__media">
+          <img src="${p.image}" alt="${p.title}" loading="lazy">
+        </div>
+        <div class="card__badges">
+          <span class="card__tag">${p.categoryLabel || p.category}</span>
+          <span class="card__budget">${p.budget || 'Completed'}</span>
+        </div>
+        <h3 class="card__title">${p.title}</h3>
+        <p class="card__desc">${p.desc}</p>
+        <span style="font-size:0.75rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Client: <strong>${p.client}</strong> &middot; ${p.date || ''}</span>
+      </div>
+    `).join('');
+  }
+
+  // Check URL query parameters for pre-selected filter (e.g. ?filter=road)
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialFilter = urlParams.get('filter') || 'all';
+
+  tabs.forEach(tab => {
+    if (tab.dataset.filter === initialFilter) {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    }
+
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderProjects(tab.dataset.filter, searchInput.value);
+    });
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    const activeTab = document.querySelector('.portfolio-tab.active');
+    renderProjects(activeTab ? activeTab.dataset.filter : 'all', e.target.value);
+  });
+
+  renderProjects(initialFilter);
+});
+
+// Lightbox helper
+window.openProjectLightbox = function(id) {
+  const projects = window.DB ? window.DB.getProjects() : [];
+  const p = projects.find(item => item.id === id);
+  if (!p) return;
+
+  const dialog = document.getElementById('projectModal');
+  const stage = dialog.querySelector('.proj__stage');
+  const title = dialog.querySelector('.proj__title');
+  const nav = dialog.querySelector('.proj__nav');
+  const count = dialog.querySelector('.proj__count');
+
+  const gallery = p.gallery || [p.image];
+  let idx = 0;
+
+  title.textContent = p.title + ' — ' + (p.categoryLabel || p.category);
+  nav.hidden = gallery.length < 2;
+
+  function showImg() {
+    stage.innerHTML = `<img src="${gallery[idx]}" alt="${p.title}" style="width:100%; height:100%; object-fit:contain;">`;
+    count.textContent = (idx + 1) + ' / ' + gallery.length;
+  }
+
+  dialog.querySelector('[data-project-prev]').onclick = () => {
+    idx = (idx - 1 + gallery.length) % gallery.length;
+    showImg();
+  };
+  dialog.querySelector('[data-project-next]').onclick = () => {
+    idx = (idx + 1) % gallery.length;
+    showImg();
+  };
+
+  showImg();
+  dialog.showModal();
+};
+</script>
+</body>
+</html>

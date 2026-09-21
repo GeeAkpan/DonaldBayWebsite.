@@ -23,13 +23,10 @@
     
     <nav class="nav__links" id="nav-links">
       <a href="#services">Services</a>
-      <a href="#work">Portfolio</a>
+      <a href="portfolio.html">Portfolio</a>
       <a href="#studio">Company</a>
+      <a href="#insights">Insights</a>
       <a href="#book">Contact</a>
-      <a href="admin.html" class="nav-admin-link" title="Executive Management &amp; Invoicing Portal">
-        <span class="nav-admin-dot"></span>
-        Executive Portal
-      </a>
     </nav>
     
     <span class="nav__clock" id="clock" aria-label="Site Operations Local Time">WAT 00:00</span>
@@ -102,82 +99,102 @@
   </div>
 </section>
 
-<!-- ============================ PILLARS (SERVICES) ============================ -->
+<!-- ============================ PILLARS (SERVICES — ITB NIGERIA INSPIRED) ============================ -->
 <section class="band band--white" id="services">
   <div class="shell">
-    <div class="stack">
-      <span class="label" data-reveal>Core Capabilities</span>
-      <p class="pillars__lede" data-reveal>
-        We build landmarks and infrastructure engineered for permanence.
-      </p>
-      <p data-reveal style="color:var(--ink-mid)">
-        Ordinary contractors merely execute drawings. Donalds Bay Limited integrates comprehensive 
-        project management, heavy equipment fleets, and architectural mastery to eliminate cost overruns 
-        and deliver unmatched structural precision.
+    <div class="pillars__banner-head">
+      <span class="label" data-reveal>Core Sectors &amp; Engineering Disciplines</span>
+      <h2 class="pillars__title-banner" data-reveal>
+        <span>Road Construction</span> <span class="divider-pipe">|</span> 
+        <span>Project Management</span> <span class="divider-pipe">|</span> 
+        <span>Real Estate</span> <span class="divider-pipe">|</span> 
+        <span>Building Construction</span>
+      </h2>
+      <p data-reveal style="color:var(--ink-mid); max-width:65ch; margin-top:0.5rem; font-size:var(--step-0);">
+        As an integrated civil and building contractor, Donalds Bay Limited delivers end-to-end heavy infrastructure, EPC governance, and bespoke commercial and residential landmarks across Nigeria and West Africa.
       </p>
     </div>
 
     <div class="pillars__grid">
-      <!-- Pillar 1: Project Management -->
-      <div class="pillar" data-reveal>
-        <div class="pillar__media">
-          <img src="media/pillar-management.jpg" alt="Civil engineering project managers on high-rise construction site" loading="lazy">
+      <!-- Sector 1: Road Construction -->
+      <article class="itb-card" data-reveal>
+        <div class="itb-card__media">
+          <img src="media/pillar-roads.jpg" alt="Heavy road construction asphalt paving equipment" loading="lazy">
+          <div class="itb-card__media-overlay">
+            <span class="itb-card__badge">Heavy Civil &middot; Highways</span>
+            <a href="portfolio.html?filter=road" class="itb-card__action-btn" title="View Road Construction Projects" aria-label="View Road Construction Projects">&rarr;</a>
+          </div>
         </div>
-        <span class="pillar__word">Project Management</span>
-        <p>Comprehensive EPC supervision, cost engineering, feasibility analyses, and quality control that guarantee on-time delivery within budget.</p>
-        <div class="pillar__terms">
-          <span class="pillar__price">EPC &middot; Site Supervision &middot; Cost Audits</span>
-          <ul class="pillar__includes">
-            <li>Full Bill of Quantities (BoQ) &amp; financial forecasting</li>
-            <li>On-site chief engineer &amp; quality assurance officers</li>
-            <li>Real-time drone telemetry &amp; milestone reporting</li>
-            <li>ISO 9001 compliance &amp; zero-harm safety audits</li>
-          </ul>
-          <span class="pillar__time">Mobilization in 7 to 14 days</span>
-        </div>
-      </div>
-
-      <!-- Pillar 2: Road Construction -->
-      <div class="pillar" data-reveal>
-        <div class="pillar__media">
-          <img src="media/pillar-roads.jpg" alt="Heavy road construction asphalt paving machinery" loading="lazy">
-        </div>
-        <span class="pillar__word">Road Construction</span>
-        <p>Heavy civil infrastructure: multi-lane expressways, asphalt paving, reinforced concrete highways, culverts, bridges, and earthworks.</p>
-        <div class="pillar__terms">
-          <span class="pillar__price">Highway Infrastructure &middot; Heavy Civil</span>
-          <ul class="pillar__includes">
-            <li>High-capacity asphalt paving &amp; subgrade compaction</li>
+        <div class="itb-card__body">
+          <h3 class="itb-card__title">Road Construction</h3>
+          <p class="itb-card__desc">Multi-lane arterial expressways, polymer asphalt paving, heavy subgrade compaction, dual bridges, and reinforced stormwater culvert networks.</p>
+          <ul class="itb-card__features">
+            <li>High-tonnage polymer asphalt paving &amp; milling</li>
             <li>Hydraulic drainage networks &amp; culvert installations</li>
             <li>Bridge civil works &amp; dual-carriageway expansion</li>
-            <li>Heavy earthmoving fleet: excavators, graders, pavers</li>
+            <li>Fleet of 60+ heavy earthmovers &amp; asphalt plants</li>
           </ul>
-          <span class="pillar__time">Scheduled milestone phase delivery</span>
+          <div class="itb-card__footer">
+            <span>Mobilization: 7–14 Days</span>
+            <a href="portfolio.html?filter=road" class="itb-card__link">Explore Corridors &rarr;</a>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <!-- Pillar 3: Real Estate -->
-      <div class="pillar" data-reveal>
-        <div class="pillar__media">
-          <img src="media/pillar-realestate.jpg" alt="Luxury contemporary real estate waterfront estate" loading="lazy">
+      <!-- Sector 2: Project Management -->
+      <article class="itb-card" data-reveal>
+        <div class="itb-card__media">
+          <img src="media/pillar-management.jpg" alt="Chief civil engineers auditing high-rise construction blueprints" loading="lazy">
+          <div class="itb-card__media-overlay">
+            <span class="itb-card__badge">EPC &middot; Site Governance</span>
+            <a href="portfolio.html?filter=management" class="itb-card__action-btn" title="View Project Management Works" aria-label="View Project Management Works">&rarr;</a>
+          </div>
         </div>
-        <span class="pillar__word">Real Estate</span>
-        <p>Turnkey luxury residential developments, commercial high-rises, and masterplanned communities delivering enduring asset value.</p>
-        <div class="pillar__terms">
-          <span class="pillar__price">Luxury Estates &middot; Commercial Hubs</span>
-          <ul class="pillar__includes">
-            <li>Architectural conceptualization &amp; structural engineering</li>
-            <li>Gated luxury residential estates &amp; waterfront villas</li>
-            <li>Commercial headquarters &amp; modern business towers</li>
-            <li>Turnkey MEP, premium finishes &amp; facility handover</li>
+        <div class="itb-card__body">
+          <h3 class="itb-card__title">Project Management &amp; EPC</h3>
+          <p class="itb-card__desc">End-to-end engineering, procurement, and construction governance. We ensure zero cost overruns, strict BoQ audit compliance, and on-time milestone delivery.</p>
+          <ul class="itb-card__features">
+            <li>Full Bill of Quantities (BoQ) &amp; financial cost audits</li>
+            <li>On-site chief engineer &amp; QA/QC safety signoffs</li>
+            <li>Real-time drone telemetry &amp; 3D BIM coordination</li>
+            <li>ISO 9001 &amp; HSE Level 3 Zero-LTI compliance</li>
           </ul>
-          <span class="pillar__time">Phased build-out: 6 to 24 months</span>
+          <div class="itb-card__footer">
+            <span>Turnkey EPC Oversight</span>
+            <a href="portfolio.html?filter=management" class="itb-card__link">View EPC Cases &rarr;</a>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <!-- Sector 3: Real Estate -->
+      <article class="itb-card" data-reveal>
+        <div class="itb-card__media">
+          <img src="media/pillar-realestate.jpg" alt="Luxury modern waterfront architectural residential estate" loading="lazy">
+          <div class="itb-card__media-overlay">
+            <span class="itb-card__badge">Luxury &middot; Commercial</span>
+            <a href="portfolio.html?filter=realestate" class="itb-card__action-btn" title="View Real Estate Developments" aria-label="View Real Estate Developments">&rarr;</a>
+          </div>
+        </div>
+        <div class="itb-card__body">
+          <h3 class="itb-card__title">Real Estate &amp; Building</h3>
+          <p class="itb-card__desc">Bespoke ultra-luxury residential communities, corporate high-rise towers, and masterplanned gated enclaves built with generational materials.</p>
+          <ul class="itb-card__features">
+            <li>Architectural conceptualization &amp; structural engineering</li>
+            <li>Gated luxury residential enclaves &amp; waterfront villas</li>
+            <li>Commercial headquarters &amp; Grade-A business towers</li>
+            <li>Turnkey MEP, travertine finishes &amp; facility handover</li>
+          </ul>
+          <div class="itb-card__footer">
+            <span>Asset Lifecycle: 60+ Years</span>
+            <a href="portfolio.html?filter=realestate" class="itb-card__link">View Real Estate &rarr;</a>
+          </div>
+        </div>
+      </article>
     </div>
 
-    <div style="margin-top:3.5rem" data-reveal>
-      <a class="cta-link" href="#book">Discuss your project scope with our engineers <span class="arw">&rarr;</span></a>
+    <div style="margin-top:3.5rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1.5rem;" data-reveal>
+      <a class="cta-link" href="#book">Discuss your tender or project scope with our engineers <span class="arw">&rarr;</span></a>
+      <a class="btn btn--dark" href="portfolio.html">Browse All Executed Landmarks</a>
     </div>
   </div>
 </section>
@@ -252,16 +269,16 @@
       </div>
     </div>
 
-    <!-- ===================== ENHANCED FILTERABLE PORTFOLIO ===================== -->
+    <!-- ===================== FEATURED PORTFOLIO SECTION ===================== -->
     <div class="grid__head" data-reveal>
       <div>
-        <span class="label">Comprehensive Portfolio</span>
-        <h3 style="font-size:1.8rem; color:var(--on-petrol); margin-top:0.4rem;">Selected Landmarks &amp; Civil Contracts</h3>
+        <span class="label">Executed Landmarks</span>
+        <h3 style="font-size:1.8rem; color:var(--on-petrol); margin-top:0.4rem;">Selected Civil &amp; Architectural Works</h3>
       </div>
-      <a class="cta-link" href="admin.html">Manage Project Logs in Portal <span class="arw">&rarr;</span></a>
+      <a class="cta-link" href="portfolio.html">View Dedicated Portfolio Page <span class="arw">&rarr;</span></a>
     </div>
 
-    <!-- Portfolio Category Filter Tabs (Matching The ConCave Labs Model) -->
+    <!-- Portfolio Category Filter Tabs -->
     <div class="portfolio-filters" data-reveal>
       <button class="portfolio-tab active" data-filter="all">All Projects</button>
       <button class="portfolio-tab" data-filter="road">Road Construction</button>
@@ -377,8 +394,25 @@
   </div>
 </section>
 
+<!-- ============================ BLOGS & ENGINEERING INSIGHTS ============================ -->
+<section class="band band--sand" id="insights">
+  <div class="shell">
+    <div class="grid__head" style="border-top:none; margin-top:0;" data-reveal>
+      <div>
+        <span class="label" style="color:var(--ink-soft);">Knowledge &amp; Technical Briefs</span>
+        <h2 style="font-size:var(--step-3); color:var(--ink); margin-top:0.35rem;">Engineering Insights &amp; Industry Articles</h2>
+      </div>
+      <span class="label" style="color:var(--ink-soft);">Authored by Resident Chief Engineers</span>
+    </div>
+
+    <div class="grid" id="blogsGrid" style="margin-top:2.5rem;">
+      <!-- Populated dynamically via JS from DB.getBlogs() -->
+    </div>
+  </div>
+</section>
+
 <!-- ============================ CONSULTATION & RFP ============================ -->
-<section class="band band--sand cta" id="book">
+<section class="band band--white cta" id="book">
   <div class="shell">
     <div class="cta__head" data-reveal>
       <h2>Ready to break ground on your next landmark?</h2>
@@ -453,7 +487,7 @@
       <p style="margin-top:1.5rem; font-size:0.85rem; color:var(--ink-soft);">
         Direct Headquarters Line: <a href="tel:+2348000000000" style="font-weight:600; color:var(--ink);">+234 (0) 800 DONALDS</a> &middot; 
         Email: <a href="mailto:info@donaldsbay.com" style="font-weight:600; color:var(--ink);">info@donaldsbay.com</a> &middot;
-        <a href="admin.html" style="font-weight:600; color:var(--petrol); text-decoration:underline;">Executive Portal Login</a>
+        <a href="portfolio.html" style="font-weight:600; color:var(--petrol); text-decoration:underline;">View Portfolio Index</a>
       </p>
     </div>
   </div>
@@ -474,7 +508,7 @@
         <a href="#services">Project Management</a>
         <a href="#services">Road Construction</a>
         <a href="#services">Real Estate Development</a>
-        <a href="#work">Major Civil Works</a>
+        <a href="portfolio.html">All Executed Projects</a>
       </div>
       <div class="foot__col">
         <span class="label" style="color:var(--on-petrol-soft)">Executive Access</span>
@@ -559,8 +593,35 @@
 }
 </script>
 
+<script src="js/db.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/ai-chat.js" defer></script>
+<script>
+// Dynamic Blogs & Insights Renderer for Landing Page
+document.addEventListener('DOMContentLoaded', () => {
+  const blogsGrid = document.getElementById('blogsGrid');
+  if (blogsGrid && window.DB) {
+    const blogs = window.DB.getBlogs();
+    blogsGrid.innerHTML = blogs.map(b => `
+      <article class="blog-card" data-reveal>
+        <div class="blog-media">
+          <img src="${b.image}" alt="${b.title}" loading="lazy">
+        </div>
+        <div class="blog-meta">
+          <span class="card__tag" style="color:var(--petrol);">${b.category}</span>
+          <span style="font-size:0.75rem; color:var(--ink-soft);">${b.readTime || '5 min read'}</span>
+        </div>
+        <h3 class="blog-title">${b.title}</h3>
+        <p class="blog-excerpt">${b.excerpt}</p>
+        <div class="blog-foot">
+          <span style="font-size:0.78rem; font-weight:600; color:var(--ink);">${b.author}</span>
+          <span style="font-size:0.75rem; color:var(--ink-soft);">${b.date}</span>
+        </div>
+      </article>
+    `).join('');
+  }
+});
+</script>
 </body>
 </html>

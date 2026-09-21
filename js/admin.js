@@ -193,7 +193,64 @@ function updateAdminClock() {
 setInterval(updateAdminClock, 30000);
 updateAdminClock();
 
-// Tab Switching
+/* ==========================================================================
+   AUTHENTICATION GATE & ACCESS CONTROL
+   ========================================================================== */
+function checkAuth() {
+  const authGate = document.getElementById('authGate');
+  const dashboardView = document.getElementById('adminDashboardView');
+  const userEmailDisplay = document.getElementById('activeUserEmailDisplay');
+  const loggedInUser = sessionStorage.getItem('donalds_bay_auth_user');
+
+  if (loggedInUser) {
+    if (authGate) authGate.style.display = 'none';
+    if (dashboardView) dashboardView.style.display = 'flex';
+    if (userEmailDisplay) userEmailDisplay.textContent = loggedInUser;
+  } else {
+    if (authGate) authGate.style.display = 'flex';
+    if (dashboardView) dashboardView.style.display = 'none';
+  }
+}
+
+// Handle Sign In Submission
+document.getElementById('formAuthLogin')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const emailInput = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const passkeyInput = document.getElementById('loginPasskey').value.trim();
+  const errorBox = document.getElementById('authErrorMsg');
+
+  const admins = getAdmins();
+  const isAuthorizedEmail = admins.some(a => a.email.toLowerCase() === emailInput) || emailInput === 'd.akpan@donaldsbay.com';
+  const isCorrectPIN = (passkeyInput === 'donald2026' || passkeyInput === 'admin2026' || passkeyInput === '1234');
+
+  if (isAuthorizedEmail && isCorrectPIN) {
+    sessionStorage.setItem('donalds_bay_auth_user', emailInput);
+    if (errorBox) errorBox.style.display = 'none';
+    checkAuth();
+  } else {
+    if (errorBox) {
+      errorBox.style.display = 'block';
+      if (!isAuthorizedEmail) {
+        errorBox.textContent = 'Access Denied: Email is not in the authorized executive administrator directory.';
+      } else {
+        errorBox.textContent = 'Access Denied: Invalid executive PIN / passkey.';
+      }
+    }
+  }
+});
+
+// Handle Sign Out
+document.getElementById('btnAdminSignOut')?.addEventListener('click', () => {
+  sessionStorage.removeItem('donalds_bay_auth_user');
+  checkAuth();
+});
+
+// Run auth check immediately
+checkAuth();
+
+/* ==========================================================================
+   TAB SWITCHING
+   ========================================================================== */
 document.querySelectorAll('.admin-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -204,23 +261,38 @@ document.querySelectorAll('.admin-tab').forEach(tab => {
   });
 });
 
-// Calculate and Update KPI Metrics & Revenue Distribution Chart
+/* ==========================================================================
+   KPIs & REVENUE ANALYTICS CHART
+   ========================================================================== */
 function updateKPIsAndChart() {
   const calls = getCalls();
   const invoices = getInvoices();
   const admins = getAdmins();
+  const projects = window.DB ? window.DB.getProjects() : [];
+  const blogs = window.DB ? window.DB.getBlogs() : [];
 
-  document.getElementById('kpiTotalCalls').textContent = calls.length;
-  document.getElementById('countCallsBadge').textContent = calls.length;
-  document.getElementById('kpiActiveInvoices').textContent = invoices.length;
-  document.getElementById('countInvoicesBadge').textContent = invoices.length;
-  document.getElementById('countAdminsBadge').textContent = admins.length;
+  const kpiTotalCalls = document.getElementById('kpiTotalCalls');
+  const countCallsBadge = document.getElementById('countCallsBadge');
+  const kpiActiveInvoices = document.getElementById('kpiActiveInvoices');
+  const countInvoicesBadge = document.getElementById('countInvoicesBadge');
+  const countAdminsBadge = document.getElementById('countAdminsBadge');
+  const countProjectsBadge = document.getElementById('countProjectsBadge');
+  const kpiTotalProjects = document.getElementById('kpiTotalProjects');
+  const countBlogsBadge = document.getElementById('countBlogsBadge');
+  const kpiTotalBlogs = document.getElementById('kpiTotalBlogs');
+
+  if (kpiTotalCalls) kpiTotalCalls.textContent = calls.length;
+  if (countCallsBadge) countCallsBadge.textContent = calls.length;
+  if (kpiActiveInvoices) kpiActiveInvoices.textContent = invoices.length;
+  if (countInvoicesBadge) countInvoicesBadge.textContent = invoices.length;
+  if (countAdminsBadge) countAdminsBadge.textContent = admins.length;
+  if (countProjectsBadge) countProjectsBadge.textContent = projects.length;
+  if (kpiTotalProjects) kpiTotalProjects.textContent = projects.length;
+  if (countBlogsBadge) countBlogsBadge.textContent = blogs.length;
+  if (kpiTotalBlogs) kpiTotalBlogs.textContent = `${blogs.length} Published Insights`;
 
   let collected = 0;
-  let pending = 0;
   let totalVolume = 0;
-  let pendingCount = 0;
-
   let revRoad = 0;
   let revPM = 0;
   let revRE = 0;
@@ -230,53 +302,63 @@ function updateKPIsAndChart() {
     totalVolume += amt;
     if (inv.status === 'Paid') {
       collected += amt;
-    } else {
-      pending += amt;
-      pendingCount++;
     }
 
     // Category distribution
     const cat = (inv.category || '').toLowerCase();
     if (cat.includes('road')) revRoad += amt;
-    else if (cat.includes('project') || cat.includes('epc')) revPM += amt;
+    else if (cat.includes('project') || cat.includes('epc') || cat.includes('management')) revPM += amt;
     else revRE += amt;
   });
 
-  document.getElementById('kpiCollectedRevenue').textContent = fmtNgn(collected);
-  document.getElementById('kpiPendingRevenue').textContent = fmtNgn(pending);
-  document.getElementById('kpiTotalVolume').textContent = fmtNgn(totalVolume) + ' total volume';
-  document.getElementById('kpiPendingCount').textContent = `${pendingCount} invoices pending / overdue`;
+  const kpiCollected = document.getElementById('kpiCollectedRevenue');
+  const kpiVol = document.getElementById('kpiTotalVolume');
+  const kpiRate = document.getElementById('kpiCollectionRate');
+  const racGrand = document.getElementById('racGrandTotal');
+
+  if (kpiCollected) kpiCollected.textContent = fmtNgn(collected);
+  if (kpiVol) kpiVol.textContent = fmtNgn(totalVolume) + ' total volume';
 
   const rate = totalVolume > 0 ? ((collected / totalVolume) * 100).toFixed(1) : 0;
-  document.getElementById('kpiCollectionRate').textContent = `${rate}% collection rate`;
-
-  // Update Revenue Breakdown Chart
-  document.getElementById('racGrandTotal').textContent = 'Total Invoiced: ' + fmtNgn(totalVolume);
+  if (kpiRate) kpiRate.textContent = `${rate}% collection rate`;
+  if (racGrand) racGrand.textContent = 'Total Invoiced: ' + fmtNgn(totalVolume);
 
   const pctRoad = totalVolume > 0 ? (revRoad / totalVolume * 100) : 0;
   const pctPM = totalVolume > 0 ? (revPM / totalVolume * 100) : 0;
   const pctRE = totalVolume > 0 ? (revRE / totalVolume * 100) : 0;
 
-  document.getElementById('barRoad').style.width = pctRoad + '%';
-  document.getElementById('barPM').style.width = pctPM + '%';
-  document.getElementById('barRE').style.width = pctRE + '%';
+  const barRoad = document.getElementById('barRoad');
+  const barPM = document.getElementById('barPM');
+  const barRE = document.getElementById('barRE');
+  if (barRoad) barRoad.style.width = pctRoad + '%';
+  if (barPM) barPM.style.width = pctPM + '%';
+  if (barRE) barRE.style.width = pctRE + '%';
 
-  document.getElementById('pctRoad').textContent = pctRoad.toFixed(1) + '%';
-  document.getElementById('pctPM').textContent = pctPM.toFixed(1) + '%';
-  document.getElementById('pctRE').textContent = pctRE.toFixed(1) + '%';
+  const elPctRoad = document.getElementById('pctRoad');
+  const elPctPM = document.getElementById('pctPM');
+  const elPctRE = document.getElementById('pctRE');
+  if (elPctRoad) elPctRoad.textContent = pctRoad.toFixed(1) + '%';
+  if (elPctPM) elPctPM.textContent = pctPM.toFixed(1) + '%';
+  if (elPctRE) elPctRE.textContent = pctRE.toFixed(1) + '%';
 
-  document.getElementById('revRoad').textContent = fmtNgn(revRoad);
-  document.getElementById('revPM').textContent = fmtNgn(revPM);
-  document.getElementById('revRE').textContent = fmtNgn(revRE);
+  const elRevRoad = document.getElementById('revRoad');
+  const elRevPM = document.getElementById('revPM');
+  const elRevRE = document.getElementById('revRE');
+  if (elRevRoad) elRevRoad.textContent = fmtNgn(revRoad);
+  if (elRevPM) elRevPM.textContent = fmtNgn(revPM);
+  if (elRevRE) elRevRE.textContent = fmtNgn(revRE);
 }
 
-// Render Calls Table
+/* ==========================================================================
+   CALL SCHEDULES TAB
+   ========================================================================== */
 function renderCalls() {
   const calls = getCalls();
   const tbody = document.getElementById('callsTableBody');
-  const search = document.getElementById('searchCalls').value.toLowerCase();
-  const statusFilter = document.getElementById('filterCallStatus').value;
-  const serviceFilter = document.getElementById('filterCallService').value;
+  if (!tbody) return;
+  const search = (document.getElementById('searchCalls')?.value || '').toLowerCase();
+  const statusFilter = document.getElementById('filterCallStatus')?.value || 'ALL';
+  const serviceFilter = document.getElementById('filterCallService')?.value || 'ALL';
 
   const filtered = calls.filter(c => {
     const matchSearch = (c.client + ' ' + c.location + ' ' + c.contact).toLowerCase().includes(search);
@@ -292,7 +374,7 @@ function renderCalls() {
 
   tbody.innerHTML = filtered.map(c => {
     const dt = new Date(c.dateTime);
-    const dtStr = dt.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) + ' at ' + dt.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+    const dtStr = isNaN(dt.getTime()) ? c.dateTime : dt.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) + ' at ' + dt.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
     const statusClass = c.status === 'Confirmed' ? 'status-confirmed' : c.status === 'Completed' ? 'status-paid' : 'status-pending';
 
     return `
@@ -318,12 +400,15 @@ function renderCalls() {
   }).join('');
 }
 
-// Render Invoices Table
+/* ==========================================================================
+   MILESTONE INVOICES TAB
+   ========================================================================== */
 function renderInvoices() {
   const invoices = getInvoices();
   const tbody = document.getElementById('invoicesTableBody');
-  const search = document.getElementById('searchInvoices').value.toLowerCase();
-  const statusFilter = document.getElementById('filterInvoiceStatus').value;
+  if (!tbody) return;
+  const search = (document.getElementById('searchInvoices')?.value || '').toLowerCase();
+  const statusFilter = document.getElementById('filterInvoiceStatus')?.value || 'ALL';
 
   const filtered = invoices.filter(inv => {
     const matchSearch = (inv.id + ' ' + inv.client + ' ' + inv.project + ' ' + inv.milestone).toLowerCase().includes(search);
@@ -367,7 +452,101 @@ function renderInvoices() {
   }).join('');
 }
 
-// Render Admin Team Table
+/* ==========================================================================
+   PORTFOLIO PROJECTS TAB (ADD / DELETE EXECUTED PROJECTS)
+   ========================================================================== */
+function renderProjects() {
+  const projects = window.DB ? window.DB.getProjects() : [];
+  const tbody = document.getElementById('projectsTableBody');
+  if (!tbody) return;
+
+  if (!projects.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--on-petrol-soft);">No executed projects currently in portfolio.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = projects.map(p => `
+    <tr>
+      <td>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <img src="${p.image}" alt="${p.title}" style="width:44px; height:32px; object-fit:cover; border-radius:3px; border:1px solid rgba(255,255,255,0.1);">
+          <div>
+            <div class="td-main">${p.title}</div>
+            <div class="td-sub">${p.desc.substring(0, 50)}...</div>
+          </div>
+        </div>
+      </td>
+      <td><span class="card__tag">${p.categoryLabel || p.category}</span></td>
+      <td>${p.client}</td>
+      <td><strong style="color:var(--accent);">${p.budget}</strong></td>
+      <td>${p.date}</td>
+      <td>
+        <div class="table-actions">
+          <button class="table-btn" onclick="deleteProject('${p.id}')" title="Remove from Portfolio">Delete ✕</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+window.deleteProject = function(id) {
+  if (!confirm('Are you sure you want to remove this project from the portfolio?')) return;
+  let projects = window.DB.getProjects();
+  projects = projects.filter(p => p.id !== id);
+  window.DB.saveProjects(projects);
+  renderProjects();
+  updateKPIsAndChart();
+};
+
+/* ==========================================================================
+   BLOGS & INSIGHTS TAB (ADD / DELETE ARTICLES)
+   ========================================================================== */
+function renderBlogs() {
+  const blogs = window.DB ? window.DB.getBlogs() : [];
+  const tbody = document.getElementById('blogsTableBody');
+  if (!tbody) return;
+
+  if (!blogs.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--on-petrol-soft);">No engineering insights published.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = blogs.map(b => `
+    <tr>
+      <td>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <img src="${b.image}" alt="${b.title}" style="width:44px; height:32px; object-fit:cover; border-radius:3px; border:1px solid rgba(255,255,255,0.1);">
+          <div>
+            <div class="td-main">${b.title}</div>
+            <div class="td-sub">${b.excerpt.substring(0, 50)}...</div>
+          </div>
+        </div>
+      </td>
+      <td><span class="card__tag" style="color:var(--accent); border:1px solid rgba(0,229,153,0.3);">${b.category}</span></td>
+      <td>${b.author}</td>
+      <td>${b.readTime || '5 min read'}</td>
+      <td>${b.date}</td>
+      <td>
+        <div class="table-actions">
+          <button class="table-btn" onclick="deleteBlog('${b.id}')" title="Delete Article">Delete ✕</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+window.deleteBlog = function(id) {
+  if (!confirm('Are you sure you want to delete this engineering insight?')) return;
+  let blogs = window.DB.getBlogs();
+  blogs = blogs.filter(b => b.id !== id);
+  window.DB.saveBlogs(blogs);
+  renderBlogs();
+  updateKPIsAndChart();
+};
+
+/* ==========================================================================
+   ADMIN ACCESS CONTROL TAB
+   ========================================================================== */
 function renderAdmins() {
   const admins = getAdmins();
   const tbody = document.getElementById('adminsTableBody');
@@ -391,7 +570,22 @@ function renderAdmins() {
   `).join('');
 }
 
-// Actions for Calls
+window.deleteAdmin = function(id) {
+  const admins = getAdmins();
+  if (admins.length <= 1) {
+    alert('Action Refused: You must retain at least one Super Admin in the system.');
+    return;
+  }
+  if (!confirm('Are you sure you want to revoke administrative access for this email?')) return;
+  const updated = admins.filter(a => a.id !== id);
+  saveAdmins(updated);
+  renderAdmins();
+  updateKPIsAndChart();
+};
+
+/* ==========================================================================
+   ACTIONS FOR CALLS & INVOICES
+   ========================================================================== */
 window.toggleCallComplete = function(id) {
   const calls = getCalls();
   const call = calls.find(c => c.id === id);
@@ -412,7 +606,6 @@ window.deleteCall = function(id) {
   updateKPIsAndChart();
 };
 
-// Actions for Invoices (Edit, Delete, Mark Paid)
 window.markInvoicePaid = function(id) {
   const invoices = getInvoices();
   const inv = invoices.find(i => i.id === id);
@@ -452,21 +645,6 @@ window.openEditInvoiceModal = function(id) {
   if (modal) modal.showModal();
 };
 
-// Actions for Admin Management
-window.deleteAdmin = function(id) {
-  const admins = getAdmins();
-  if (admins.length <= 1) {
-    alert('Action Refused: You must retain at least one Super Admin in the system.');
-    return;
-  }
-  if (!confirm('Are you sure you want to revoke administrative access for this email?')) return;
-  const updated = admins.filter(a => a.id !== id);
-  saveAdmins(updated);
-  renderAdmins();
-  updateKPIsAndChart();
-};
-
-// Printable Invoice Viewer
 window.openInvoicePreview = function(id) {
   const invoices = getInvoices();
   const inv = invoices.find(i => i.id === id);
@@ -489,16 +667,22 @@ window.openInvoicePreview = function(id) {
   if (modal) modal.showModal();
 };
 
-// Modal Open / Close Handlers
+/* ==========================================================================
+   MODAL CONTROLLERS & FORM SUBMISSIONS
+   ========================================================================== */
 const modalInv = document.getElementById('modalInvoice');
 const modalEditInv = document.getElementById('modalEditInvoice');
 const modalCall = document.getElementById('modalCall');
 const modalAddAdmin = document.getElementById('modalAddAdmin');
+const modalAddProject = document.getElementById('modalAddProject');
+const modalAddBlog = document.getElementById('modalAddBlog');
 
-document.getElementById('btnNewInvoiceModal')?.addEventListener('click', () => modalInv.showModal());
-document.getElementById('btnCreateInvoiceQuick')?.addEventListener('click', () => modalInv.showModal());
-document.getElementById('btnNewCallModal')?.addEventListener('click', () => modalCall.showModal());
-document.getElementById('btnAddAdminModal')?.addEventListener('click', () => modalAddAdmin.showModal());
+document.getElementById('btnNewInvoiceModal')?.addEventListener('click', () => modalInv?.showModal());
+document.getElementById('btnCreateInvoiceQuick')?.addEventListener('click', () => modalInv?.showModal());
+document.getElementById('btnNewCallModal')?.addEventListener('click', () => modalCall?.showModal());
+document.getElementById('btnAddAdminModal')?.addEventListener('click', () => modalAddAdmin?.showModal());
+document.getElementById('btnAddProjectModal')?.addEventListener('click', () => modalAddProject?.showModal());
+document.getElementById('btnAddBlogModal')?.addEventListener('click', () => modalAddBlog?.showModal());
 
 document.querySelectorAll('[data-close-modal]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -506,14 +690,88 @@ document.querySelectorAll('[data-close-modal]').forEach(btn => {
   });
 });
 
-// Modal Outside Click Close
 document.querySelectorAll('.admin-modal').forEach(m => {
   m.addEventListener('click', (e) => {
     if (e.target === m) m.close();
   });
 });
 
-// Handle New Invoice Form Submission
+// Submit: Add New Executed Project
+document.getElementById('formAddProject')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.getElementById('projTitle').value.trim();
+  const client = document.getElementById('projClient').value.trim();
+  const category = document.getElementById('projCategory').value;
+  const budget = document.getElementById('projBudget').value.trim();
+  const image = document.getElementById('projImage').value;
+  const date = document.getElementById('projDate').value.trim();
+  const desc = document.getElementById('projDesc').value.trim();
+
+  const categoryLabels = {
+    road: "Road Construction",
+    management: "Project Management",
+    realestate: "Real Estate"
+  };
+
+  const projects = window.DB.getProjects();
+  const newProject = {
+    id: "PROJ-0" + (projects.length + 1),
+    title: title,
+    category: category,
+    categoryLabel: categoryLabels[category] || "Civil Engineering",
+    client: client,
+    budget: budget,
+    image: image,
+    desc: desc,
+    date: date,
+    gallery: [image, "media/pillar-roads.jpg", "media/case-flagship.jpg"]
+  };
+
+  projects.unshift(newProject);
+  window.DB.saveProjects(projects);
+
+  modalAddProject.close();
+  e.target.reset();
+  renderProjects();
+  updateKPIsAndChart();
+  alert(`Executed Project "${title}" published to portfolio!`);
+});
+
+// Submit: Publish New Blog / Insight
+document.getElementById('formAddBlog')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.getElementById('blogTitle').value.trim();
+  const category = document.getElementById('blogCategory').value;
+  const author = document.getElementById('blogAuthor').value.trim();
+  const image = document.getElementById('blogImage').value;
+  const readTime = document.getElementById('blogReadTime').value.trim();
+  const excerpt = document.getElementById('blogExcerpt').value.trim();
+
+  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  const blogs = window.DB.getBlogs();
+  const newBlog = {
+    id: "BLOG-0" + (blogs.length + 1),
+    title: title,
+    category: category,
+    author: author,
+    date: today,
+    readTime: readTime || "5 min read",
+    image: image,
+    excerpt: excerpt
+  };
+
+  blogs.unshift(newBlog);
+  window.DB.saveBlogs(blogs);
+
+  modalAddBlog.close();
+  e.target.reset();
+  renderBlogs();
+  updateKPIsAndChart();
+  alert(`Engineering Insight "${title}" published to landing page!`);
+});
+
+// Submit: New Invoice
 document.getElementById('formNewInvoice')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const newInv = {
@@ -539,7 +797,7 @@ document.getElementById('formNewInvoice')?.addEventListener('submit', (e) => {
   alert(`Milestone Invoice ${newInv.id} issued successfully!`);
 });
 
-// Handle Edit Invoice Form Submission
+// Submit: Edit Invoice
 document.getElementById('formEditInvoice')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const id = document.getElementById('editInvOriginalId').value;
@@ -563,7 +821,7 @@ document.getElementById('formEditInvoice')?.addEventListener('submit', (e) => {
   }
 });
 
-// Handle Add Admin Form Submission
+// Submit: Add Admin
 document.getElementById('formAddAdmin')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const email = document.getElementById('adminNewEmail').value.trim().toLowerCase();
@@ -595,7 +853,7 @@ document.getElementById('formAddAdmin')?.addEventListener('submit', (e) => {
   alert(`Administrative access granted to ${email} (${role})!`);
 });
 
-// Handle New Call Schedule Form Submission
+// Submit: New Call
 document.getElementById('formNewCall')?.addEventListener('submit', (e) => {
   e.preventDefault();
   const newCall = {
@@ -621,11 +879,12 @@ document.getElementById('formNewCall')?.addEventListener('submit', (e) => {
   alert(`Technical consultation scheduled with ${newCall.client}!`);
 });
 
-// CSV Exporter
+// Export CSV
 document.getElementById('btnExportData')?.addEventListener('click', () => {
   const calls = getCalls();
   const invoices = getInvoices();
   const admins = getAdmins();
+  const projects = window.DB ? window.DB.getProjects() : [];
 
   let csv = '=== DONALDS BAY LIMITED — CALL SCHEDULES ===\n';
   csv += 'ID,Client,Contact,Service,Location,Date_Time,Format,Budget,Status\n';
@@ -645,6 +904,12 @@ document.getElementById('btnExportData')?.addEventListener('click', () => {
     csv += `"${a.id}","${a.name}","${a.email}","${a.role}","${a.dateAdded}","${a.status}"\n`;
   });
 
+  csv += '\n=== DONALDS BAY LIMITED — EXECUTED PORTFOLIO PROJECTS ===\n';
+  csv += 'ID,Title,Category,Client,Budget,Date\n';
+  projects.forEach(p => {
+    csv += `"${p.id}","${p.title}","${p.categoryLabel || p.category}","${p.client}","${p.budget}","${p.date}"\n`;
+  });
+
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -653,7 +918,7 @@ document.getElementById('btnExportData')?.addEventListener('click', () => {
   a.click();
 });
 
-// Filter Event Listeners
+// Search & Filter Listeners
 document.getElementById('searchCalls')?.addEventListener('input', renderCalls);
 document.getElementById('filterCallStatus')?.addEventListener('change', renderCalls);
 document.getElementById('filterCallService')?.addEventListener('change', renderCalls);
@@ -661,8 +926,10 @@ document.getElementById('filterCallService')?.addEventListener('change', renderC
 document.getElementById('searchInvoices')?.addEventListener('input', renderInvoices);
 document.getElementById('filterInvoiceStatus')?.addEventListener('change', renderInvoices);
 
-// Initial Render
+// Initial Invocations
 renderCalls();
 renderInvoices();
+renderProjects();
+renderBlogs();
 renderAdmins();
 updateKPIsAndChart();

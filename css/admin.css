@@ -655,17 +655,65 @@
   gap: 1.5rem;
 }
 
-@media print {
-  body * { visibility: hidden; }
-  #printableInvoiceContent, #printableInvoiceContent * { visibility: visible; }
-  #printableInvoiceContent {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    border: none;
-  }
+/* Auth Gate Modal / Screen */
+.auth-gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(2, 18, 20, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
+
+.auth-box {
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(180deg, rgba(9, 51, 57, 0.9) 0%, rgba(4, 33, 37, 0.98) 100%);
+  border: 1px solid rgba(0, 229, 153, 0.25);
+  border-radius: 12px;
+  padding: clamp(1.8rem, 4vw, 2.5rem);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 229, 153, 0.08);
+  animation: authFadeIn 0.35s var(--ease);
+}
+
+@keyframes authFadeIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #FFAAAA;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-hint {
+  background: rgba(0, 229, 153, 0.06);
+  border: 1px solid rgba(0, 229, 153, 0.18);
+  color: var(--on-petrol-mid);
+  padding: 0.85rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+
+.auth-hint code {
+  color: var(--accent);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--mono);
+}
+

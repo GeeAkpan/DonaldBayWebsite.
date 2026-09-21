@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Executive Portal | Donalds Bay Limited — Operations, Invoicing &amp; Access</title>
-  <meta name="description" content="Donalds Bay Limited Executive Management Dashboard for call scheduling, client site consultations, milestone invoice logs, and revenue distribution analytics.">
+  <title>Executive Portal | Donalds Bay Limited</title>
+  <meta name="description" content="Donalds Bay Limited Executive Management Dashboard for call scheduling, milestone invoice logs, project portfolio management, and insights publishing.">
   <meta name="theme-color" content="#021214">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,48 @@
 </head>
 <body class="admin-body">
 
-<!-- ============================ ADMIN HEADER ============================ -->
+<!-- ============================ AUTHENTICATION GATE ============================ -->
+<div class="auth-gate-overlay" id="authGate">
+  <div class="auth-box">
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <img src="media/logo-white.svg" alt="Donalds Bay Limited" height="32">
+      <h2 style="font-size:1.4rem; color:var(--white); margin-top:0.85rem;">Executive Portal Authentication</h2>
+      <p style="font-size:0.82rem; color:var(--on-petrol-mid); margin-top:0.35rem;">Restricted access for authorized directors &amp; senior civil engineers.</p>
+    </div>
+
+    <form id="formAuthLogin" class="modal-form">
+      <div class="form-group">
+        <label for="loginEmail">Authorized Administrator Email</label>
+        <input type="email" id="loginEmail" class="form-control" placeholder="d.akpan@donaldsbay.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="loginPasskey">Executive Passkey / Access PIN</label>
+        <input type="password" id="loginPasskey" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <div id="authErrorMsg" class="auth-error" style="display:none;"></div>
+
+      <button type="submit" class="btn btn--primary" style="width:100%; padding:1rem; margin-top:0.5rem;">
+        Authenticate &amp; Enter Portal
+      </button>
+
+      <div class="auth-hint">
+        <strong>Default Credentials:</strong><br>
+        Email: <code>d.akpan@donaldsbay.com</code> &middot; PIN: <code>donald2026</code>
+      </div>
+    </form>
+
+    <div style="text-align:center; margin-top:1.5rem;">
+      <a href="index.html" style="font-size:0.8rem; color:var(--on-petrol-soft);">&larr; Return to Public Website</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ MAIN DASHBOARD VIEW (AUTHENTICATED) ============================ -->
+<div id="adminDashboardView" style="display:none; flex-direction:column; min-height:100vh;">
+
+<!-- ADMIN HEADER -->
 <header class="admin-nav">
   <div class="admin-shell admin-nav__inner">
     <div class="admin-nav__brand">
@@ -32,8 +73,11 @@
       <span class="nav__clock" id="admin-clock">WAT 00:00</span>
       <div class="admin-user-pill">
         <span class="admin-user-dot"></span>
-        <span id="activeUserEmail">exec.director@donaldsbay.com</span>
+        <span id="activeUserEmailDisplay">d.akpan@donaldsbay.com</span>
       </div>
+      <button class="table-btn" id="btnAdminSignOut" style="border-color:rgba(239,68,68,0.4); color:#FF8888;">
+        Sign Out
+      </button>
     </div>
   </div>
 </header>
@@ -44,9 +88,9 @@
     <!-- Header & Quick Action Row -->
     <div class="admin-head">
       <div>
-        <span class="label" style="color:var(--accent);">Operations, Billing &amp; Access Control</span>
+        <span class="label" style="color:var(--accent);">Operations, Billing, Portfolio &amp; Insights</span>
         <h1 class="admin-title">Executive Management Hub</h1>
-        <p class="admin-sub">Monitor incoming technical consultations, manage construction milestone invoices, control admin credentials, and track service revenue share.</p>
+        <p class="admin-sub">Monitor incoming technical consultations, manage construction milestone invoices, publish portfolio projects, and release engineering insights.</p>
       </div>
 
       <div class="admin-actions">
@@ -79,9 +123,9 @@
         <span class="kpi-trend positive" id="kpiCollectionRate">81.8% collection rate</span>
       </div>
       <div class="kpi-card">
-        <span class="kpi-label">Pending / Overdue Balance</span>
-        <div class="kpi-value warning" id="kpiPendingRevenue">₦87.5M</div>
-        <span class="kpi-trend warning" id="kpiPendingCount">2 invoices pending</span>
+        <span class="kpi-label">Executed Projects in Portfolio</span>
+        <div class="kpi-value" id="kpiTotalProjects">6</div>
+        <span class="kpi-trend positive" id="kpiTotalBlogs">3 Published Insights</span>
       </div>
     </div>
 
@@ -140,22 +184,28 @@
     <div class="admin-tabs">
       <button class="admin-tab active" data-tab="tab-schedules">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l5 5-5 5M4 4v7a4 4 0 0 0 4 4h12"/></svg>
-        <span>Call Schedules &amp; Consultations</span>
+        <span>Call Schedules</span>
         <span class="tab-count" id="countCallsBadge">8</span>
       </button>
       <button class="admin-tab" data-tab="tab-invoices">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 10h20"/></svg>
-        <span>Milestone Invoice Logs</span>
+        <span>Milestone Invoices</span>
         <span class="tab-count" id="countInvoicesBadge">14</span>
+      </button>
+      <button class="admin-tab" data-tab="tab-manage-projects">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <span>Portfolio Manager</span>
+        <span class="tab-count" id="countProjectsBadge">6</span>
+      </button>
+      <button class="admin-tab" data-tab="tab-manage-blogs">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>Blogs &amp; Insights</span>
+        <span class="tab-count" id="countBlogsBadge">3</span>
       </button>
       <button class="admin-tab" data-tab="tab-admins">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span>Admin Team &amp; Access Control</span>
+        <span>Admin Access Control</span>
         <span class="tab-count" id="countAdminsBadge">3</span>
-      </button>
-      <button class="admin-tab" data-tab="tab-projects">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-        <span>Active Projects Telemetry</span>
       </button>
     </div>
 
@@ -204,7 +254,7 @@
       </div>
     </section>
 
-    <!-- TAB 2: INVOICE LOGS (EDIT / DELETE / VIEW) -->
+    <!-- TAB 2: INVOICE LOGS -->
     <section class="tab-panel" id="tab-invoices">
       <div class="panel-header">
         <div class="filter-group">
@@ -243,7 +293,71 @@
       </div>
     </section>
 
-    <!-- TAB 3: ADMIN ACCESS CONTROL (ADD / REMOVE ADMINS) -->
+    <!-- TAB 3: PORTFOLIO PROJECTS MANAGER (ADD / DELETE EXECUTED PROJECTS) -->
+    <section class="tab-panel" id="tab-manage-projects">
+      <div class="panel-header">
+        <div>
+          <h3 style="font-size:1.15rem; color:var(--on-petrol);">Executed Projects &middot; Portfolio Manager</h3>
+          <p style="font-size:0.85rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Add newly delivered landmarks or remove projects from the public portfolio &amp; landing page.</p>
+        </div>
+        <button class="btn btn--primary btn--sm" id="btnAddProjectModal">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add Executed Project
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-table" id="projectsTable">
+          <thead>
+            <tr>
+              <th>Project Title</th>
+              <th>Category</th>
+              <th>Client / Entity</th>
+              <th>Contract Scale</th>
+              <th>Completion Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="projectsTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: BLOGS & INSIGHTS MANAGER (ADD / PUBLISH ARTICLES) -->
+    <section class="tab-panel" id="tab-manage-blogs">
+      <div class="panel-header">
+        <div>
+          <h3 style="font-size:1.15rem; color:var(--on-petrol);">Engineering Insights &middot; Content Publisher</h3>
+          <p style="font-size:0.85rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Publish technical engineering articles and civil infrastructure insights to the landing page.</p>
+        </div>
+        <button class="btn btn--primary btn--sm" id="btnAddBlogModal">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Publish New Article
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-table" id="blogsTable">
+          <thead>
+            <tr>
+              <th>Article Title</th>
+              <th>Category</th>
+              <th>Author / Engineer</th>
+              <th>Read Time</th>
+              <th>Date Published</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="blogsTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 5: ADMIN ACCESS CONTROL -->
     <section class="tab-panel" id="tab-admins">
       <div class="panel-header">
         <div>
@@ -275,68 +389,135 @@
       </div>
     </section>
 
-    <!-- TAB 4: ACTIVE PROJECTS TELEMETRY -->
-    <section class="tab-panel" id="tab-projects">
-      <div class="panel-header">
-        <div>
-          <h3 style="font-size:1.1rem; color:var(--on-petrol);">On-Site Project Milestone Summary</h3>
-          <p style="font-size:0.85rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Real-time execution status across Road Construction, Project Management, and Real Estate developments.</p>
-        </div>
-      </div>
-
-      <div class="projects-admin-grid">
-        <div class="project-admin-card">
-          <div class="pac-top">
-            <span class="card__tag">Road Construction</span>
-            <span class="status-pill status-paid">Phase 2: Active</span>
-          </div>
-          <h4 class="pac-title">Atlantic Coastal Expressway</h4>
-          <p class="pac-meta">Client: Federal Ministry of Works &middot; 42km Corridor</p>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" style="width: 88%;"></div>
-          </div>
-          <div class="pac-footer">
-            <span>Progress: <strong>88%</strong></span>
-            <span>Est. Handover: <strong>Q4 2026</strong></span>
-          </div>
-        </div>
-
-        <div class="project-admin-card">
-          <div class="pac-top">
-            <span class="card__tag">Real Estate</span>
-            <span class="status-pill status-paid">Fit-out Stage</span>
-          </div>
-          <h4 class="pac-title">The Bayview Waterfront Residences</h4>
-          <p class="pac-meta">Client: PrimeStone Assets &middot; 24 Luxury Units</p>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" style="width: 72%;"></div>
-          </div>
-          <div class="pac-footer">
-            <span>Progress: <strong>72%</strong></span>
-            <span>Est. Handover: <strong>Q1 2027</strong></span>
-          </div>
-        </div>
-
-        <div class="project-admin-card">
-          <div class="pac-top">
-            <span class="card__tag">Project Management</span>
-            <span class="status-pill status-pending">Structural Frame</span>
-          </div>
-          <h4 class="pac-title">Sterling Heights Corporate Tower</h4>
-          <p class="pac-meta">Client: Sterling Urban Developments &middot; 32 Storeys</p>
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-fill" style="width: 54%;"></div>
-          </div>
-          <div class="pac-footer">
-            <span>Progress: <strong>54%</strong></span>
-            <span>Est. Handover: <strong>Q3 2027</strong></span>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </div>
 </main>
+
+</div><!-- /adminDashboardView -->
+
+<!-- ============================ MODAL: NEW PROJECT ============================ -->
+<dialog class="admin-modal" id="modalAddProject">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Add New Executed Project to Portfolio</h3>
+      <button class="modal-close" type="button" data-close-modal>&times;</button>
+    </div>
+
+    <form id="formAddProject" class="modal-form">
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Project Title</label>
+          <input type="text" id="projTitle" class="form-control" placeholder="e.g. Lekki Free Zone Dual Expressway" required>
+        </div>
+        <div class="form-group">
+          <label>Client / Organization</label>
+          <input type="text" id="projClient" class="form-control" placeholder="e.g. Apex Industrial Zone" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Service Specialization</label>
+          <select id="projCategory" class="form-control">
+            <option value="road">Road Construction</option>
+            <option value="management">Project Management &amp; EPC</option>
+            <option value="realestate">Real Estate &amp; Towers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Contract Scale / Budget</label>
+          <input type="text" id="projBudget" class="form-control" placeholder="e.g. ₦16.5B Budget" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Project Showcase Image</label>
+          <select id="projImage" class="form-control">
+            <option value="media/work-01.jpg">Highway &amp; Bridge Corridor (Work 01)</option>
+            <option value="media/work-02.jpg">Commercial Glass Tower (Work 02)</option>
+            <option value="media/work-03.jpg">Luxury Waterfront Villa (Work 03)</option>
+            <option value="media/work-04.jpg">Superstructure Steel Frame (Work 04)</option>
+            <option value="media/work-05.jpg">Asphalt Paving Machinery (Work 05)</option>
+            <option value="media/work-06.jpg">BIM Tablet Engineers (Work 06)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Completion Year / Status</label>
+          <input type="text" id="projDate" class="form-control" placeholder="e.g. Completed 2026" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Executive Description / Deliverables</label>
+        <textarea id="projDesc" class="form-control" rows="3" placeholder="Summary of civil engineering milestones, bridge spans, or architectural finishes..." required></textarea>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Publish to Portfolio</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============================ MODAL: NEW BLOG / INSIGHT ============================ -->
+<dialog class="admin-modal" id="modalAddBlog">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Publish Engineering Insight / Article</h3>
+      <button class="modal-close" type="button" data-close-modal>&times;</button>
+    </div>
+
+    <form id="formAddBlog" class="modal-form">
+      <div class="form-group">
+        <label>Article Title</label>
+        <input type="text" id="blogTitle" class="form-control" placeholder="e.g. High-Capacity Asphalt Compaction Standards" required>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Category</label>
+          <select id="blogCategory" class="form-control">
+            <option value="Road Engineering">Road Engineering</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Luxury Architecture">Luxury Architecture</option>
+            <option value="Civil Materials">Civil Materials &amp; Testing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Author / Chief Engineer</label>
+          <input type="text" id="blogAuthor" class="form-control" placeholder="e.g. Engr. Donald Akpan" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Article Cover Image</label>
+          <select id="blogImage" class="form-control">
+            <option value="media/pillar-roads.jpg">Roadworks &amp; Asphalt Equipment</option>
+            <option value="media/pillar-management.jpg">Engineers on High-Rise Site</option>
+            <option value="media/pillar-realestate.jpg">Modern Architecture at Dusk</option>
+            <option value="media/case-flagship.jpg">Coastal Expressway Aerial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Estimated Read Time</label>
+          <input type="text" id="blogReadTime" class="form-control" placeholder="e.g. 5 min read" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Article Summary / Excerpt</label>
+        <textarea id="blogExcerpt" class="form-control" rows="3" placeholder="Summary of engineering methods, quality controls, or architectural philosophy..." required></textarea>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Publish Insight to Landing Page</button>
+      </div>
+    </form>
+  </div>
+</dialog>
 
 <!-- ============================ MODAL: NEW INVOICE ============================ -->
 <dialog class="admin-modal" id="modalInvoice">
@@ -656,6 +837,7 @@
   </div>
 </dialog>
 
+<script src="js/db.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/ai-chat.js" defer></script>
 </body>
