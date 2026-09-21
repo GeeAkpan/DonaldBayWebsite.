@@ -1,12 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" fill="none">
-  <!-- Monogram -->
-  <g transform="translate(4, 8)">
-    <rect x="0" y="0" width="10" height="44" fill="#0A3638" rx="2"/>
-    <path d="M16 0H30C38.8366 0 46 7.16344 46 16V16C46 24.8366 38.8366 32 30 32H16V0Z" stroke="#061B1E" stroke-width="6" stroke-linejoin="round"/>
-    <path d="M16 22H32C38.0751 22 43 26.9249 43 33V33C43 39.0751 38.0751 44 32 44H16V22Z" fill="#0A3638"/>
-    <rect x="22" y="10" width="8" height="8" fill="#061B1E"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 54" fill="none">
+  <!-- Iconic Donalds Bay Lighthouse & Waves Emblem (Dark/Print Edition) -->
+  <g transform="translate(2, 3)">
+    <!-- Shield -->
+    <rect width="48" height="48" rx="10" fill="#042125" stroke="#052F33" stroke-width="1.5"/>
+    <!-- Light Beam -->
+    <polygon points="24,14 6,8 6,24 24,18" fill="#00E599" opacity="0.3"/>
+    <!-- Lighthouse Dome -->
+    <path d="M22 10C22 8.89543 22.8954 8 24 8C25.1046 8 26 8.89543 26 10V13H22V10Z" fill="#00E599"/>
+    <rect x="20" y="13" width="8" height="2" fill="#FFFFFF" rx="0.5"/>
+    <rect x="21" y="15" width="6" height="4" fill="#00E599" rx="0.5"/>
+    <rect x="23" y="16" width="2" height="2" fill="#FFFFFF"/>
+    <rect x="19" y="19" width="10" height="2" fill="#FFFFFF" rx="0.5"/>
+    <!-- Lighthouse Body -->
+    <path d="M20 21L17.5 35H30.5L28 21H20Z" fill="#042125"/>
+    <polygon points="19.2 25 28.8 25 28.3 28 18.7 28" fill="#00E599"/>
+    <rect x="16" y="35" width="16" height="3" fill="#00E599" rx="1"/>
+    <!-- Waves -->
+    <path d="M6 39C10 37 14 41 18 39C22 37 26 41 30 39C34 37 38 41 42 39" stroke="#00E599" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M6 43C10 41 14 45 18 43C22 41 26 45 30 43C34 41 38 45 42 43" stroke="#042125" stroke-width="1.5" stroke-linecap="round" fill="none"/>
   </g>
-  <!-- Wordmark -->
-  <text x="64" y="32" font-family="'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="20" letter-spacing="0.04em" fill="#061B1E">DONALDS BAY</text>
-  <text x="65" y="46" font-family="'Space Grotesk', ui-monospace, monospace" font-weight="600" font-size="9" letter-spacing="0.28em" fill="#0A3638">LIMITED &middot; ENGINEERING &amp; INFRASTRUCTURE</text>
+
+  <!-- Typography -->
+  <text x="62" y="27" font-family="'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="21" letter-spacing="0.05em" fill="#042125">DONALDS BAY</text>
+  <text x="63" y="42" font-family="'Space Grotesk', ui-monospace, monospace" font-weight="700" font-size="9.5" letter-spacing="0.22em" fill="#06564B">LIMITED &middot; CIVIL ENGINEERING</text>
 </svg>

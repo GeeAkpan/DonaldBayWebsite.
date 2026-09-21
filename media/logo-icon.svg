@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#021214" stroke="#00E599" stroke-width="2"/>
+  <g transform="translate(8, 8)">
+    <polygon points="24,14 4,8 4,24 24,18" fill="#00E599" opacity="0.35"/>
+    <path d="M22 10C22 8.89543 22.8954 8 24 8C25.1046 8 26 8.89543 26 10V13H22V10Z" fill="#00E599"/>
+    <rect x="20" y="13" width="8" height="2" fill="#FFFFFF" rx="0.5"/>
+    <rect x="21" y="15" width="6" height="4" fill="#00E599" rx="0.5"/>
+    <rect x="23" y="16" width="2" height="2" fill="#FFFFFF"/>
+    <rect x="19" y="19" width="10" height="2" fill="#FFFFFF" rx="0.5"/>
+    <path d="M20 21L17.5 35H30.5L28 21H20Z" fill="#FFFFFF"/>
+    <polygon points="19.2 25 28.8 25 28.3 28 18.7 28" fill="#00E599"/>
+    <rect x="16" y="35" width="16" height="3" fill="#00E599" rx="1"/>
+    <path d="M6 39C10 37 14 41 18 39C22 37 26 41 30 39C34 37 38 41 42 39" stroke="#00E599" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M6 43C10 41 14 45 18 43C22 41 26 45 30 43C34 41 38 45 42 43" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.85"/>
+  </g>
+</svg>
