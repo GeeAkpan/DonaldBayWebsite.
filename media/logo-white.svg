@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" fill="none">
+  <!-- Monogram -->
+  <g transform="translate(4, 8)">
+    <rect x="0" y="0" width="10" height="44" fill="#00E599" rx="2"/>
+    <path d="M16 0H30C38.8366 0 46 7.16344 46 16V16C46 24.8366 38.8366 32 30 32H16V0Z" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M16 22H32C38.0751 22 43 26.9249 43 33V33C43 39.0751 38.0751 44 32 44H16V22Z" fill="#00E599"/>
+    <rect x="22" y="10" width="8" height="8" fill="#FFFFFF"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="64" y="32" font-family="'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="20" letter-spacing="0.04em" fill="#FFFFFF">DONALDS BAY</text>
+  <text x="65" y="46" font-family="'Space Grotesk', ui-monospace, monospace" font-weight="600" font-size="9" letter-spacing="0.28em" fill="#00E599">LIMITED &middot; ENGINEERING &amp; INFRASTRUCTURE</text>
+</svg>

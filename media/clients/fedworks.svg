@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="currentColor">
+  <path d="M12 6L24 13V27L12 34L0 27V13L12 6Z" fill="#000" opacity="0.9"/>
+  <path d="M12 12L18 16V24L12 28L6 24V16L12 12Z" fill="#fff"/>
+  <text x="36" y="24" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="14" letter-spacing="0.1em">FEDWORKS</text>
+  <text x="36" y="33" font-family="'Space Grotesk', sans-serif" font-weight="500" font-size="7" letter-spacing="0.2em" opacity="0.6">INFRASTRUCTURE AUTHORITY</text>
+</svg>

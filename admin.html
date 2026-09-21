@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Executive Portal | Donalds Bay Limited — Operations, Invoicing &amp; Access</title>
+  <meta name="description" content="Donalds Bay Limited Executive Management Dashboard for call scheduling, client site consultations, milestone invoice logs, and revenue distribution analytics.">
+  <meta name="theme-color" content="#021214">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ============================ ADMIN HEADER ============================ -->
+<header class="admin-nav">
+  <div class="admin-shell admin-nav__inner">
+    <div class="admin-nav__brand">
+      <a href="index.html" class="admin-back-btn" title="Return to Public Website">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Live Site</span>
+      </a>
+      <div class="admin-nav__divider"></div>
+      <img src="media/logo-white.svg" alt="Donalds Bay Limited" height="24">
+      <span class="admin-badge">Executive Portal</span>
+    </div>
+
+    <div class="admin-nav__right">
+      <span class="nav__clock" id="admin-clock">WAT 00:00</span>
+      <div class="admin-user-pill">
+        <span class="admin-user-dot"></span>
+        <span id="activeUserEmail">exec.director@donaldsbay.com</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="admin-main">
+  <div class="admin-shell">
+
+    <!-- Header & Quick Action Row -->
+    <div class="admin-head">
+      <div>
+        <span class="label" style="color:var(--accent);">Operations, Billing &amp; Access Control</span>
+        <h1 class="admin-title">Executive Management Hub</h1>
+        <p class="admin-sub">Monitor incoming technical consultations, manage construction milestone invoices, control admin credentials, and track service revenue share.</p>
+      </div>
+
+      <div class="admin-actions">
+        <button class="btn btn--ghost" id="btnExportData">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export Logs (CSV)
+        </button>
+        <button class="btn btn--primary" id="btnNewInvoiceModal">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Create Milestone Invoice
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Metric Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Scheduled Consultations</span>
+        <div class="kpi-value" id="kpiTotalCalls">8</div>
+        <span class="kpi-trend positive">&uarr; Synchronized from Web &amp; AI RFP</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Total Milestone Invoices</span>
+        <div class="kpi-value" id="kpiActiveInvoices">14</div>
+        <span class="kpi-trend" id="kpiTotalVolume">₦482.5M total volume</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Collected Revenue</span>
+        <div class="kpi-value" id="kpiCollectedRevenue">₦395.0M</div>
+        <span class="kpi-trend positive" id="kpiCollectionRate">81.8% collection rate</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Pending / Overdue Balance</span>
+        <div class="kpi-value warning" id="kpiPendingRevenue">₦87.5M</div>
+        <span class="kpi-trend warning" id="kpiPendingCount">2 invoices pending</span>
+      </div>
+    </div>
+
+    <!-- ===================== SERVICE REVENUE & % DISTRIBUTION CHART ===================== -->
+    <section class="revenue-analytics-card">
+      <div class="rac-head">
+        <div>
+          <span class="label" style="color:var(--accent);">Financial Analytics</span>
+          <h3 style="font-size:1.35rem; color:var(--white); margin:0.25rem 0 0;">Service Revenue Breakdown &amp; Market Share (%)</h3>
+        </div>
+        <span class="rac-total" id="racGrandTotal">Total Invoiced: ₦482,500,000</span>
+      </div>
+
+      <!-- Segmented Multi-Color Progress Bar -->
+      <div class="rac-bar-wrapper">
+        <div class="rac-segment rac-road" id="barRoad" style="width: 55%;" title="Road Construction"></div>
+        <div class="rac-segment rac-pm" id="barPM" style="width: 27%;" title="Project Management"></div>
+        <div class="rac-segment rac-re" id="barRE" style="width: 18%;" title="Real Estate"></div>
+      </div>
+
+      <!-- Service Legend Cards -->
+      <div class="rac-legend-grid">
+        <div class="rac-legend-item">
+          <div class="rac-legend-top">
+            <span class="rac-dot rac-road-dot"></span>
+            <strong>Road Construction</strong>
+            <span class="rac-pct" id="pctRoad">55.0%</span>
+          </div>
+          <div class="rac-amt" id="revRoad">₦265,000,000</div>
+          <div class="rac-meta" id="countRoad">High-tonnage paving &amp; bridge civil works</div>
+        </div>
+
+        <div class="rac-legend-item">
+          <div class="rac-legend-top">
+            <span class="rac-dot rac-pm-dot"></span>
+            <strong>Project Management</strong>
+            <span class="rac-pct" id="pctPM">27.3%</span>
+          </div>
+          <div class="rac-amt" id="revPM">₦132,000,000</div>
+          <div class="rac-meta" id="countPM">EPC supervision &amp; site quality audits</div>
+        </div>
+
+        <div class="rac-legend-item">
+          <div class="rac-legend-top">
+            <span class="rac-dot rac-re-dot"></span>
+            <strong>Real Estate &amp; Towers</strong>
+            <span class="rac-pct" id="pctRE">17.7%</span>
+          </div>
+          <div class="rac-amt" id="revRE">₦85,500,000</div>
+          <div class="rac-meta" id="countRE">Luxury residential estates &amp; towers</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="tab-schedules">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l5 5-5 5M4 4v7a4 4 0 0 0 4 4h12"/></svg>
+        <span>Call Schedules &amp; Consultations</span>
+        <span class="tab-count" id="countCallsBadge">8</span>
+      </button>
+      <button class="admin-tab" data-tab="tab-invoices">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 10h20"/></svg>
+        <span>Milestone Invoice Logs</span>
+        <span class="tab-count" id="countInvoicesBadge">14</span>
+      </button>
+      <button class="admin-tab" data-tab="tab-admins">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Admin Team &amp; Access Control</span>
+        <span class="tab-count" id="countAdminsBadge">3</span>
+      </button>
+      <button class="admin-tab" data-tab="tab-projects">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <span>Active Projects Telemetry</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: CALL SCHEDULES -->
+    <section class="tab-panel active" id="tab-schedules">
+      <div class="panel-header">
+        <div class="filter-group">
+          <input type="text" id="searchCalls" class="table-search" placeholder="Search client, company, or site...">
+          <select id="filterCallStatus" class="table-select">
+            <option value="ALL">All Statuses</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Pending">Pending Review</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <select id="filterCallService" class="table-select">
+            <option value="ALL">All Services</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Road Construction">Road Construction</option>
+            <option value="Real Estate">Real Estate</option>
+          </select>
+        </div>
+        <button class="btn btn--ghost btn--sm" id="btnNewCallModal">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Schedule Site Meeting
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-table" id="callsTable">
+          <thead>
+            <tr>
+              <th>Client / Entity</th>
+              <th>Service Category</th>
+              <th>Site Location</th>
+              <th>Scheduled Date &amp; Time</th>
+              <th>Platform / Meeting Type</th>
+              <th>Budget Tier</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="callsTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 2: INVOICE LOGS (EDIT / DELETE / VIEW) -->
+    <section class="tab-panel" id="tab-invoices">
+      <div class="panel-header">
+        <div class="filter-group">
+          <input type="text" id="searchInvoices" class="table-search" placeholder="Search invoice #, client, or project...">
+          <select id="filterInvoiceStatus" class="table-select">
+            <option value="ALL">All Payment Statuses</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Overdue">Overdue</option>
+          </select>
+        </div>
+        <button class="btn btn--primary btn--sm" id="btnCreateInvoiceQuick">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          New Milestone Invoice
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-table" id="invoicesTable">
+          <thead>
+            <tr>
+              <th>Invoice #</th>
+              <th>Client / Authority</th>
+              <th>Project &amp; Milestone Phase</th>
+              <th>Amount (NGN)</th>
+              <th>Issued Date</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="invoicesTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 3: ADMIN ACCESS CONTROL (ADD / REMOVE ADMINS) -->
+    <section class="tab-panel" id="tab-admins">
+      <div class="panel-header">
+        <div>
+          <h3 style="font-size:1.15rem; color:var(--on-petrol);">Executive Access Control &amp; Administrator List</h3>
+          <p style="font-size:0.85rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Authorize or revoke administrative credentials by corporate email address.</p>
+        </div>
+        <button class="btn btn--primary btn--sm" id="btnAddAdminModal">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add New Administrator
+        </button>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-table" id="adminsTable">
+          <thead>
+            <tr>
+              <th>Administrator Name</th>
+              <th>Corporate Email</th>
+              <th>Assigned Role</th>
+              <th>Authorization Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminsTableBody">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: ACTIVE PROJECTS TELEMETRY -->
+    <section class="tab-panel" id="tab-projects">
+      <div class="panel-header">
+        <div>
+          <h3 style="font-size:1.1rem; color:var(--on-petrol);">On-Site Project Milestone Summary</h3>
+          <p style="font-size:0.85rem; color:var(--on-petrol-soft); margin-top:0.25rem;">Real-time execution status across Road Construction, Project Management, and Real Estate developments.</p>
+        </div>
+      </div>
+
+      <div class="projects-admin-grid">
+        <div class="project-admin-card">
+          <div class="pac-top">
+            <span class="card__tag">Road Construction</span>
+            <span class="status-pill status-paid">Phase 2: Active</span>
+          </div>
+          <h4 class="pac-title">Atlantic Coastal Expressway</h4>
+          <p class="pac-meta">Client: Federal Ministry of Works &middot; 42km Corridor</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" style="width: 88%;"></div>
+          </div>
+          <div class="pac-footer">
+            <span>Progress: <strong>88%</strong></span>
+            <span>Est. Handover: <strong>Q4 2026</strong></span>
+          </div>
+        </div>
+
+        <div class="project-admin-card">
+          <div class="pac-top">
+            <span class="card__tag">Real Estate</span>
+            <span class="status-pill status-paid">Fit-out Stage</span>
+          </div>
+          <h4 class="pac-title">The Bayview Waterfront Residences</h4>
+          <p class="pac-meta">Client: PrimeStone Assets &middot; 24 Luxury Units</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" style="width: 72%;"></div>
+          </div>
+          <div class="pac-footer">
+            <span>Progress: <strong>72%</strong></span>
+            <span>Est. Handover: <strong>Q1 2027</strong></span>
+          </div>
+        </div>
+
+        <div class="project-admin-card">
+          <div class="pac-top">
+            <span class="card__tag">Project Management</span>
+            <span class="status-pill status-pending">Structural Frame</span>
+          </div>
+          <h4 class="pac-title">Sterling Heights Corporate Tower</h4>
+          <p class="pac-meta">Client: Sterling Urban Developments &middot; 32 Storeys</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" style="width: 54%;"></div>
+          </div>
+          <div class="pac-footer">
+            <span>Progress: <strong>54%</strong></span>
+            <span>Est. Handover: <strong>Q3 2027</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ============================ MODAL: NEW INVOICE ============================ -->
+<dialog class="admin-modal" id="modalInvoice">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Create Construction Milestone Invoice</h3>
+      <button class="modal-close" type="button" data-close-modal>&times;</button>
+    </div>
+
+    <form id="formNewInvoice" class="modal-form">
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Invoice Number</label>
+          <input type="text" id="invNumber" class="form-control" value="DBL-INV-2026-092" required>
+        </div>
+        <div class="form-group">
+          <label>Client / Organization</label>
+          <input type="text" id="invClient" class="form-control" placeholder="e.g. Apex Civil &amp; Marine" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Project Category</label>
+          <select id="invCategory" class="form-control">
+            <option value="Road Construction">Road Construction</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Real Estate">Real Estate &amp; Towers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Project Name</label>
+          <input type="text" id="invProject" class="form-control" placeholder="e.g. Atlantic Coastal Expressway - Section 3" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Milestone Phase Description</label>
+        <input type="text" id="invMilestone" class="form-control" placeholder="e.g. 50% Asphalt Base Compaction Complete" required>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Milestone Contract Amount (NGN)</label>
+          <input type="number" id="invAmount" class="form-control" placeholder="45000000" min="100000" required>
+        </div>
+        <div class="form-group">
+          <label>Payment Due Date</label>
+          <input type="date" id="invDueDate" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Payment Status</label>
+          <select id="invStatus" class="form-control">
+            <option value="Pending">Pending (Issued)</option>
+            <option value="Paid">Paid (Confirmed Bank Transfer)</option>
+            <option value="Overdue">Overdue</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Payment Destination Bank Account</label>
+          <input type="text" class="form-control" value="Zenith Bank · 1014882901 (Donalds Bay Ltd)" readonly>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Issue &amp; Save Milestone Invoice</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============================ MODAL: EDIT INVOICE ============================ -->
+<dialog class="admin-modal" id="modalEditInvoice">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Edit Milestone Invoice</h3>
+      <button class="modal-close" type="button" data-close-modal>&times;</button>
+    </div>
+
+    <form id="formEditInvoice" class="modal-form">
+      <input type="hidden" id="editInvOriginalId">
+      
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Invoice Number</label>
+          <input type="text" id="editInvNumber" class="form-control" readonly style="opacity:0.75;">
+        </div>
+        <div class="form-group">
+          <label>Client / Organization</label>
+          <input type="text" id="editInvClient" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Project Category</label>
+          <select id="editInvCategory" class="form-control">
+            <option value="Road Construction">Road Construction</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Real Estate">Real Estate &amp; Towers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Project Name</label>
+          <input type="text" id="editInvProject" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Milestone Phase Description</label>
+        <input type="text" id="editInvMilestone" class="form-control" required>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Milestone Amount (NGN)</label>
+          <input type="number" id="editInvAmount" class="form-control" min="100000" required>
+        </div>
+        <div class="form-group">
+          <label>Payment Due Date</label>
+          <input type="date" id="editInvDueDate" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Payment Status</label>
+        <select id="editInvStatus" class="form-control">
+          <option value="Paid">Paid (Settled)</option>
+          <option value="Pending">Pending (Awaiting Settlement)</option>
+          <option value="Overdue">Overdue (Past Due Date)</option>
+        </select>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============================ MODAL: ADD ADMIN BY EMAIL ============================ -->
+<dialog class="admin-modal" id="modalAddAdmin">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Add Authorized Administrator</h3>
+      <button class="modal-close" type="button" data-close-modal>&times;</button>
+    </div>
+
+    <form id="formAddAdmin" class="modal-form">
+      <div class="form-group">
+        <label>Administrator Full Name</label>
+        <input type="text" id="adminNewName" class="form-control" placeholder="e.g. Engr. Donald Akpan" required>
+      </div>
+
+      <div class="form-group">
+        <label>Corporate Email Address</label>
+        <input type="email" id="adminNewEmail" class="form-control" placeholder="d.akpan@donaldsbay.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Designated Role &amp; Permissions</label>
+        <select id="adminNewRole" class="form-control">
+          <option value="Super Admin">Super Admin (Full Access &amp; Invoice Approval)</option>
+          <option value="Project Director">Project Director (Site Logs &amp; Schedules)</option>
+          <option value="Finance & Billing">Finance &amp; Billing Officer</option>
+          <option value="Chief Site Engineer">Chief Site Engineer</option>
+        </select>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Authorize &amp; Grant Access</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============================ MODAL: NEW CALL SCHEDULE ============================ -->
+<dialog class="admin-modal" id="modalCall">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Schedule Technical Consultation / Site Visit</h3>
+      <button class="modal-close" type="button" data-close-modal>&times;</button>
+    </div>
+
+    <form id="formNewCall" class="modal-form">
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Client / Organization Name</label>
+          <input type="text" id="callClient" class="form-control" placeholder="e.g. Chevron Infrastructure Group" required>
+        </div>
+        <div class="form-group">
+          <label>Corporate Email / Phone</label>
+          <input type="text" id="callContact" class="form-control" placeholder="e.g. eng.okoye@chevron.com / +234..." required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Service Category</label>
+          <select id="callService" class="form-control">
+            <option value="Project Management">Project Management</option>
+            <option value="Road Construction">Road Construction</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Building Construction">Building Construction</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Site Location</label>
+          <input type="text" id="callLocation" class="form-control" placeholder="e.g. Lekki Phase 1, Lagos" required>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label>Meeting Date &amp; Time</label>
+          <input type="datetime-local" id="callDateTime" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Meeting Format</label>
+          <select id="callFormat" class="form-control">
+            <option value="Google Meet (Virtual)">Google Meet (Virtual)</option>
+            <option value="On-Site Inspection">On-Site Technical Inspection</option>
+            <option value="Headquarters Boardroom">Headquarters Boardroom Meeting</option>
+            <option value="Phone Conference">Direct Phone Conference</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Budget Tier / Project Scale</label>
+        <select id="callBudget" class="form-control">
+          <option value="₦1B – ₦10B ($1M – $10M)">₦1B – ₦10B ($1M – $10M)</option>
+          <option value="₦250M – ₦1B ($250K – $1M)">₦250M – ₦1B ($250K – $1M)</option>
+          <option value="₦50M – ₦250M ($50K – $250K)">₦50M – ₦250M ($50K – $250K)</option>
+          <option value="₦10B+ Mega Infrastructure">₦10B+ Mega Infrastructure</option>
+        </select>
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn btn--ghost" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn--primary">Confirm &amp; Add Schedule</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============================ MODAL: INVOICE PREVIEW / PRINT ============================ -->
+<dialog class="admin-modal" id="modalPrintInvoice">
+  <div class="modal-box invoice-printable" id="printableInvoiceContent">
+    <div class="inv-head-row">
+      <div>
+        <img src="media/logo-dark.svg" alt="Donalds Bay Limited" height="32">
+        <p style="font-size:0.8rem; color:#444; margin-top:0.4rem;">Donalds Bay Limited &middot; RC-1849204<br>Headquarters: Donalds Bay Tower, Coastal Boulevard, Lagos</p>
+      </div>
+      <div style="text-align:right;">
+        <h2 style="font-size:1.6rem; color:#042125; margin:0;" id="printInvTitle">INVOICE</h2>
+        <span style="font-family:var(--label); font-weight:700; color:#042125;" id="printInvNumber">DBL-INV-2026-001</span>
+      </div>
+    </div>
+
+    <hr style="border:0; border-top:1px solid #ddd; margin:1.2rem 0;">
+
+    <div class="inv-meta-row">
+      <div>
+        <span style="font-size:0.75rem; text-transform:uppercase; color:#666; font-weight:700;">Bill To:</span>
+        <h4 style="font-size:1.05rem; margin:0.2rem 0;" id="printInvClient">Federal Ministry of Works</h4>
+        <p style="font-size:0.85rem; color:#444;" id="printInvProject">Project: Atlantic Coastal Expressway</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:0.85rem; margin:0.2rem 0;"><strong>Issued Date:</strong> <span id="printInvDate">2026-09-01</span></p>
+        <p style="font-size:0.85rem; margin:0.2rem 0;"><strong>Due Date:</strong> <span id="printInvDue">2026-09-30</span></p>
+        <p style="font-size:0.85rem; margin:0.2rem 0;"><strong>Status:</strong> <span id="printInvStatus" class="status-pill status-paid">PAID</span></p>
+      </div>
+    </div>
+
+    <table class="inv-items-table" style="width:100%; margin-top:1.5rem; border-collapse:collapse;">
+      <thead>
+        <tr style="background:#f4ece1; color:#07191A; text-align:left; font-size:0.8rem; font-family:var(--label);">
+          <th style="padding:0.75rem;">Milestone Description</th>
+          <th style="padding:0.75rem; text-align:right;">Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:0.9rem 0.75rem; border-bottom:1px solid #eee;" id="printInvMilestone">Phase 2 Asphalt Paving &amp; Subgrade Compaction Complete</td>
+          <td style="padding:0.9rem 0.75rem; border-bottom:1px solid #eee; text-align:right; font-weight:700;" id="printInvAmount">₦45,000,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:2rem; display:flex; justify-content:space-between; align-items:flex-end;">
+      <div style="font-size:0.8rem; color:#666;">
+        <strong>Bank Details:</strong><br>
+        Bank: Zenith Bank PLC<br>
+        Account: 1014882901 (Donalds Bay Limited)<br>
+        TIN: 22094819-0001
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:0.85rem; color:#666;">Total Invoiced:</span>
+        <div style="font-size:1.5rem; font-weight:800; color:#042125;" id="printInvTotal">₦45,000,000</div>
+      </div>
+    </div>
+
+    <div class="modal-foot" style="margin-top:2rem;">
+      <button type="button" class="btn btn--ghost" data-close-modal>Close</button>
+      <button type="button" class="btn btn--primary" onclick="window.print()">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save PDF
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
