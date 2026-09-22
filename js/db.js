@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Donalds Bay Limited — Shared Data & Persistence Layer
+   Donald Bay Limited — Shared Data & Persistence Layer
    ========================================================================== */
 
 // Initial Seed Projects
@@ -84,7 +84,7 @@ const SEED_BLOGS = [
     id: "BLOG-01",
     title: "Deep Soil Stabilization & Heavy Paving in Coastal Highway Construction",
     category: "Road Engineering",
-    author: "Donalds Bay Road Engineering Directorate",
+    author: "Donald Bay Road Engineering Directorate",
     date: "September 15, 2026",
     readTime: "5 min read",
     image: "media/branded-trucks.jpg",
@@ -104,7 +104,7 @@ const SEED_BLOGS = [
     id: "BLOG-03",
     title: "Travertine & Passive Biophilic Cooling in Waterfront Real Estate",
     category: "Luxury Architecture",
-    author: "Donalds Bay Architectural Board",
+    author: "Donald Bay Architectural Board",
     date: "August 28, 2026",
     readTime: "4 min read",
     image: "media/pillar-realestate.jpg",

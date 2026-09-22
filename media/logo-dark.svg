@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 54" fill="none">
-  <!-- Iconic Donalds Bay Lighthouse & Waves Emblem (Dark/Print Edition) -->
+  <!-- Iconic Donald Bay Lighthouse & Waves Emblem (Dark/Print Edition) -->
   <g transform="translate(2, 3)">
     <!-- Shield -->
     <rect width="48" height="48" rx="10" fill="#042125" stroke="#052F33" stroke-width="1.5"/>
@@ -38,6 +38,6 @@
   </style>
 
   <!-- Typography -->
-  <text x="62" y="27" class="db-brand-text-dark">DONALDS BAY</text>
+  <text x="62" y="27" class="db-brand-text-dark">DONALD BAY</text>
   <text x="63" y="42" class="db-brand-tagline-dark">LIMITED · CIVIL ENGINEERING</text>
 </svg>

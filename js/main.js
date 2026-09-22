@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Donalds Bay Limited — Motion & Behaviour
+   Donald Bay Limited — Motion & Behaviour
    ========================================================================== */
 
 document.documentElement.classList.add('js');
@@ -408,7 +408,7 @@ if (rfpForm) {
       btn.textContent = 'Project Brief Received ✓';
       btn.style.background = '#00E599';
       btn.style.color = '#042125';
-      alert('Thank you for contacting Donalds Bay Limited. Your project specifications have been transmitted to our Chief Engineer & Estimation Team and logged in the Executive Portal.');
+      alert('Thank you for contacting Donald Bay Limited. Your project specifications have been transmitted to our Chief Engineer & Estimation Team and logged in the Executive Portal.');
       rfpForm.reset();
       setTimeout(() => {
         btn.disabled = false;

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Donalds Bay Limited — Interactive Calendar Booking & Consultation Engine
+   Donald Bay Limited — Interactive Calendar Booking & Consultation Engine
    ========================================================================== */
 
 (function() {

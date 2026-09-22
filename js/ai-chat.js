@@ -1,14 +1,14 @@
 /* ==========================================================================
-   Donalds Bay Limited — Advanced AI Engineering & Support Assistant
+   Donald Bay Limited — Advanced AI Engineering & Support Assistant
    ========================================================================== */
 
 (function() {
-  // Comprehensive Knowledge Engine for Donalds Bay Limited
+  // Comprehensive Knowledge Engine for Donald Bay Limited
   const KNOWLEDGE_BASE = [
     {
       intent: "services_overview",
       keywords: ["service", "offer", "what do you do", "capabilities", "specialty", "about", "overview", "what are your services"],
-      response: "Donalds Bay Limited is an integrated civil engineering, project management, and luxury real estate enterprise. We operate across three primary divisions:\n\n1. 🏗️ **Project Management & EPC**: End-to-end site oversight, Bill of Quantities (BoQ), cost engineering, and QA/QC compliance.\n2. 🛣️ **Road Construction**: Heavy civil expressways, high-tonnage asphalt paving, drainage networks, and bridge infrastructure.\n3. 🏙️ **Real Estate & Commercial Towers**: Turnkey luxury residential estates, waterfront villas, and Grade-A commercial office skyscrapers.\n\nWhich division would you like more technical details on?",
+      response: "Donald Bay Limited is an integrated civil engineering, project management, and luxury real estate enterprise. We operate across three primary divisions:\n\n1. 🏗️ **Project Management & EPC**: End-to-end site oversight, Bill of Quantities (BoQ), cost engineering, and QA/QC compliance.\n2. 🛣️ **Road Construction**: Heavy civil expressways, high-tonnage asphalt paving, drainage networks, and bridge infrastructure.\n3. 🏙️ **Real Estate & Commercial Towers**: Turnkey luxury residential estates, waterfront villas, and Grade-A commercial office skyscrapers.\n\nWhich division would you like more technical details on?",
       followUps: ["Tell me about Road Construction", "Project Management EPC details", "Explore Real Estate portfolio", "Request Cost Estimate"]
     },
     {
@@ -38,31 +38,31 @@
     {
       intent: "safety_certification",
       keywords: ["safety", "certification", "compliance", "hse", "coren", "iso", "lti", "loss time", "standards", "quality"],
-      response: "Safety and quality governance at Donalds Bay Limited are benchmarked to international standards:\n\n• **ISO 9001:2015**: Certified Quality Management System.\n• **HSE Level 3**: 100% Zero-Loss Time Incident (Zero-LTI) track record over 5,200,000 operational hours.\n• **COREN & NSE Compliant**: All structural and civil designs are stamped by registered professional engineers.",
+      response: "Safety and quality governance at Donald Bay Limited are benchmarked to international standards:\n\n• **ISO 9001:2015**: Certified Quality Management System.\n• **HSE Level 3**: 100% Zero-Loss Time Incident (Zero-LTI) track record over 5,200,000 operational hours.\n• **COREN & NSE Compliant**: All structural and civil designs are stamped by registered professional engineers.",
       followUps: ["What services do you offer?", "Request Company Credentials"]
     },
     {
       intent: "contact_location",
       keywords: ["contact", "phone", "email", "location", "address", "office", "headquarters", "where", "reach", "call", "whatsapp"],
-      response: "📍 **Headquarters**: Donalds Bay Tower, Coastal Boulevard, Victoria Island / Lekki, Lagos, Nigeria\n📞 **Direct Line**: +234 (0) 800 DONALDS (+234 800 366 2537)\n✉️ **Corporate Inquiries**: info@donaldsbay.com\n⏰ **Operational Hours**: Mon – Sat: 07:00 – 18:00 (WAT)\n\nYou can also use the RFP form right on this page to request an immediate callback from our project director!",
+      response: "📍 **Headquarters**: Donald Bay Tower, Coastal Boulevard, Victoria Island / Lekki, Lagos, Nigeria\n📞 **Direct Line**: +234 (0) 800 DONALDS (+234 800 366 2537)\n✉️ **Corporate Inquiries**: info@donaldbay.com\n⏰ **Operational Hours**: Mon – Sat: 07:00 – 18:00 (WAT)\n\nYou can also use the RFP form right on this page to request an immediate callback from our project director!",
       followUps: ["Schedule Technical Consultation", "Talk to Chief Estimator"]
     },
     {
       intent: "leadership_team",
       keywords: ["founder", "ceo", "director", "who owns", "leadership", "management team", "donald", "babatunde", "team"],
-      response: "Donalds Bay Limited is led by a distinguished executive board:\n\n• **Engr. Donald Akpan** — Chief Executive & Managing Director\n• **Engr. Babatunde Sanusi, FNSE** — Director of Highway Planning & Civil Infrastructure\n• **Ngozi Okonkwo** — Chief Financial & Commercial Officer\n\nSupported by over 250 resident civil engineers, architects, survey specialists, and heavy plant operators.",
+      response: "Donald Bay Limited is led by a distinguished executive board:\n\n• **Engr. Donald Akpan** — Chief Executive & Managing Director\n• **Engr. Babatunde Sanusi, FNSE** — Director of Highway Planning & Civil Infrastructure\n• **Ngozi Okonkwo** — Chief Financial & Commercial Officer\n\nSupported by over 250 resident civil engineers, architects, survey specialists, and heavy plant operators.",
       followUps: ["Contact the Executive Board", "Schedule Technical Meeting"]
     },
     {
       intent: "mission_vision_values",
       keywords: ["mission", "vision", "core values", "values", "philosophy", "principles", "culture", "motto", "purpose"],
-      response: "Here is what defines **Donalds Bay Limited**:\n\n🎯 **Our Mission**: To engineer, manage, and construct high-impact road corridors, civil infrastructure, and premier real estate landmarks through uncompromising structural precision, rigorous EPC governance, and sustainable technologies built to last generations.\n\n🌐 **Our Vision**: To be the foremost civil engineering and infrastructure development authority in West Africa—recognized for structural integrity, innovation, zero-loss time safety, and resilient urban environments.\n\n⭐ **Our Core Values**:\n1. **Structural Integrity & Quality**: Zero compromise on testing and civil standards.\n2. **Uncompromising Safety**: 5.2M+ hours Zero-Loss Time Incidents (HSE Level 3).\n3. **Precision Project Governance**: Transparent BoQ milestone control.\n4. **Generational Sustainability**: Biophilic design & durable eco-materials.",
+      response: "Here is what defines **Donald Bay Limited**:\n\n🎯 **Our Mission**: To engineer, manage, and construct high-impact road corridors, civil infrastructure, and premier real estate landmarks through uncompromising structural precision, rigorous EPC governance, and sustainable technologies built to last generations.\n\n🌐 **Our Vision**: To be the foremost civil engineering and infrastructure development authority in West Africa—recognized for structural integrity, innovation, zero-loss time safety, and resilient urban environments.\n\n⭐ **Our Core Values**:\n1. **Structural Integrity & Quality**: Zero compromise on testing and civil standards.\n2. **Uncompromising Safety**: 5.2M+ hours Zero-Loss Time Incidents (HSE Level 3).\n3. **Precision Project Governance**: Transparent BoQ milestone control.\n4. **Generational Sustainability**: Biophilic design & durable eco-materials.",
       followUps: ["Explore Road Construction", "View Executed Portfolio", "Request Consultation"]
     },
     {
       intent: "admin_portal",
       keywords: ["admin", "invoice", "portal", "schedule", "meeting", "call logs", "billing", "revenue", "executive"],
-      response: "Authorized executives can access the **Executive Portal** to:\n\n• Inspect and manage **Call Schedules & Technical Site Consultations**.\n• Issue, edit, or track **Construction Milestone Invoices**.\n• Publish new projects to the **Portfolio Page** and articles to **Blogs & Insights**.\n• Authorize or revoke **Admin Credentials by Email**.\n• View real-time **Service Revenue Breakdown & Market Share Analytics**.\n\nVisit the Executive Portal link in the footer or navigate to `/admin.html` (Authentication required: `d.akpan@donaldsbay.com` / PIN: `donald2026`).",
+      response: "Authorized executives can access the **Executive Portal** to:\n\n• Inspect and manage **Call Schedules & Technical Site Consultations**.\n• Issue, edit, or track **Construction Milestone Invoices**.\n• Publish new projects to the **Portfolio Page** and articles to **Blogs & Insights**.\n• Authorize or revoke **Admin Credentials by Email**.\n• View real-time **Service Revenue Breakdown & Market Share Analytics**.\n\nVisit the Executive Portal link in the footer or navigate to `/admin.html` (Authentication required: `d.akpan@donaldbay.com` / PIN: `donald2026`).",
       followUps: ["Go to Executive Portal", "How do I add an Admin?"]
     }
   ];
@@ -91,7 +91,7 @@
     }
 
     return {
-      response: "Thank you for asking! **Donalds Bay Limited** provides enterprise civil solutions across **Project Management**, **Road Construction**, and **Real Estate Development**.\n\nWould you like to speak directly with our chief estimation engineer or submit your project scope for a free technical assessment?",
+      response: "Thank you for asking! **Donald Bay Limited** provides enterprise civil solutions across **Project Management**, **Road Construction**, and **Real Estate Development**.\n\nWould you like to speak directly with our chief estimation engineer or submit your project scope for a free technical assessment?",
       followUps: ["What services do you offer?", "Request Cost Estimate", "Contact Headquarters", "Schedule Site Inspection"]
     };
   }
@@ -123,7 +123,7 @@
 
         <div class="ai-chat-body" id="aiChatMessages">
           <div class="ai-msg ai-msg-bot">
-            <p>Welcome to <strong>Donalds Bay Limited</strong>! Ask Donald anything about our civil projects, road engineering, EPC management, or real estate developments.</p>
+            <p>Welcome to <strong>Donald Bay Limited</strong>! Ask Donald anything about our civil projects, road engineering, EPC management, or real estate developments.</p>
           </div>
 
           <div class="ai-quick-prompts" id="aiQuickPrompts">
@@ -135,7 +135,7 @@
         </div>
 
         <form class="ai-chat-foot" id="aiChatForm">
-          <input type="text" id="aiUserInput" class="ai-input" placeholder="Ask Donald anything about Donalds Bay Limited..." autocomplete="off" required>
+          <input type="text" id="aiUserInput" class="ai-input" placeholder="Ask Donald anything about Donald Bay Limited..." autocomplete="off" required>
           <button type="submit" class="ai-send-btn" aria-label="Send message">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
           </button>

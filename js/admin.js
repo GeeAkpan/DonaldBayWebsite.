@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Donalds Bay Limited — Executive Portal Controller
+   Donald Bay Limited — Executive Portal Controller
    ========================================================================== */
 
 // Initial Seed Data for Call Schedules & Consultations
@@ -125,7 +125,7 @@ const SEED_ADMINS = [
   {
     id: "ADM-01",
     name: "Engr. Donald Akpan",
-    email: "d.akpan@donaldsbay.com",
+    email: "d.akpan@donaldbay.com",
     role: "Super Admin",
     dateAdded: "2026-01-10",
     status: "Active"
@@ -133,7 +133,7 @@ const SEED_ADMINS = [
   {
     id: "ADM-02",
     name: "Babatunde Sanusi",
-    email: "b.sanusi@donaldsbay.com",
+    email: "b.sanusi@donaldbay.com",
     role: "Project Director",
     dateAdded: "2026-02-15",
     status: "Active"
@@ -141,7 +141,7 @@ const SEED_ADMINS = [
   {
     id: "ADM-03",
     name: "Ngozi Okonkwo",
-    email: "n.okonkwo@donaldsbay.com",
+    email: "n.okonkwo@donaldbay.com",
     role: "Finance & Billing",
     dateAdded: "2026-03-01",
     status: "Active"
@@ -253,14 +253,14 @@ document.getElementById('formAuthLogin')?.addEventListener('submit', (e) => {
   const errorBox = document.getElementById('authErrorMsg');
 
   const admins = getAdmins();
-  const isDonaldsBayDomain = emailInput.endsWith('@donaldsbay.com') || emailInput.includes('donald') || emailInput.includes('akpan');
+  const isDonaldsBayDomain = emailInput.endsWith('@donaldbay.com') || emailInput.includes('donald') || emailInput.includes('akpan');
   const isAuthorizedEmail = isDonaldsBayDomain || admins.some(a => a.email.toLowerCase() === emailInput) || emailInput === 'admin' || emailInput === 'director';
   
   const validPins = ['donald2026', 'donalds2026', 'admin2026', 'admin', '1234', 'donald', 'donalds', 'portal2026', 'passkey'];
   const isCorrectPIN = validPins.includes(passkeyInput) || passkeyInput.length >= 4;
 
   if (isAuthorizedEmail && isCorrectPIN) {
-    const finalUser = emailInput || 'd.akpan@donaldsbay.com';
+    const finalUser = emailInput || 'd.akpan@donaldbay.com';
     sessionStorage.setItem('donalds_bay_auth_user', finalUser);
     localStorage.setItem('donalds_bay_auth_user', finalUser);
     if (errorBox) errorBox.style.display = 'none';
@@ -269,7 +269,7 @@ document.getElementById('formAuthLogin')?.addEventListener('submit', (e) => {
     if (errorBox) {
       errorBox.style.display = 'block';
       if (!isAuthorizedEmail) {
-        errorBox.innerHTML = '<strong>Access Denied</strong>: Email is not recognized in the executive director directory. Use <code>d.akpan@donaldsbay.com</code>.';
+        errorBox.innerHTML = '<strong>Access Denied</strong>: Email is not recognized in the executive director directory. Use <code>d.akpan@donaldbay.com</code>.';
       } else {
         errorBox.innerHTML = '<strong>Access Denied</strong>: Invalid executive passkey. Use PIN <code>donald2026</code>.';
       }
@@ -281,11 +281,11 @@ document.getElementById('formAuthLogin')?.addEventListener('submit', (e) => {
 document.getElementById('btnQuickAuth')?.addEventListener('click', () => {
   const emailField = document.getElementById('loginEmail');
   const passkeyField = document.getElementById('loginPasskey');
-  if (emailField) emailField.value = 'd.akpan@donaldsbay.com';
+  if (emailField) emailField.value = 'd.akpan@donaldbay.com';
   if (passkeyField) passkeyField.value = 'donald2026';
   
-  sessionStorage.setItem('donalds_bay_auth_user', 'd.akpan@donaldsbay.com');
-  localStorage.setItem('donalds_bay_auth_user', 'd.akpan@donaldsbay.com');
+  sessionStorage.setItem('donalds_bay_auth_user', 'd.akpan@donaldbay.com');
+  localStorage.setItem('donalds_bay_auth_user', 'd.akpan@donaldbay.com');
   checkAuth();
 });
 
@@ -667,7 +667,7 @@ window.deleteAdmin = function(id) {
    ACTIONS FOR CALLS & INVOICES
    ========================================================================== */
 window.validateCall = function(id) {
-  const loggedInUser = sessionStorage.getItem('donalds_bay_auth_user') || 'd.akpan@donaldsbay.com';
+  const loggedInUser = sessionStorage.getItem('donalds_bay_auth_user') || 'd.akpan@donaldbay.com';
   if (window.DB && typeof window.DB.validateMeeting === 'function') {
     window.DB.validateMeeting(id, loggedInUser);
   } else {
@@ -1012,25 +1012,25 @@ document.getElementById('btnExportData')?.addEventListener('click', () => {
   const admins = getAdmins();
   const projects = window.DB ? window.DB.getProjects() : [];
 
-  let csv = '=== DONALDS BAY LIMITED — CALL SCHEDULES ===\n';
+  let csv = '=== DONALD BAY LIMITED — CALL SCHEDULES ===\n';
   csv += 'ID,Client,Contact,Service,Location,Date_Time,Format,Budget,Status\n';
   calls.forEach(c => {
     csv += `"${c.id}","${c.client}","${c.contact}","${c.service}","${c.location}","${c.dateTime}","${c.format}","${c.budget}","${c.status}"\n`;
   });
 
-  csv += '\n=== DONALDS BAY LIMITED — MILESTONE INVOICE LOGS ===\n';
+  csv += '\n=== DONALD BAY LIMITED — MILESTONE INVOICE LOGS ===\n';
   csv += 'Invoice_ID,Client,Category,Project,Milestone,Amount_NGN,Issued_Date,Due_Date,Status\n';
   invoices.forEach(i => {
     csv += `"${i.id}","${i.client}","${i.category || ''}","${i.project}","${i.milestone}",${i.amount},"${i.issuedDate}","${i.dueDate}","${i.status}"\n`;
   });
 
-  csv += '\n=== DONALDS BAY LIMITED — AUTHORIZED ADMINISTRATORS ===\n';
+  csv += '\n=== DONALD BAY LIMITED — AUTHORIZED ADMINISTRATORS ===\n';
   csv += 'ID,Name,Email,Role,Date_Added,Status\n';
   admins.forEach(a => {
     csv += `"${a.id}","${a.name}","${a.email}","${a.role}","${a.dateAdded}","${a.status}"\n`;
   });
 
-  csv += '\n=== DONALDS BAY LIMITED — EXECUTED PORTFOLIO PROJECTS ===\n';
+  csv += '\n=== DONALD BAY LIMITED — EXECUTED PORTFOLIO PROJECTS ===\n';
   csv += 'ID,Title,Category,Client,Budget,Date\n';
   projects.forEach(p => {
     csv += `"${p.id}","${p.title}","${p.categoryLabel || p.category}","${p.client}","${p.budget}","${p.date}"\n`;
@@ -1040,7 +1040,7 @@ document.getElementById('btnExportData')?.addEventListener('click', () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `Donalds_Bay_Executive_Report_${new Date().toISOString().split('T')[0]}.csv`;
+  a.download = `Donald_Bay_Executive_Report_${new Date().toISOString().split('T')[0]}.csv`;
   a.click();
 });
 
