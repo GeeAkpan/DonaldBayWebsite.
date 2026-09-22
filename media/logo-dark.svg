@@ -19,8 +19,25 @@
     <path d="M6 39C10 37 14 41 18 39C22 37 26 41 30 39C34 37 38 41 42 39" stroke="#00E599" stroke-width="2.5" stroke-linecap="round" fill="none"/>
     <path d="M6 43C10 41 14 45 18 43C22 41 26 45 30 43C34 41 38 45 42 43" stroke="#042125" stroke-width="1.5" stroke-linecap="round" fill="none"/>
   </g>
+  <!-- Embedded Typography Styles for 100% Crisp Browser Rendering -->
+  <style>
+    .db-brand-text-dark {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 21px;
+      letter-spacing: 0.05em;
+      fill: #042125;
+    }
+    .db-brand-tagline-dark {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+      font-weight: 700;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      fill: #06564B;
+    }
+  </style>
 
   <!-- Typography -->
-  <text x="62" y="27" font-family="'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="21" letter-spacing="0.05em" fill="#042125">DONALDS BAY</text>
-  <text x="63" y="42" font-family="'Space Grotesk', ui-monospace, monospace" font-weight="700" font-size="9.5" letter-spacing="0.22em" fill="#06564B">LIMITED &middot; CIVIL ENGINEERING</text>
+  <text x="62" y="27" class="db-brand-text-dark">DONALDS BAY</text>
+  <text x="63" y="42" class="db-brand-tagline-dark">LIMITED · CIVIL ENGINEERING</text>
 </svg>
