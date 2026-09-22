@@ -709,6 +709,17 @@
   padding: 1.5rem;
 }
 
+body.is-authenticated .auth-gate-overlay {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.is-authenticated #adminDashboardView {
+  display: flex !important;
+  visibility: visible !important;
+}
+
 .auth-box {
   width: 100%;
   max-width: 480px;
